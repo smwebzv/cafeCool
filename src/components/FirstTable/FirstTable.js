@@ -8,29 +8,22 @@ const FirstTable = (props) => {
     const [products, setProducts] = useState(storeProducts);
     const [total, setTotal] = useState(0);
     const [savedData, setSavedData] = useState([]);
-    const inputRef = useRef();
-
-    /*useEffect(() => {
-        localStorage.setItem('savedData', JSON.stringify(savedData));
-        console.log(savedData);
-    }, [savedData]);*/
 
 
-    /*useEffect(() => {
-        const items = JSON.parse(localStorage.getItem('savedData'));
-        if (savedData) {
-         setSavedData(savedData);
-        }
-      }, []);*/
+    const save = (e) => {
+      const oldSave = savedData.slice();
+      oldSave.push ({
+          potrosnja: e?.target.value
+      });
+      setSavedData(oldSave);
+      console.log(oldSave);
+    }
 
-      /*const save = (e) => {
-        const oldSave = savedData.slice();
-        oldSave.push ({
-            potrosnja: e?.target.value
-        });
-        setSavedData(oldSave);
-        console.log(oldSave);
-      }*/
+    useEffect(() => {
+        const oldProducts = products.slice();
+        setProducts(oldProducts => [...oldProducts, {prodName: 444444, prodPrice: 55555, prodCondition: 55555, prodRest: 77777}]);
+        console.log(oldProducts);
+    }, []);
 
     return (
         <FirstTableHolder>
@@ -57,8 +50,7 @@ const FirstTable = (props) => {
                                         <input
                                             className="potrosnjaInpt"
                                             type="text"
-                                            name="potrosnja"
-                                            /*onChange={(e) => save(e)}*/
+                                        onChange={(e) => save(e)}
                                         />
                                     </td>
                                     <td className="ostatak">{item.prodRest}</td>
