@@ -21,7 +21,6 @@ const FirstTable = (props) => {
 
     useEffect(() => {
         const oldProducts = products.slice();
-        setProducts(oldProducts => [...oldProducts, {prodName: 444444, prodPrice: 55555, prodCondition: 55555, prodRest: 77777}]);
         console.log(oldProducts);
     }, []);
 
