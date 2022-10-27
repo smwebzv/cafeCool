@@ -1,28 +1,23 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import GetDrinks from "../../actions/drinkActions";
 import { AddProd } from "../Faktura/FakturaStyle";
-import storeProducts from "../../utils/Data.js"
 import { FirstTableFrame, FirstTableHolder, FrameButton } from "./FirstTableStyle";
 
-const FirstTable = (props) => {
 
-    const [products, setProducts] = useState(storeProducts);
-    const [total, setTotal] = useState(0);
-    const [savedData, setSavedData] = useState([]);
+const FirstTable = () => {
 
+    const [products, setProducts] = useState([]);
 
-    const save = (e) => {
-      const oldSave = savedData.slice();
-      oldSave.push ({
-          potrosnja: e?.target.value
-      });
-      setSavedData(oldSave);
-      console.log(oldSave);
-    }
+    useEffect(()=> {
+        GetDrinks().then((res)=>{
+          setProducts(res.data);
+          console.log(res.data);
+        }).catch((err)=> {
+          console.log(err);
+        })
+      }, [])
+    
 
-    useEffect(() => {
-        const oldProducts = products.slice();
-        console.log(oldProducts);
-    }, []);
 
     return (
         <FirstTableHolder>
@@ -42,18 +37,17 @@ const FirstTable = (props) => {
                         {
                             products.map((item, indx) =>
                                 <tr key={indx}>
-                                    <td className="ime">{item.prodName}</td>
-                                    <td className="cijena">{item.prodPrice}</td>
-                                    <td className="preneseno">{item.prodCondition}</td>
+                                    <td className="ime">{item.name}</td>
+                                    <td className="cijena">{item.price}</td>
+                                    <td className="preneseno">{item.carried}</td>
                                     <td className="potrosnja">
                                         <input
                                             className="potrosnjaInpt"
                                             type="text"
-                                        onChange={(e) => save(e)}
                                         />
                                     </td>
-                                    <td className="ostatak">{item.prodRest}</td>
-                                    <td className="vrijednost">{total} KM</td>
+                                    <td className="ostatak"></td>
+                                    <td className="vrijednost"> KM</td>
                                 </tr>
                             )
                         }
