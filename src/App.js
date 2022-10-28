@@ -10,13 +10,12 @@ import axios from "axios";
 import Registration from "./components/Registration/Registration";
 
 function App() {
-
   return (
     <div className="container">
       <Router>
         <Routes>
-          <Route path="/" element={<Registration />} exact></Route>
-          <Route path="/loginPage" element={<Login />} />
+          <Route path="/" element={<Login />} />
+          <Route path="registrationPage" element={<Registration />} />
           <Route path="/firstPage" element={<FirstPage />} />
           <Route path="/firstTable" element={<FirstTable />} />
           <Route path="/secondTable" element={<SecondTable />} />

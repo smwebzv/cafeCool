@@ -1,7 +1,13 @@
-import { LoginBox, LoginButton, LoginFrame, LoginTitle } from "./LoginStyle";
+import {
+  LoginBox,
+  LoginButton,
+  LoginFrame,
+  LoginTitle,
+  RegistrationBnt,
+} from "./LoginStyle";
 import { NavLink } from "react-router-dom";
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { login } from "../../context/actions/autentificationActions";
 import {
   BrowserRouter as Router,
   Navigate,
@@ -20,14 +26,10 @@ const Login = () => {
 
   const [errorSpanLogin, setErrorSpanLogin] = useState(false);
 
-  const login = () => {
-    console.log(loginData);
-    return axios.post("http://18.193.130.171/auth/login", loginData);
-  };
-
   const handleLogin = () => {
-    login()
+    login(loginData)
       .then((res) => {
+        localStorage.setItem("userToken", res.data.access_token);
         navigate("/firstPage");
       })
       .catch((err) => {
@@ -68,6 +70,15 @@ const Login = () => {
         )}
 
         <LoginButton onClick={() => handleLogin()}>Log in</LoginButton>
+        <RegistrationBnt>
+          <NavLink
+            style={{ color: "#000", textDecoration: "none" }}
+            to="/registrationPage"
+          >
+            {" "}
+            Registration
+          </NavLink>
+        </RegistrationBnt>
       </LoginBox>
     </LoginFrame>
   );

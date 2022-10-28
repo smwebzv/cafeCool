@@ -65,3 +65,11 @@ export const LoginButton = styled.div`
   margin: 20px 0 40px;
   cursor: pointer;
 `;
+export const RegistrationBnt = styled.div`
+  margin: 10px;
+  background-color: #fff;
+  padding: 5px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+`;

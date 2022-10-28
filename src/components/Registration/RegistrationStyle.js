@@ -66,12 +66,20 @@ export const CheckBoxAdmin = styled.div`
   align-items: center;
   width: 50%;
 
-  .checkAdminInput {
-    margin: 0px 5px 0px 0px;
-    width: 20px;
-    height: 20px;
-  }
-  div {
+  p {
     font-family: cursive;
   }
+  div {
+    width: 20px;
+    heigth: 20px;
+    border: 1px solid #fff;
+    background-color: red;
+  }
+`;
+export const CheckBtn = styled.div`
+  width: 20px;
+  height: 20px;
+  background-color: ${(checkedBox) => (checkedBox ? "" : "white")};
+
+  margin-right: 5px;
 `;

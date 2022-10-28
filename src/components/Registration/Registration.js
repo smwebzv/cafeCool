@@ -1,9 +1,11 @@
+import { register } from "../../context/actions/autentificationActions";
 import {
   RegistrationFrame,
   RegistrationBox,
   RegistrationTitle,
   RegistrationButton,
   CheckBoxAdmin,
+  CheckBtn,
 } from "./RegistrationStyle";
 import {
   BrowserRouter as Router,
@@ -26,14 +28,11 @@ const Registration = ({ navigation }) => {
     admin: 0,
   });
   const [displaySpan, setSpan] = useState(false);
-  const [checkedBox, setCheckedBox] = useState(registData.admin);
+  const [checkedBox, setCheckedBox] = useState(true);
   console.log(checkedBox);
-  const checkBox = () => {
-    setCheckedBox(checkedBox === 1);
-    console.log(checkedBox);
-  };
-
+  const [errors, setErrors] = useState("");
   const handleRegData = (e) => {
+    setErrors("");
     const { name, value } = e.target;
     const data = registData;
     data[name] = value;
@@ -41,20 +40,21 @@ const Registration = ({ navigation }) => {
     console.log(registData.admin);
   };
 
-  const register = () => {
-    console.log(registData);
-    return axios.post("http://18.193.130.171/users", registData);
-  };
-
   const handleRegister = () => {
-    register()
+    register(registData)
       .then((res) => {
         navigate("/loginPage");
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
         setSpan(true);
+        setErrors(err?.response?.data?.message[0]);
+        console.log(err.response);
       });
+  };
+
+  const changeCheckBtn = () => {
+    setCheckedBox(!checkedBox);
   };
 
   return (
@@ -67,29 +67,29 @@ const Registration = ({ navigation }) => {
           type="text"
           placeholder="User name"
         />
+        {errors.includes("username") && <div>{errors}</div>}
         <input
           onChange={(name) => handleRegData(name)}
           name="password"
           type="text"
           placeholder="Password"
         />
+        {errors.includes("password") && <div>Password error</div>}
+
         <input
           onChange={(name) => handleRegData(name)}
           name="email"
           type="email"
           placeholder="Email"
         />
+        {errors.includes("email") && <div>Email error</div>}
 
         <CheckBoxAdmin>
-          <input
-            onChange={() => checkBox()}
-            className="checkAdminInput"
-            type="checkbox"
-            id="scales"
-            name="admin"
-            value={checkedBox}
-          />
-          <div>Are you admin?</div>
+          <div onClick={() => changeCheckBtn()}>
+            {checkedBox && <CheckBtn></CheckBtn>}
+          </div>
+
+          <p>Are you admin?</p>
         </CheckBoxAdmin>
 
         {displaySpan && (
