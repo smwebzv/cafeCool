@@ -17,6 +17,7 @@ const Login = () => {
     username: "",
     password: "",
   });
+  console.log(loginData);
 
   const [errorSpanLogin, setErrorSpanLogin] = useState(false);
 
