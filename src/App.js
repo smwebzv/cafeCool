@@ -10,17 +10,6 @@ import axios from "axios";
 import Registration from "./components/Registration/Registration";
 
 function App() {
-  const getDrinkss = () => {
-    return axios.get("http://18.193.130.171/drinks");
-  };
-  // const datas = getDrinkss()
-  //   .then((res) => {
-  //     const data = res.data;
-  //     console.log(data);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 
   return (
     <div className="container">
