@@ -7,7 +7,7 @@ import FirstTable from './components/FirstTable/FirstTable';
 import SecondTable from './components/SecondTable/SecondTable';
 
 function App() {
-
+console.log("ttttt")
   return (
     <div className="container">
     <Router>
