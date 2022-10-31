@@ -14,22 +14,19 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
-
-import Login from "../Login/Login";
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
+
 const Registration = ({ navigation }) => {
   let navigate = useNavigate();
+  const [checkedBox, setCheckedBox] = useState(true);
+
   const [registData, setRegistData] = useState({
     username: "",
     password: "",
     email: "",
     admin: 0,
   });
-  const [displaySpan, setSpan] = useState(false);
-  const [checkedBox, setCheckedBox] = useState(true);
-  console.log(checkedBox);
+  console.log(registData.admin);
   const [errors, setErrors] = useState("");
   const handleRegData = (e) => {
     setErrors("");
@@ -37,24 +34,25 @@ const Registration = ({ navigation }) => {
     const data = registData;
     data[name] = value;
     setRegistData(data);
-    console.log(registData.admin);
   };
 
   const handleRegister = () => {
+    console.log(registData);
     register(registData)
       .then((res) => {
-        navigate("/loginPage");
+        navigate("/");
       })
       .catch((err) => {
-        // console.log(err);
-        setSpan(true);
         setErrors(err?.response?.data?.message[0]);
-        console.log(err.response);
       });
   };
 
   const changeCheckBtn = () => {
+    const check = checkedBox;
     setCheckedBox(!checkedBox);
+    const data = registData;
+    data["admin"] = check ? 1 : 0;
+    setRegistData(data);
   };
 
   return (
@@ -67,14 +65,14 @@ const Registration = ({ navigation }) => {
           type="text"
           placeholder="User name"
         />
-        {errors.includes("username") && <div>{errors}</div>}
+        {errors.includes("username") && <div className="error">{errors}</div>}
         <input
           onChange={(name) => handleRegData(name)}
           name="password"
           type="text"
           placeholder="Password"
         />
-        {errors.includes("password") && <div>Password error</div>}
+        {errors.includes("password") && <div className="error">{errors}</div>}
 
         <input
           onChange={(name) => handleRegData(name)}
@@ -82,21 +80,11 @@ const Registration = ({ navigation }) => {
           type="email"
           placeholder="Email"
         />
-        {errors.includes("email") && <div>Email error</div>}
-
-        <CheckBoxAdmin>
-          <div onClick={() => changeCheckBtn()}>
-            {checkedBox && <CheckBtn></CheckBtn>}
-          </div>
-
+        {errors.includes("email") && <div className="error">{errors}</div>}
+        <CheckBoxAdmin checkedBox={registData.admin === 1}>
+          <div className="handleCheck" onClick={() => changeCheckBtn()}></div>
           <p>Are you admin?</p>
         </CheckBoxAdmin>
-
-        {displaySpan && (
-          <>
-            <span>Please check your data!</span>
-          </>
-        )}
 
         <RegistrationButton onClick={() => handleRegister()}>
           Registration
