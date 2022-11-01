@@ -42,9 +42,7 @@ const Registration = ({ navigation }) => {
 
   const handleRegister = () => {
     register(registData)
-      .then((res) => {
-        navigate("/loginPage");
-      })
+      .then((res) => {})
       .catch((err) => {
         // console.log(err);
         setSpan(true);

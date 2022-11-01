@@ -30,7 +30,7 @@ const Login = () => {
     login(loginData)
       .then((res) => {
         localStorage.setItem("userToken", res.data.access_token);
-        navigate("/firstPage");
+        window.location.reload(false);
       })
       .catch((err) => {
         console.log(err);
@@ -75,7 +75,6 @@ const Login = () => {
             style={{ color: "#000", textDecoration: "none" }}
             to="/registrationPage"
           >
-            {" "}
             Registration
           </NavLink>
         </RegistrationBnt>
