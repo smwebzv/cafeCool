@@ -11,6 +11,7 @@ export const RegistrationBox = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   width: 360px;
   background-color: #e3be30;
   border-radius: 20px;
@@ -26,18 +27,12 @@ export const RegistrationBox = styled.div`
     font-size: 15px;
     padding: 0 20px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin: 10px 0px;
   }
-  span {
-    display: ${(displaySpan) => (displaySpan ? displaySpan : "none")};
-    margin-top: 10px;
-    padding: 8px;
-    background-color: #fff;
-    opacity: 0.8;
-    border-radius: 20px;
-    font-size: 14px;
+  .error {
+    margin: 0px;
     color: red;
-    font-family: cursive;
+    font-size: 14px;
   }
 `;
 export const RegistrationTitle = styled.div`
@@ -65,21 +60,20 @@ export const CheckBoxAdmin = styled.div`
   justify-content: center;
   align-items: center;
   width: 50%;
-
   p {
     font-family: cursive;
   }
-  div {
+  .handleCheck {
     width: 20px;
-    heigth: 20px;
+    height: 20px;
     border: 1px solid #fff;
-    background-color: red;
+    background-color: ${(props) => (props.checkedBox ? "blue" : "white")};
   }
 `;
-export const CheckBtn = styled.div`
-  width: 20px;
-  height: 20px;
-  background-color: ${(checkedBox) => (checkedBox ? "" : "white")};
+// export const CheckBtn = styled.div`
+//   width: 20px;
+//   height: 20px;
+//   background-color: ${(checkedBox) => (checkedBox ? "" : "white")};
 
-  margin-right: 5px;
-`;
+//   margin-right: 5px;
+// `;

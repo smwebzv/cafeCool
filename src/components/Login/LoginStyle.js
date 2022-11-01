@@ -32,16 +32,9 @@ export const LoginBox = styled.div`
     box-sizing: border-box;
     margin-bottom: 20px;
   }
-  .spanErrorLogin {
-    display: ${(errorSpanLogin) => (errorSpanLogin ? errorSpanLogin : "none")};
-    margin-top: 10px;
-    padding: 8px;
-    background-color: #fff;
-    opacity: 0.8;
-    border-radius: 20px;
-    font-size: 14px;
-    color: red;
-    font-family: cursive;
+
+  .error {
+    background-color: red;
   }
 `;
 

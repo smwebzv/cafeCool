@@ -18,13 +18,21 @@ import {
 
 const Login = () => {
   let navigate = useNavigate();
+  const [error, setError] = useState("");
 
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
   });
 
-  const [errorSpanLogin, setErrorSpanLogin] = useState(false);
+  const loginDataa = (e) => {
+    setError("");
+    const { name, value } = e.target;
+    const data = loginData;
+    data[name] = value;
+    console.log(data);
+    setLoginData(data);
+  };
 
   const handleLogin = () => {
     login(loginData)
@@ -33,18 +41,11 @@ const Login = () => {
         window.location.reload(false);
       })
       .catch((err) => {
-        console.log(err);
-        setErrorSpanLogin(true);
+        setError(err?.response?.data?.message);
+        console.log(err?.response?.data?.message);
       });
   };
 
-  const loginDataa = (e) => {
-    const { name, value } = e.target;
-    const data = loginData;
-    data[name] = value;
-    console.log(data);
-    setLoginData(data);
-  };
   return (
     <LoginFrame>
       <LoginBox>
@@ -63,11 +64,7 @@ const Login = () => {
           placeholder="Password"
           name="password"
         />
-        {errorSpanLogin && (
-          <>
-            <span className="spanErrorLogin">Please check your data!</span>
-          </>
-        )}
+        <div className="error">{error}</div>
 
         <LoginButton onClick={() => handleLogin()}>Log in</LoginButton>
         <RegistrationBnt>
