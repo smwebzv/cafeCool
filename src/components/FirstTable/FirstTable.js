@@ -10,7 +10,7 @@ import {
 const FirstTable = () => {
 
 const [products, setProducts] = useState([]);
-const [total, setTotal] = useState(0);
+const [total, setTotal] = useState(0.00);
 
 useEffect(() => {
     GetDrinks()
@@ -19,6 +19,7 @@ useEffect(() => {
           item.potrosnja = 0
           item.totalPrice = 0
           item.ostatak = 0
+          item.potrosnja = 0
         })
         setProducts(res.data);
       })
@@ -27,16 +28,18 @@ useEffect(() => {
       });
 }, []);
 
-const Potrosnja = (id, number) => {
+const Potrosnja = (indx, number) => {
   const productsCoppy = products.slice();
-  products.map((item) => {
-  if(item.id === id){
-      item.potrosnja = number
-      item.totalPrice = Number(item.potrosnja) * Number(item.price);
-      item.ostatak = Number(item.carried) - Number(item.potrosnja);
-    }
-  })
+  const item = productsCoppy[indx];
+  const oldPrice = productsCoppy[indx].totalPrice;
+
+  item.potrosnja = number
+  item.totalPrice = Number(item.potrosnja) * Number(item.price);
+  item.ostatak = Number(item.carried) - Number(item.potrosnja);
+  const newTotal = total - oldPrice + item.totalPrice;
+
   setProducts(productsCoppy);
+  setTotal(newTotal.toFixed(2));
 }
 
   return (
@@ -64,7 +67,7 @@ const Potrosnja = (id, number) => {
                   className="potrosnjaInpt" 
                   type="text"
                   name="potrosnja"
-                  onChange={(e) => Potrosnja(item.id, e.target.value)} 
+                  onChange={(e) => Potrosnja(indx, e.target.value)} 
                   />
                 </td>
                 <td className="ostatak">{item.ostatak}</td>
@@ -88,7 +91,7 @@ const Potrosnja = (id, number) => {
             </tr>
             <tr className="rashodi">
               <td colSpan="5">Ukupno</td>
-              <td></td>
+              <td>{total}</td>
             </tr>
           </tbody>
         </table>
