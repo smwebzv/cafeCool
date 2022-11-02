@@ -8,18 +8,36 @@ import {
 } from "./FirstTableStyle";
 
 const FirstTable = () => {
-  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
+const [products, setProducts] = useState([]);
+const [total, setTotal] = useState(0);
+
+useEffect(() => {
     GetDrinks()
       .then((res) => {
+        res.data.map((item, indx) => {
+          item.potrosnja = 0
+          item.totalPrice = 0
+          item.ostatak = 0
+        })
         setProducts(res.data);
-        console.log(res.data);
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+}, []);
+
+const Potrosnja = (id, number) => {
+  const productsCoppy = products.slice();
+  products.map((item) => {
+  if(item.id === id){
+      item.potrosnja = number
+      item.totalPrice = Number(item.potrosnja) * Number(item.price);
+      item.ostatak = Number(item.carried) - Number(item.potrosnja);
+    }
+  })
+  setProducts(productsCoppy);
+}
 
   return (
     <FirstTableHolder>
@@ -42,10 +60,15 @@ const FirstTable = () => {
                 <td className="cijena">{item.price}</td>
                 <td className="preneseno">{item.carried}</td>
                 <td className="potrosnja">
-                  <input className="potrosnjaInpt" type="text" />
+                  <input 
+                  className="potrosnjaInpt" 
+                  type="text"
+                  name="potrosnja"
+                  onChange={(e) => Potrosnja(item.id, e.target.value)} 
+                  />
                 </td>
-                <td className="ostatak"></td>
-                <td className="vrijednost"> KM</td>
+                <td className="ostatak">{item.ostatak}</td>
+                <td className="vrijednost">{item.totalPrice} KM</td>
               </tr>
             ))}
             <tr className="rashodi">
@@ -57,7 +80,10 @@ const FirstTable = () => {
                 ></textarea>
               </td>
               <td colSpan="1">
-                <input className="potrosnjaInpt" type="text" />
+                <input 
+                className="potrosnjaInpt" 
+                type="text" 
+                />
               </td>
             </tr>
             <tr className="rashodi">
