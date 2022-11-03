@@ -44,6 +44,7 @@ export const FirstTableFrame = styled.div`
                     font-family: cursive;
                     outline: none;
                     width: 130px;
+                    height: 80%;
                 }
                 &.preneseno{
                     background-color: silver;

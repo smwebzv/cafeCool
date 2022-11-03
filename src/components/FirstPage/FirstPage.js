@@ -1,13 +1,21 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { LoginButton, LoginFrame } from "../Login/LoginStyle";
 import { CaffeCoolTitle, FirstPageFrame } from "./FirstPageStyle";
 import GetDrinks from "../../context/actions/drinkActions";
+import { GetDailyReports } from "../../context/actions/dailyReportsActions";
+
 const FirstPage = (props) => {
+
+  const [dailyReports, setDailyReports] = useState([]);
+
   useEffect(() => {
-    GetDrinks().then((res) => {
+    GetDailyReports().then((res) => {
+      setDailyReports(res.data);
       console.log(res.data);
-    });
+    }).catch((err) =>{
+      console.log(err);
+    })
   }, []);
 
   return (
@@ -61,16 +69,20 @@ const FirstPage = (props) => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td className="doc"></td>
-              <td className="pen"></td>
-              <td className="delete"></td>
-            </tr>
+            {
+              dailyReports.map((item, indx) =>
+              <tr key={indx}>
+                <td>{item.date}</td>
+                <td>{item.shift}</td>
+                <td>{item.user.username}</td>
+                <td>{item.consumption}KM</td>
+                <td>{item.total}KM</td>
+                <td className="doc"></td>
+                <td className="pen"></td>
+                <td className="delete"></td>
+              </tr>
+            )
+            }
           </tbody>
         </table>
       </FirstPageFrame>
