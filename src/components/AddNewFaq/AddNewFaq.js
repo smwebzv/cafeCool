@@ -1,11 +1,9 @@
-import { FirstTableFrame, FirstTableHolder } from "../FirstTable/FirstTableStyle";
-import { LoginFrame } from "../Login/LoginStyle";
-import { SecondTableFrame, SecondTableHolder } from "./SecondTableStyle";
+import { AddNewFaqFrame, AddNewFaqHolder } from "./AddNewFaqStyle";
 
-const SecondTable = () => {
+const AddNewFaq = () => {
     return(
-        <SecondTableHolder>
-            <SecondTableFrame>
+        <AddNewFaqHolder>
+            <AddNewFaqFrame>
                 <table>
                     <thead>
                         <tr>
@@ -49,9 +47,9 @@ const SecondTable = () => {
                         </tr>
                     </tbody>
                 </table>
-            </SecondTableFrame>
-        </SecondTableHolder>
+            </AddNewFaqFrame>
+        </AddNewFaqHolder>
     );
 }
 
-export default SecondTable;
+export default AddNewFaq;

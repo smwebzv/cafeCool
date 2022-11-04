@@ -1,13 +1,13 @@
 import styled from "styled-components";
 
-export const SecondTableHolder = styled.div`
+export const AddNewFaqHolder = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
 `;
 
-export const SecondTableFrame = styled.div`
+export const AddNewFaqFrame = styled.div`
     height: 100%;
     display: flex;
     align-items: center;

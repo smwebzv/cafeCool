@@ -4,9 +4,8 @@ import edit from "../../assets/icon/edit.png";
 import del from "../../assets/icon/delete.png";
 
 
-export const FirstPageFrame = styled.div`
-    height: 100vh;
-    padding: 0 20px;
+export const DailyReportsFrame = styled.div`
+    padding: 0 20px 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
@@ -69,11 +68,6 @@ export const FirstPageFrame = styled.div`
             }
         }
     }
-    .inputHolder{
-        width: 100%;
-        text-align: right;
-        margin-top: 15px;
-    }
     table{
         border: 1px solid black;
         max-width: 1200px;
@@ -128,6 +122,7 @@ export const FirstPageFrame = styled.div`
                     background-repeat: no-repeat;
                     background-size: 20px;
                     width: 40px;
+                    cursor: pointer;
                 }
                 &.pen{
                     background-color: #fff;
@@ -136,6 +131,7 @@ export const FirstPageFrame = styled.div`
                     background-repeat: no-repeat;
                     background-size: 20px;
                     width: 40px;
+                    cursor: pointer;
     
                 }
                 &.delete{
@@ -145,6 +141,7 @@ export const FirstPageFrame = styled.div`
                     background-repeat: no-repeat;
                     background-size: 20px;
                     width: 40px;
+                    cursor: pointer;
                 }
     
     
@@ -180,4 +177,10 @@ export const CaffeCoolTitle = styled.div`
     @media only screen and (max-width: 479px){
         font-size: 40px;
     }
+`;
+
+export const InputHolder = styled.div`
+    width: 100%;
+    text-align: right;
+    margin-top: 15px;
 `;

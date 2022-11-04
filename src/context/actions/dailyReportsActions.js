@@ -10,3 +10,9 @@ export const GetDailyReports = () => {
     return axiosInstance.get("daily-reports"); 
 };
 
+export const DeleteDailyReports = (id) => {
+
+    return axiosInstance.delete(`daily-reports/${id}`); 
+};
+
+

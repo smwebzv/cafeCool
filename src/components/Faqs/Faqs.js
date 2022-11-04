@@ -8,9 +8,9 @@ import {
   FakFrameFirst,
   FakHeader,
   FakTitle,
-} from "./FakturaStyle";
+} from "./FaqsStyle";
 
-const Faktura = () => {
+const Faqs = () => {
   const [products, setProducts] = useState(storeProducts);
   const [numberFaqs, setNumberFaqs] = useState(null);
   const [places, setPlace] = useState("");
@@ -149,4 +149,4 @@ const Faktura = () => {
   );
 };
 
-export default Faktura;
+export default Faqs;

@@ -1,31 +1,57 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { LoginButton, LoginFrame } from "../Login/LoginStyle";
-import { CaffeCoolTitle, FirstPageFrame } from "./FirstPageStyle";
-import GetDrinks from "../../context/actions/drinkActions";
-import { GetDailyReports } from "../../context/actions/dailyReportsActions";
+import { CaffeCoolTitle, DailyReportsFrame, InputHolder } from "./DailyReportsStyle";
+import { DeleteDailyReports, GetDailyReports } from "../../context/actions/dailyReportsActions";
+import { Input } from "../../AppStyle";
+import moment from "moment";
 
-const FirstPage = (props) => {
+const DailyReports = (props) => {
+  let navigate = useNavigate();
 
   const [dailyReports, setDailyReports] = useState([]);
 
-  useEffect(() => {
+  const DailyReports = () => {
     GetDailyReports().then((res) => {
       setDailyReports(res.data);
-      console.log(res.data);
+      console.logO(res.data);
     }).catch((err) =>{
       console.log(err);
     })
+  }
+
+  useEffect(() => {
+    DailyReports();
   }, []);
+
+  const UpdateSpecificFaq = (item) => {
+    console.log("----", item);
+    navigate("/addDailyReports", {state: {list:item}});
+  }
+  const OpenSpecificFaq = (item) => {
+    console.log("----", item);
+    navigate("/addDailyReports", {state: {list:item, disableInput: true}});
+  }
+
+  const Delete = (id) => {
+    DeleteDailyReports(id).then((res)=> {
+      DailyReports();
+      console.log(res.data);
+    }).catch((err)=> {
+      console.log(err);
+    });
+    
+  }
+
 
   return (
     <LoginFrame>
-      <FirstPageFrame>
+      <DailyReportsFrame>
         <CaffeCoolTitle>Cool Caffe</CaffeCoolTitle>
         <div className="buttons">
           <LoginButton className="button">
             <NavLink
-              to="/firstTable"
+              to="/addDailyReports"
               style={{ color: "#fff", textDecoration: "none" }}
             >
               Unesi smjenu
@@ -33,7 +59,7 @@ const FirstPage = (props) => {
           </LoginButton>
           <LoginButton className="button">
             <NavLink
-              to="/faktura"
+              to="/faqs"
               style={{ color: "#fff", textDecoration: "none" }}
             >
               Unesi fakturu
@@ -41,20 +67,19 @@ const FirstPage = (props) => {
           </LoginButton>
           <LoginButton className="button">
             <NavLink
-              to="/secondTable"
+              to="/addNewFaq"
               style={{ color: "#fff", textDecoration: "none" }}
             >
               Sve fakture
             </NavLink>
           </LoginButton>
         </div>
-        <div className="inputHolder">
-          <input
-            className="searchInput"
+        <InputHolder>
+          <Input 
             type="text"
             placeholder="Pretrazi..."
-          ></input>
-        </div>
+          />
+        </InputHolder>
         <table>
           <thead>
             <tr>
@@ -72,22 +97,22 @@ const FirstPage = (props) => {
             {
               dailyReports.map((item, indx) =>
               <tr key={indx}>
-                <td>{item.date}</td>
+                <td>{moment(item.date).format("DD MMM YYYY")}</td>
                 <td>{item.shift}</td>
                 <td>{item.user.username}</td>
                 <td>{item.consumption}KM</td>
                 <td>{item.total}KM</td>
-                <td className="doc"></td>
-                <td className="pen"></td>
-                <td className="delete"></td>
+                <td className="doc" onClick={() => OpenSpecificFaq(item)}></td>
+                <td className="pen" onClick={() => UpdateSpecificFaq(item)}></td>
+                <td className="delete" onClick={() => Delete(item.id)}></td>
               </tr>
             )
             }
           </tbody>
         </table>
-      </FirstPageFrame>
+      </DailyReportsFrame>
     </LoginFrame>
   );
 };
 
-export default FirstPage;
+export default DailyReports;

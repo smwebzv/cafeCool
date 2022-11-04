@@ -1,39 +1,53 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {SendDailyReports} from "../../context/actions/dailyReportsActions";
 import GetDrinks from "../../context/actions/drinkActions";
-import { AddProd } from "../Faktura/FakturaStyle";
+import { AddProd } from "../Faqs/FaqsStyle";
 import {
-  FirstTableFrame,
-  FirstTableHolder,
+  AddDailyReportsFrame,
+  AddDailyReportsHolder,
   FrameButton,
-} from "./FirstTableStyle";
+} from "./AddDailyReportsStyle";
 
-const FirstTable = () => {
+
+const AddDailyReports = (props) => {
+  let navigate = useNavigate();
+  let location = useLocation();
 
 const [products, setProducts] = useState([]);
 const [total, setTotal] = useState(0.00);
 const [dailyShift, setDailyShift] = useState(1);
-const [consuption, setConsuption] = useState({
-  consuptionAmount: 0,
-  consuptionDesc: ""
-})
+const [propsData, setPropsData] = useState(location?.state?.list);
+const [consumption, setConsumption] = useState(propsData ? Number(propsData.consumption) : 0)
+const [consumptionDesc, setConsumptionDesc] = useState(propsData ? propsData.consumptionDesc : "");
+const [disableInput, setDisableInput] = useState(location?.state?.disableInput);
 
 useEffect(() => {
+  if(propsData){
+   propsData.dailyList?.map((item)=>{
+    item.consumption = item.carried - item.remaind
+   })
+   setProducts(propsData.dailyList);
+   setTotal(Number(propsData.total));
+  }else{
     GetDrinks()
-      .then((res) => {
-        res.data.map((item, indx) => {
-          item.consumption = 0
-          item.totalPrice = 0
-          item.remaind = item.carried
-        })
-        setProducts(res.data);
+    .then((res) => {
+      res.data.map((item, indx) => {
+        item.consumption = 0
+        item.totalPrice = 0
+        item.remaind = item.carried
       })
-      .catch((err) => {
-        console.log(err);
-      });
+      setProducts(res.data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
 }, []);
 
+
 const Potrosnja = (indx, number) => {
+  if(!isNaN(+number) === false) return;
   const productsCoppy = products.slice();
   const item = productsCoppy[indx];
   const oldPrice = productsCoppy[indx].totalPrice;
@@ -47,16 +61,25 @@ const Potrosnja = (indx, number) => {
   setTotal(newTotal.toFixed(2));
 }
 
-const consuptionHandle = (e) => {
-  const oldPrice = consuption.consuptionAmount;
-  const { name, value } = e.target;
-  const data = consuption;
-  data[name] = value;
+const consuptionHandleAmount = (e) => {
+  const oldPrice = consumption;
+  const { value } = e.target;
+  if(!isNaN(+value) === false) return;
+  let data = consumption;
+  data = value;
   
-  const newTotal = Number(total) + Number(oldPrice) - data.consuptionAmount;
+  const newTotal = Number(total) + Number(oldPrice) - data;
 
   setTotal(newTotal.toFixed(2));
-  setConsuption(data);
+  setConsumption(data);
+};
+
+const consuptionHandleDesc = (e) => {
+  const { value } = e.target;
+  let data = consumptionDesc;
+  data = value;
+  
+  setConsumptionDesc(data);
 };
 
 useEffect(() => {
@@ -76,12 +99,13 @@ useEffect(() => {
 const Send = () => {
   const data = {
     "shift": dailyShift,
-    "consumption": consuption.consuptionAmount,
-    "consumptionDesc": consuption.consuptionDesc,
+    "consumption": consumption,
+    "consumptionDesc": consumptionDesc,
     "total": total,
     "dailyList": products
   }
   SendDailyReports(data).then((res) => {
+    navigate("/");
     console.log(res.data);
   }).catch((err) => {
     console.log(err);
@@ -89,8 +113,8 @@ const Send = () => {
 }
 
   return (
-    <FirstTableHolder>
-      <FirstTableFrame>
+    <AddDailyReportsHolder>
+      <AddDailyReportsFrame>
         <table>
           <thead>
             <tr>
@@ -113,6 +137,8 @@ const Send = () => {
                   className="potrosnjaInpt" 
                   type="text"
                   name="consumption"
+                  value={item.consumption}
+                  disabled={disableInput}
                   onChange={(e) => Potrosnja(indx, e.target.value)} 
                   />
                 </td>
@@ -126,31 +152,33 @@ const Send = () => {
                 <textarea
                   className="rashodiOpis"
                   placeholder="Navedi rashode"
-                  name="consuptionDesc"
-                  onChange={(e) => consuptionHandle(e)}
+                  value={consumptionDesc}
+                  disabled={disableInput}
+                  onChange={(e) => consuptionHandleDesc(e)}
                 ></textarea>
               </td>
               <td colSpan="1">
                 <input 
                 className="potrosnjaInpt" 
                 type="text" 
-                name="consuptionAmount"
-                onChange={(e) => consuptionHandle(e)}
+                value={consumption}
+                disabled={disableInput}
+                onChange={(e) => consuptionHandleAmount(e)}
                 />
               </td>
             </tr>
             <tr className="rashodi">
               <td colSpan="5">Ukupno</td>
-              <td>{total}</td>
+              <td>{total}KM</td>
             </tr>
           </tbody>
         </table>
         <FrameButton>
           <AddProd onClick={() => Send()}>Snimi Smjenu</AddProd>
         </FrameButton>
-      </FirstTableFrame>
-    </FirstTableHolder>
+      </AddDailyReportsFrame>
+    </AddDailyReportsHolder>
   );
 };
 
-export default FirstTable;
+export default AddDailyReports;

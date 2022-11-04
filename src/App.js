@@ -1,11 +1,11 @@
-import "./App.css";
+import { Container } from "./AppStyle";
 import Navigation from "./components/Navigation/Navigation";
 
 function App() {
   return (
-    <div className="container">
+    <Container>
       <Navigation />
-    </div>
+    </Container>
   );
 }
 
