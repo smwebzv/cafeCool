@@ -26,16 +26,22 @@ const Registration = ({ navigation }) => {
     email: "",
     admin: 0,
   });
-  console.log(registData.admin);
-  const [errors, setErrors] = useState("");
+  const [errors, setErrors] = useState();
+  console.log(errors);
   const handleRegData = (e) => {
-    setErrors("");
+    setErrors();
     const { name, value } = e.target;
     const data = registData;
     data[name] = value;
     setRegistData(data);
   };
 
+  const handleErrors = (name) => {
+    const e = errors?.find((item) => {
+      if (item.includes(name)) return item;
+    });
+    return e;
+  };
   const handleRegister = () => {
     console.log(registData);
     register(registData)
@@ -43,7 +49,8 @@ const Registration = ({ navigation }) => {
         navigate("/");
       })
       .catch((err) => {
-        setErrors(err?.response?.data?.message[0]);
+        setErrors(err?.response?.data?.message);
+        console.log(err);
       });
   };
 
@@ -63,16 +70,16 @@ const Registration = ({ navigation }) => {
           onChange={(name) => handleRegData(name)}
           name="username"
           type="text"
-          placeholder="User name"
+          placeholder="Username"
         />
-        {errors.includes("username") && <div className="error">{errors}</div>}
+        <div className="error">{handleErrors("username")}</div>
         <input
           onChange={(name) => handleRegData(name)}
           name="password"
-          type="text"
+          type="password"
           placeholder="Password"
         />
-        {errors.includes("password") && <div className="error">{errors}</div>}
+        <div className="error">{handleErrors("password")}</div>
 
         <input
           onChange={(name) => handleRegData(name)}
@@ -80,10 +87,11 @@ const Registration = ({ navigation }) => {
           type="email"
           placeholder="Email"
         />
-        {errors.includes("email") && <div className="error">{errors}</div>}
+        <div className="error">{handleErrors("email")}</div>
+
         <CheckBoxAdmin checkedBox={registData.admin === 1}>
           <div className="handleCheck" onClick={() => changeCheckBtn()}></div>
-          <p>Are you admin?</p>
+          <p>Admin?</p>
         </CheckBoxAdmin>
 
         <RegistrationButton onClick={() => handleRegister()}>

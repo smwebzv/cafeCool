@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import storeProducts from "../../utils/Data.js";
+import GetDrinks from "../../context/actions/drinkActions.js";
+import { saveFAQS } from "../../context/actions/autentificationActions.js";
 import {
   AddProd,
   ButtonsFrame,
@@ -9,23 +10,37 @@ import {
   FakHeader,
   FakTitle,
 } from "./FakturaStyle";
+import { useNavigate } from "react-router-dom";
 
 const Faktura = () => {
-  const [products, setProducts] = useState(storeProducts);
-  const [numberFaqs, setNumberFaqs] = useState(null);
-  const [places, setPlace] = useState("");
+  let navigate = useNavigate();
+
+  const [products, setProducts] = useState([]);
+  const [numberFaqs, setNumberFaqs] = useState({});
+  const [places, setPlace] = useState({});
+  const [total, setTotal] = useState(0.0);
+
   const [dailyList, setDailyList] = useState([
     {
-      names: "",
+      drinkId: "",
       quantity: 0,
       price: 0,
     },
   ]);
 
-  const [total, setTotal] = useState(0.0);
+  useEffect(() => {
+    GetDrinks()
+      .then((res) => {
+        setProducts(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   const handleAddRow = () => {
     const item = {
-      names: "",
+      drinkId: "",
       quantity: 0,
       price: 0,
     };
@@ -38,29 +53,49 @@ const Faktura = () => {
     dailyListCoppy[indx][e.target.name] = e.target.value;
     setDailyList(dailyListCoppy);
   };
-
   useEffect(() => {
     let newPrice = 0;
     let totalPrice = 0;
     dailyList.map((item) => {
-      if (item.price && item.quantity) {
-        newPrice = parseInt(item.quantity) * item.price;
-        totalPrice = newPrice + totalPrice;
+      if (item.price) {
+        newPrice = item.price;
+        totalPrice = parseInt(totalPrice) + parseInt(newPrice);
       }
     });
-    setTotal(totalPrice.toFixed(2));
+    setTotal(totalPrice);
   }, [dailyList]);
 
   const changeDeliverer = (e) => {
-    let options = e.target.value;
-    setPlace(options);
-    console.log(options);
+    const { name, value } = e.target;
+    const data = places;
+    data[name] = value;
+    setPlace(data);
+    console.log(data);
   };
 
   const inputFaqs = (e) => {
-    const number = e.target.value;
-    setNumberFaqs(number);
-    console.log(numberFaqs);
+    const { name, value } = e.target;
+    const data = numberFaqs;
+    data[name] = value;
+    console.log(data);
+    setNumberFaqs(data);
+  };
+
+  const saveFaqss = () => {
+    const data = {
+      total: Number(total),
+      dailyList: dailyList,
+      number: numberFaqs.inputFaqs,
+      place: places.selectItems,
+    };
+    console.log(data);
+    saveFAQS(data)
+      .then((res) => {
+        navigate("/secondTable");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   return (
     <FakFrameFirst>
@@ -81,6 +116,9 @@ const Faktura = () => {
               onChange={(value) => changeDeliverer(value)}
               name="selectItems"
             >
+              <option value="default" hidden>
+                Odaberite dostavljaca
+              </option>
               <option value="Beoprom">Beoprom</option>
               <option value="Srbija">Srbija</option>
               <option value="Market">Market</option>
@@ -100,10 +138,19 @@ const Faktura = () => {
                 <tr key={indx1}>
                   <td>{indx1 + 1}.</td>
                   <td>
-                    <select className="selectProd">
-                      <option>Izaberi proizvod</option>
-                      {products.map((item, indx) => (
-                        <option key={indx}>{item.prodName}</option>
+                    <select
+                      onChange={(e) => handleChange(e, indx1)}
+                      className="selectProd"
+                      id="drinkId"
+                      name="drinkId"
+                    >
+                      <option value="default" hidden>
+                        Izaberi proizvod
+                      </option>
+                      {products.map((item) => (
+                        <option value={item.name} key={item.id}>
+                          {item.name}
+                        </option>
                       ))}
                     </select>
                   </td>
@@ -141,7 +188,9 @@ const Faktura = () => {
 
           <ButtonsFrame>
             <AddProd onClick={() => handleAddRow()}>Novi Proizvod</AddProd>
-            <AddProd className="saveFak">Sačuvaj Fakturu</AddProd>
+            <AddProd onClick={() => saveFaqss()} className="saveFak">
+              Sačuvaj Fakturu
+            </AddProd>
           </ButtonsFrame>
         </FakBox>
       </FakFrame>
