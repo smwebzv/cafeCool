@@ -9,17 +9,12 @@ import {
   FakFrameFirst,
   FakHeader,
   FakTitle,
-} from "./FakturaStyle";
-import { useNavigate } from "react-router-dom";
+} from "./FaqsStyle";
 
-const Faktura = () => {
-  let navigate = useNavigate();
-
-  const [products, setProducts] = useState([]);
-  const [numberFaqs, setNumberFaqs] = useState({});
-  const [places, setPlace] = useState({});
-  const [total, setTotal] = useState(0.0);
-
+const Faqs = () => {
+  const [products, setProducts] = useState(storeProducts);
+  const [numberFaqs, setNumberFaqs] = useState(null);
+  const [places, setPlace] = useState("");
   const [dailyList, setDailyList] = useState([
     {
       drinkId: "",
@@ -198,4 +193,4 @@ const Faktura = () => {
   );
 };
 
-export default Faktura;
+export default Faqs;

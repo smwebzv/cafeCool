@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
-export const FirstTableHolder = styled.div`
+export const AddDailyReportsHolder = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
 `;
 
-export const FirstTableFrame = styled.div`
+export const AddDailyReportsFrame = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
@@ -44,6 +44,7 @@ export const FirstTableFrame = styled.div`
                     font-family: cursive;
                     outline: none;
                     width: 130px;
+                    height: 80%;
                 }
                 &.preneseno{
                     background-color: silver;

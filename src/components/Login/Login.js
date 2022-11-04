@@ -1,4 +1,5 @@
 import {
+  Error,
   LoginBox,
   LoginButton,
   LoginFrame,
@@ -6,7 +7,7 @@ import {
   RegistrationBnt,
 } from "./LoginStyle";
 import { NavLink } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { login } from "../../context/actions/autentificationActions";
 import {
   BrowserRouter as Router,
@@ -15,6 +16,7 @@ import {
   Routes,
   useNavigate,
 } from "react-router-dom";
+import { Input } from "../../AppStyle";
 
 const Login = () => {
   let navigate = useNavigate();
@@ -47,30 +49,27 @@ const Login = () => {
   };
 
   return (
-    <LoginFrame>
+    <LoginFrame style={{height: "100vh"}}>
       <LoginBox>
         <LoginTitle>LOG IN</LoginTitle>
-        <input
-          onChange={(name) => loginDataa(name)}
-          className="loginInput"
+        <Input 
           type="text"
           placeholder="Username"
           name="username"
-        />
-        <input
           onChange={(name) => loginDataa(name)}
-          className="loginInput"
+        />
+        <Input 
           type="text"
           placeholder="Password"
           name="password"
+          onChange={(name) => loginDataa(name)}
         />
-        <div className="error">{error}</div>
-
+        <Error>{error}</Error>
         <LoginButton onClick={() => handleLogin()}>Log in</LoginButton>
         <RegistrationBnt>
           <NavLink
             style={{ color: "#000", textDecoration: "none" }}
-            to="/registrationPage"
+            to="/registration"
           >
             Registration
           </NavLink>

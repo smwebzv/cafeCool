@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const LoginFrame = styled.div`
-  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -18,25 +17,10 @@ export const LoginBox = styled.div`
   flex-direction: column;
   background-color: #e3be30;
   border-radius: 20px;
+`;
 
-  .loginInput {
-    width: 80%;
-    height: 40px;
-    background-color: #fff;
-    border-radius: 10px;
-    border: none;
-    outline: none;
-    font-family: cursive;
-    font-size: 15px;
-    padding: 0 20px;
-    box-sizing: border-box;
-    margin-bottom: 20px;
-  }
-
-  .error {
-    background-color: red;
-    font-size: 20px;
-  }
+export const Error = styled.div`
+  background-color: red;
 `;
 
 export const LoginTitle = styled.div`
@@ -67,3 +51,4 @@ export const RegistrationBnt = styled.div`
   font-size: 15px;
   cursor: pointer;
 `;
+
