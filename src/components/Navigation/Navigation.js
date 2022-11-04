@@ -1,8 +1,8 @@
 import { BrowserRouter, BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Faqs from "../Faqs/Faqs";
+import AddNewFaq from "../AddNewFaq/AddNewFaq";
 import Login from "../Login/Login";
 import AddDailyReports from "../AddDailyReports/AddDailyReports";
-import AddNewFaq from "../AddNewFaq/AddNewFaq";
+import Faqs from "../Faqs/Faqs";
 import Registration from "../Registration/Registration";
 import DailyReports from "../DailyReports/DailyReports";
 

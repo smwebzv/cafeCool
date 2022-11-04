@@ -59,7 +59,7 @@ const DailyReports = (props) => {
           </LoginButton>
           <LoginButton className="button">
             <NavLink
-              to="/faqs"
+              to="/addNewFaq"
               style={{ color: "#fff", textDecoration: "none" }}
             >
               Unesi fakturu
@@ -67,7 +67,7 @@ const DailyReports = (props) => {
           </LoginButton>
           <LoginButton className="button">
             <NavLink
-              to="/addNewFaq"
+              to="/faqs"
               style={{ color: "#fff", textDecoration: "none" }}
             >
               Sve fakture

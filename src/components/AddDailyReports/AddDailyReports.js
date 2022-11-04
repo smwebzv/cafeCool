@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import {SendDailyReports} from "../../context/actions/dailyReportsActions";
 import GetDrinks from "../../context/actions/drinkActions";
-import { AddProd } from "../Faqs/FaqsStyle";
+import { AddProd } from "../AddNewFaq/AddNewFaqStyle";
 import {
   AddDailyReportsFrame,
   AddDailyReportsHolder,
