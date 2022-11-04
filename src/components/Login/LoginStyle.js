@@ -35,6 +35,7 @@ export const LoginBox = styled.div`
 
   .error {
     background-color: red;
+    font-size: 20px;
   }
 `;
 
