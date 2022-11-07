@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import GetDrinks from "../../context/actions/drinkActions.js";
-import { saveFAQS } from "../../context/actions/autentificationActions.js";
+import { saveFAQS } from "../../context/actions/faqsActions.js";
 import {
   AddProd,
   ButtonsFrame,

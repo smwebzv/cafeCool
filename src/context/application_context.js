@@ -1,17 +1,20 @@
 import React, { createContext, useReducer } from "react";
 import contextReducer from "./contextReducer/contextReducer";
+import DailyReportsReducer from "./contextReducer/dailyReportsReducer";
 import contextState from "./contextState/contextState";
+import DailyReportsState from "./contextState/dailyReportsState";
 
 export const AppContext = createContext();
+
 const AppMainContext = (props) => {
-  const [mainState, dispatch] = useReducer(contextReducer, contextState);
+
+  const [dailyReportsState, dailyReportsDispatch] = useReducer(DailyReportsReducer, DailyReportsState);
 
   return (
     <AppContext.Provider
       value={{
-        state: mainState,
-        dispatch,
-        
+        dailyReportsState,
+        dailyReportsDispatch
       }}
     >
       {props.children}
