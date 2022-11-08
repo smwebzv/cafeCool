@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {SendDailyReports} from "../../context/actions/dailyReportsActions";
+import {SendDailyReports, UpdateDailyReports} from "../../context/actions/dailyReportsActions";
 import GetDrinks from "../../context/actions/drinkActions";
+import { AppContext } from "../../context/application_context";
 import { AddProd } from "../AddNewFaq/AddNewFaqStyle";
 import {
   AddDailyReportsFrame,
@@ -14,6 +15,7 @@ const AddDailyReports = (props) => {
   let navigate = useNavigate();
   let location = useLocation();
 
+const {dailyReportsDispatch, dailyReportsState, userState} = useContext(AppContext);
 const [products, setProducts] = useState([]);
 const [total, setTotal] = useState(0.00);
 const [dailyShift, setDailyShift] = useState(1);
@@ -21,6 +23,9 @@ const [propsData, setPropsData] = useState(location?.state?.list);
 const [consumption, setConsumption] = useState(propsData ? Number(propsData.consumption) : 0)
 const [consumptionDesc, setConsumptionDesc] = useState(propsData ? propsData.consumptionDesc : "");
 const [disableInput, setDisableInput] = useState(location?.state?.disableInput);
+const [updatedItemIndex, setUpdatedItemIndex] = useState(location?.state?.indx);
+
+
 
 useEffect(() => {
   if(propsData){
@@ -30,20 +35,35 @@ useEffect(() => {
    setProducts(propsData.dailyList);
    setTotal(Number(propsData.total));
   }else{
-    GetDrinks()
-    .then((res) => {
-      res.data.map((item, indx) => {
-        item.consumption = 0
-        item.totalPrice = 0
-        item.remaind = item.carried
+    if(dailyReportsState?.dailyReport?.dailyList?.length){
+      console.log("1");
+      setProducts(dailyReportsState.dailyReport.dailyList);
+      setTotal(dailyReportsState.dailyReport.total);
+      setConsumption(dailyReportsState.dailyReport.consumption);
+      setConsumptionDesc(dailyReportsState.dailyReport.consumptionDesc);
+    }else{
+      console.log("2");
+      GetDrinks()
+      .then((res) => {
+        res.data.map((item, indx) => {
+          item.consumption = 0
+          item.totalPrice = 0
+          item.remaind = item.carried
+        })
+        const data = {
+          "dailyList": res.data,
+          "total": 0.00,
+          "consumption": consumption,
+          "consumptionDesc": consumptionDesc
+        }
+        dailyReportsDispatch({type: "setDailyReport", payload: data});
       })
-      setProducts(res.data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+      .catch((err) => {
+        console.log(err);
+      });
+    }
   }
-}, []);
+}, [dailyReportsState.dailyReport]);
 
 
 const Potrosnja = (indx, number) => {
@@ -56,7 +76,14 @@ const Potrosnja = (indx, number) => {
   item.totalPrice = Number(item.consumption) * Number(item.price);
   item.remaind = Number(item.carried) - Number(item.consumption);
   const newTotal = total - oldPrice + item.totalPrice;
-
+  const dailyReportsData = {
+    "total": newTotal.toFixed(2),
+    "dailyList": productsCoppy,
+    "consumption": consumption,
+    "consumptionDesc": consumptionDesc
+  }
+  sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
+  dailyReportsDispatch({type: "setDailyReport", payload: dailyReportsData});
   setProducts(productsCoppy);
   setTotal(newTotal.toFixed(2));
 }
@@ -69,7 +96,14 @@ const consuptionHandleAmount = (e) => {
   data = value;
   
   const newTotal = Number(total) + Number(oldPrice) - data;
-
+  const dailyReportsData = {
+    "total": newTotal.toFixed(2),
+    "dailyList": products,
+    "consumption": data,
+    "consumptionDesc": consumptionDesc
+  }
+  sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
+  dailyReportsDispatch({type: "setDailyReport", payload: dailyReportsData});
   setTotal(newTotal.toFixed(2));
   setConsumption(data);
 };
@@ -78,39 +112,78 @@ const consuptionHandleDesc = (e) => {
   const { value } = e.target;
   let data = consumptionDesc;
   data = value;
-  
+  const dailyReportsData = {
+    "total": total,
+    "dailyList": products,
+    "consumption": consumption,
+    "consumptionDesc": data
+  }
+  sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
+  dailyReportsDispatch({type: "setDailyReport", payload: dailyReportsData});
   setConsumptionDesc(data);
 };
 
 useEffect(() => {
   var today = new Date()
   const time = today.getHours();
-  console.log(time);
   if(time >= 8 && time <= 16){
-    console.log("prva");
     setDailyShift(1);
   }else if(time >= 16 && time <= 23)
   {
-    console.log("druga");
     setDailyShift(2);
   }
 }, []);
 
 const Send = () => {
-  const data = {
+  let data = {
     "shift": dailyShift,
     "consumption": consumption,
     "consumptionDesc": consumptionDesc,
     "total": total,
     "dailyList": products
   }
-  SendDailyReports(data).then((res) => {
-    navigate("/");
-    console.log(res.data);
-  }).catch((err) => {
-    console.log(err);
-  })
+  if(propsData){
+    const dataForUpdate = {
+      "total": total
+    }
+    propsData.dailyList = products;
+    propsData.total = total;
+    propsData.consumption = consumption;
+    propsData.consumptionDesc = consumptionDesc;
+    console.log(propsData);
+    /*UpdateDailyReports(propsData.user.id, dataForUpdate).then((res)=>{
+    }).catch((err)=>{
+      console.log(err);
+    })*/
+    dailyReportsDispatch({type: "updateDailyItem", payload: {data: propsData, indx:updatedItemIndex}});
+    navigate("/"); 
+  }else{
+    SendDailyReports(data).then((res) => {
+      data.user = userState.userInfo
+      data.date = new Date(); 
+      data.id = res.data.generatedMaps[0].id;
+      dailyReportsDispatch({type: "addNewDailyItem", payload: data })
+      sessionStorage.removeItem("dailyReport");
+      dailyReportsDispatch({type: "setDailyReport", payload: {}});
+      
+      navigate("/"); 
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 }
+
+/*useEffect(() => {
+  const dailyReportsData = {
+    "total": total,
+    "dailyList": products,
+    "consumption": consumption,
+    "consumptionDesc": consumptionDesc
+  }
+  sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
+  dailyReportsDispatch({type: "setDailyReport", payload: dailyReportsData});
+}, [total, consumptionDesc, products, consumption]);*/
+
 
   return (
     <AddDailyReportsHolder>
