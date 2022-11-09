@@ -1,8 +1,8 @@
 import React, { createContext, useReducer } from "react";
-import contextReducer from "./contextReducer/contextReducer";
 import DailyReportsReducer from "./contextReducer/dailyReportsReducer";
-import contextState from "./contextState/contextState";
+import UserReducer from "./contextReducer/userReducer";
 import DailyReportsState from "./contextState/dailyReportsState";
+import UserState from "./contextState/userState";
 import AddNewFaqsState from "./contextState/addNewFaqsState";
 import AddNewFaqsReducer from "./contextReducer/addnewFaqsReducer";
 export const AppContext = createContext();
@@ -12,6 +12,10 @@ const AppMainContext = (props) => {
     DailyReportsReducer,
     DailyReportsState
   );
+  const [userState, userDispatch] = useReducer(
+    UserReducer, 
+    UserState
+  );
   const [addNewFaqsState, addNewFaqDispatch] = useReducer(
     AddNewFaqsReducer,
     AddNewFaqsState
@@ -20,6 +24,8 @@ const AppMainContext = (props) => {
     <AppContext.Provider
       value={{
         dailyReportsState,
+        userState,
+        userDispatch,
         dailyReportsDispatch,
         addNewFaqsState,
         addNewFaqDispatch,

@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { LoginButton, LoginFrame } from "../Login/LoginStyle";
 import { CaffeCoolTitle, DailyReportsFrame, InputHolder } from "./DailyReportsStyle";
-import { DeleteDailyReports, GetDailyReports } from "../../context/actions/dailyReportsActions";
+import { DeleteDailyReports, GetDailyReports} from "../../context/actions/dailyReportsActions";
 import { Input } from "../../AppStyle";
 import moment from "moment";
 import { AppContext } from "../../context/application_context";
@@ -14,41 +14,36 @@ const DailyReports = (props) => {
   
   const DailyReports = () => {
     GetDailyReports().then((res) => {
-      dailyReportsDispatch({type: "setDailyList", data: res.data});
+      dailyReportsDispatch({type: "setDailyList", payload: res.data});
     }).catch((err) =>{
       console.log(err);
     })
   }
 
   useEffect(() => {
-    if(dailyReportsState?.dailyList?.length === 0){
-      DailyReports();
-    }else{
+    if(dailyReportsState?.dailyList?.length){
       setDailyReports(dailyReportsState?.dailyList);
+    }else{
+      DailyReports();
     }
   }, [dailyReportsState?.dailyList]);
 
-  const UpdateSpecificFaq = (item) => {
-    console.log("----", item);
-    navigate("/addDailyReports", {state: {list:item}});
+  const UpdateSpecificFaq = (item, indx) => {
+    navigate("/addDailyReports", {state: {list:item, indx}});
   }
   const OpenSpecificFaq = (item) => {
-    console.log("----", item);
     navigate("/addDailyReports", {state: {list:item, disableInput: true}});
   }
 
   const Delete = (id, indx) => {
     DeleteDailyReports(id).then((res)=> {
-      dailyReportsDispatch({type: "removeDailyItem", data: indx});
+      dailyReportsDispatch({type: "removeDailyItem", payload: indx});
       console.log(res.data);
     }).catch((err)=> {
       console.log(err);
     });
     
   }
-
-
-
 
   return (
     <LoginFrame>
@@ -109,7 +104,7 @@ const DailyReports = (props) => {
                 <td>{item.consumption}KM</td>
                 <td>{item.total}KM</td>
                 <td className="doc" onClick={() => OpenSpecificFaq(item)}></td>
-                <td className="pen" onClick={() => UpdateSpecificFaq(item)}></td>
+                <td className="pen" onClick={() => UpdateSpecificFaq(item, indx)}></td>
                 <td className="delete" onClick={() => Delete(item.id, indx)}></td>
               </tr>
             )

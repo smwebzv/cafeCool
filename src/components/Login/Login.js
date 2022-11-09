@@ -40,6 +40,7 @@ const Login = () => {
     login(loginData)
       .then((res) => {
         localStorage.setItem("userToken", res.data.access_token);
+        localStorage.setItem("userInfo", JSON.stringify(res.data.loggedUser));
         window.location.reload(false);
       })
       .catch((err) => {
