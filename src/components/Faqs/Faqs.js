@@ -1,21 +1,30 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { GetFaqs } from "../../context/actions/faqsActions";
 import { SecondTableFrame, SecondTableHolder } from "./FaqsStyle";
 import Moment from "moment";
+import { AppContext } from "../../context/application_context";
 
 const Faqs = () => {
   const [getFaqs, setGetFaqs] = useState();
   const [dropDownIndex, setDropDownIndex] = useState(-1);
-  useEffect(() => {
+  const { addNewFaqDispatch, addNewFaqsState } = useContext(AppContext);
+  const getFaqsList = () => {
     GetFaqs()
       .then((res) => {
         console.log(res.data);
-        setGetFaqs(res.data);
+        addNewFaqDispatch({ type: "addNewFaqs", payload: res.data });
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  };
+  useEffect(() => {
+    if (addNewFaqsState?.newFaqs?.length) {
+      setGetFaqs(addNewFaqsState.newFaqs);
+    } else {
+      getFaqsList();
+    }
+  }, [addNewFaqsState.newFaqs]);
 
   const showDailyLists = (indx) => {
     let i = dropDownIndex === indx ? -1 : indx;
@@ -49,7 +58,7 @@ const Faqs = () => {
                 <td>{item.place}</td>
                 <td>{item.total}</td>
                 <td>{Moment(item.date).format("DD/MMM/YYYY")}</td>
-              </tr>{" "}
+              </tr>
               {dropDownIndex == index && (
                 <>
                   <tr>
@@ -65,7 +74,7 @@ const Faqs = () => {
                       <td>{items.quantity}</td>
                       <td>{items.price}</td>
                     </tr>
-                  ))}{" "}
+                  ))}
                 </>
               )}
             </tbody>
