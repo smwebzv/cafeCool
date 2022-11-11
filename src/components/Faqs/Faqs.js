@@ -1,30 +1,20 @@
 import { useContext, useEffect, useState } from "react";
-import { GetFaqs } from "../../context/actions/faqsActions";
 import { SecondTableFrame, SecondTableHolder } from "./FaqsStyle";
 import Moment from "moment";
 import { AppContext } from "../../context/application_context";
 
 const Faqs = () => {
+  const { addNewFaqsState, getFaqsList } = useContext(AppContext);
   const [getFaqs, setGetFaqs] = useState();
   const [dropDownIndex, setDropDownIndex] = useState(-1);
-  const { addNewFaqDispatch, addNewFaqsState } = useContext(AppContext);
-  const getFaqsList = () => {
-    GetFaqs()
-      .then((res) => {
-        console.log(res.data);
-        addNewFaqDispatch({ type: "addNewFaqs", payload: res.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   useEffect(() => {
-    if (addNewFaqsState?.newFaqs?.length) {
-      setGetFaqs(addNewFaqsState.newFaqs);
+    if (addNewFaqsState?.faqsList?.length) {
+      setGetFaqs(addNewFaqsState.faqsList);
     } else {
       getFaqsList();
     }
-  }, [addNewFaqsState.newFaqs]);
+  }, [addNewFaqsState.faqsList]);
 
   const showDailyLists = (indx) => {
     let i = dropDownIndex === indx ? -1 : indx;

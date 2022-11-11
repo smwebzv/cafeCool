@@ -3,7 +3,12 @@ const AddNewFaqsReducer = (state, { type, payload }) => {
     case "addNewFaqs":
       return {
         ...state,
-        newFaqs: payload,
+        faqsList: payload,
+      };
+    case "addNewItemFaqs":
+      return {
+        ...state,
+        faqsList: [...state.faqsList, payload],
       };
   }
 };

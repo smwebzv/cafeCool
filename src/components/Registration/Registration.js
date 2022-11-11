@@ -5,18 +5,11 @@ import {
   RegistrationTitle,
   RegistrationButton,
   CheckBoxAdmin,
-  CheckBtn,
 } from "./RegistrationStyle";
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const Registration = ({ navigation }) => {
+const Registration = () => {
   let navigate = useNavigate();
   const [checkedBox, setCheckedBox] = useState(true);
 
