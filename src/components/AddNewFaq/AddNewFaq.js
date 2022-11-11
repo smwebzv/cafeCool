@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import GetDrinks from "../../context/actions/drinkActions.js";
-import { saveFAQS } from "../../context/actions/faqsActions.js";
 import {
   AddProd,
   ButtonsFrame,
@@ -10,16 +9,14 @@ import {
   FakHeader,
   FakTitle,
 } from "./AddNewFaqStyle";
-import { useNavigate } from "react-router-dom";
+import { AppContext } from "../../context/application_context.js";
 
 const AddNewFaq = () => {
-  let navigate = useNavigate();
-
+  const { saveNewFaq } = useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [numberFaqs, setNumberFaqs] = useState({});
   const [places, setPlace] = useState({});
   const [total, setTotal] = useState(0.0);
-
   const [dailyList, setDailyList] = useState([
     {
       drinkId: "",
@@ -88,15 +85,11 @@ const AddNewFaq = () => {
       number: numberFaqs.inputFaqs,
       place: places.selectItems,
     };
+
     console.log(data);
-    saveFAQS(data)
-      .then((res) => {
-        navigate("/faqs");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    saveNewFaq(data);
   };
+
   return (
     <FakFrameFirst>
       <FakFrame>

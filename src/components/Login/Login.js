@@ -9,17 +9,10 @@ import {
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../context/actions/autentificationActions";
-import {
-  BrowserRouter as Router,
-  Navigate,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Input } from "../../AppStyle";
 
 const Login = () => {
-  let navigate = useNavigate();
   const [error, setError] = useState("");
 
   const [loginData, setLoginData] = useState({
@@ -50,16 +43,16 @@ const Login = () => {
   };
 
   return (
-    <LoginFrame style={{height: "100vh"}}>
+    <LoginFrame style={{ height: "100vh" }}>
       <LoginBox>
         <LoginTitle>LOG IN</LoginTitle>
-        <Input 
+        <Input
           type="text"
           placeholder="Username"
           name="username"
           onChange={(name) => loginDataa(name)}
         />
-        <Input 
+        <Input
           type="text"
           placeholder="Password"
           name="password"
