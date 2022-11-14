@@ -1,9 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import {
-  SendDailyReports,
-  UpdateDailyReports,
-} from "../../context/actions/dailyReportsActions";
 import GetDrinks from "../../context/actions/drinkActions";
 import { AppContext } from "../../context/application_context";
 import { AddProd } from "../AddNewFaq/AddNewFaqStyle";
@@ -13,11 +9,12 @@ import {
   FrameButton,
 } from "./AddDailyReportsStyle";
 
+
 const AddDailyReports = (props) => {
   let navigate = useNavigate();
   let location = useLocation();
 
-  const { dailyReportsDispatch, dailyReportsState, userState } =
+  const { dailyReportsDispatch, dailyReportsState, saveOrUpdateDailyList } =
     useContext(AppContext);
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0.0);
@@ -45,13 +42,11 @@ const AddDailyReports = (props) => {
       setTotal(Number(propsData.total));
     } else {
       if (dailyReportsState?.dailyReport?.dailyList?.length) {
-        console.log("1");
         setProducts(dailyReportsState.dailyReport.dailyList);
         setTotal(dailyReportsState.dailyReport.total);
         setConsumption(dailyReportsState.dailyReport.consumption);
         setConsumptionDesc(dailyReportsState.dailyReport.consumptionDesc);
       } else {
-        console.log("2");
         GetDrinks()
           .then((res) => {
             res.data.map((item, indx) => {
@@ -74,7 +69,7 @@ const AddDailyReports = (props) => {
     }
   }, [dailyReportsState.dailyReport]);
 
-  const Potrosnja = (indx, number) => {
+  const potrosnja = (indx, number) => {
     if (!isNaN(+number) === false) return;
     const productsCoppy = products.slice();
     const item = productsCoppy[indx];
@@ -84,14 +79,7 @@ const AddDailyReports = (props) => {
     item.totalPrice = Number(item.consumption) * Number(item.price);
     item.remaind = Number(item.carried) - Number(item.consumption);
     const newTotal = total - oldPrice + item.totalPrice;
-    const dailyReportsData = {
-      total: newTotal.toFixed(2),
-      dailyList: productsCoppy,
-      consumption: consumption,
-      consumptionDesc: consumptionDesc,
-    };
-    sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
-    dailyReportsDispatch({ type: "setDailyReport", payload: dailyReportsData });
+    saveDataForSessionStorage(newTotal.toFixed(2), productsCoppy, consumption, consumptionDesc);
     setProducts(productsCoppy);
     setTotal(newTotal.toFixed(2));
   };
@@ -102,16 +90,8 @@ const AddDailyReports = (props) => {
     if (!isNaN(+value) === false) return;
     let data = consumption;
     data = value;
-
     const newTotal = Number(total) + Number(oldPrice) - data;
-    const dailyReportsData = {
-      total: newTotal.toFixed(2),
-      dailyList: products,
-      consumption: data,
-      consumptionDesc: consumptionDesc,
-    };
-    sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
-    dailyReportsDispatch({ type: "setDailyReport", payload: dailyReportsData });
+    saveDataForSessionStorage(newTotal.toFixed(2), products, data, consumptionDesc);
     setTotal(newTotal.toFixed(2));
     setConsumption(data);
   };
@@ -120,14 +100,7 @@ const AddDailyReports = (props) => {
     const { value } = e.target;
     let data = consumptionDesc;
     data = value;
-    const dailyReportsData = {
-      total: total,
-      dailyList: products,
-      consumption: consumption,
-      consumptionDesc: data,
-    };
-    sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
-    dailyReportsDispatch({ type: "setDailyReport", payload: dailyReportsData });
+    saveDataForSessionStorage(total, products, consumption, data);
     setConsumptionDesc(data);
   };
 
@@ -149,52 +122,19 @@ const AddDailyReports = (props) => {
       total: total,
       dailyList: products,
     };
-    if (propsData) {
-      const dataForUpdate = {
-        total: total,
-      };
-      propsData.dailyList = products;
-      propsData.total = total;
-      propsData.consumption = consumption;
-      propsData.consumptionDesc = consumptionDesc;
-      console.log(propsData);
-      /*UpdateDailyReports(propsData.user.id, dataForUpdate).then((res)=>{
-    }).catch((err)=>{
-      console.log(err);
-    })*/
-      dailyReportsDispatch({
-        type: "updateDailyItem",
-        payload: { data: propsData, indx: updatedItemIndex },
-      });
-      navigate("/");
-    } else {
-      SendDailyReports(data)
-        .then((res) => {
-          data.user = userState.userInfo;
-          data.date = new Date();
-          data.id = res.data.generatedMaps[0].id;
-          dailyReportsDispatch({ type: "addNewDailyItem", payload: data });
-          sessionStorage.removeItem("dailyReport");
-          dailyReportsDispatch({ type: "setDailyReport", payload: {} });
-
-          navigate("/");
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
+    saveOrUpdateDailyList(propsData, data, updatedItemIndex);
   };
 
-  /*useEffect(() => {
-  const dailyReportsData = {
-    "total": total, 
-    "dailyList": products,
-    "consumption": consumption,
-    "consumptionDesc": consumptionDesc
+  const saveDataForSessionStorage = (total, products, consumption, consumptionDesc) => {
+    const dailyReportsData = {
+      total: total,
+      dailyList: products,
+      consumption: consumption,
+      consumptionDesc: consumptionDesc,
+    };
+    sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
+    dailyReportsDispatch({ type: "setDailyReport", payload: dailyReportsData });
   }
-  sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
-  dailyReportsDispatch({type: "setDailyReport", payload: dailyReportsData});
-}, [total, consumptionDesc, products, consumption]);*/
 
   return (
     <AddDailyReportsHolder>
@@ -223,7 +163,7 @@ const AddDailyReports = (props) => {
                     name="consumption"
                     value={item.consumption}
                     disabled={disableInput}
-                    onChange={(e) => Potrosnja(indx, e.target.value)}
+                    onChange={(e) => potrosnja(indx, e.target.value)}
                   />
                 </td>
                 <td className="ostatak">{item.remaind}</td>
