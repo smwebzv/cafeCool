@@ -9,12 +9,10 @@ import {
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../context/actions/autentificationActions";
-import { useNavigate } from "react-router-dom";
 import { Input } from "../../AppStyle";
 
 const Login = () => {
   const [error, setError] = useState("");
-
   const [loginData, setLoginData] = useState({
     username: "",
     password: "",
@@ -25,7 +23,6 @@ const Login = () => {
     const { name, value } = e.target;
     const data = loginData;
     data[name] = value;
-    console.log(data);
     setLoginData(data);
   };
 
@@ -38,7 +35,6 @@ const Login = () => {
       })
       .catch((err) => {
         setError(err?.response?.data?.message);
-        console.log(err?.response?.data?.message);
       });
   };
 
@@ -53,7 +49,7 @@ const Login = () => {
           onChange={(name) => loginDataa(name)}
         />
         <Input
-          type="text"
+          type="password"
           placeholder="Password"
           name="password"
           onChange={(name) => loginDataa(name)}

@@ -12,7 +12,6 @@ import { useState } from "react";
 const Registration = () => {
   let navigate = useNavigate();
   const [checkedBox, setCheckedBox] = useState(true);
-
   const [registData, setRegistData] = useState({
     username: "",
     password: "",
@@ -20,7 +19,7 @@ const Registration = () => {
     admin: 0,
   });
   const [errors, setErrors] = useState();
-  console.log(errors);
+
   const handleRegData = (e) => {
     setErrors();
     const { name, value } = e.target;
@@ -35,15 +34,14 @@ const Registration = () => {
     });
     return e;
   };
+
   const handleRegister = () => {
-    console.log(registData);
     register(registData)
       .then((res) => {
         navigate("/");
       })
       .catch((err) => {
         setErrors(err?.response?.data?.message);
-        console.log(err);
       });
   };
 
