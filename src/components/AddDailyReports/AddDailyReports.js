@@ -126,6 +126,7 @@ const AddDailyReports = (props) => {
   };
 
   const saveDataForSessionStorage = (total, products, consumption, consumptionDesc) => {
+    if(propsData) return;
     const dailyReportsData = {
       total: total,
       dailyList: products,

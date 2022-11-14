@@ -9,7 +9,7 @@ const Faqs = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
 
   useEffect(() => {
-    if (addNewFaqsState?.faqsList?.length) {
+    if (addNewFaqsState?.faqsList?.length > 1) {
       setGetFaqs(addNewFaqsState.faqsList);
     } else {
       getFaqsList();
