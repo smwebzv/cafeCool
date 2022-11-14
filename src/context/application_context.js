@@ -8,6 +8,7 @@ import AddNewFaqsReducer from "./contextReducer/addnewFaqsReducer";
 import { useNavigate } from "react-router-dom";
 import { saveFAQS } from "./actions/faqsActions";
 import { GetFaqs } from "./actions/faqsActions";
+import { SendDailyReports } from "./actions/dailyReportsActions";
 export const AppContext = createContext();
 
 const AppMainContext = (props) => {
@@ -45,6 +46,40 @@ const AppMainContext = (props) => {
         console.log(err);
       });
   };
+
+  const saveOrUpdateDailyList = (propsData, data, updatedItemIndex) => {
+    if (propsData) {
+      propsData.dailyList = data.products;
+      propsData.total = data.total;
+      propsData.consumption = data.consumption;
+      propsData.consumptionDesc = data.consumptionDesc;
+      console.log(propsData);
+      /*UpdateDailyReports(propsData.user.id, dataForUpdate).then((res)=>{
+    }).catch((err)=>{
+      console.log(err);
+    })*/
+      dailyReportsDispatch({
+        type: "updateDailyItem",
+        payload: { data: propsData, indx: updatedItemIndex },
+      });
+      navigate("/");
+    } else {
+      SendDailyReports(data)
+        .then((res) => {
+          data.user = userState.userInfo;
+          data.date = new Date();
+          data.id = res.data.generatedMaps[0].id;
+          dailyReportsDispatch({ type: "addNewDailyItem", payload: data });
+          sessionStorage.removeItem("dailyReport");
+          dailyReportsDispatch({ type: "setDailyReport", payload: {} });
+
+          navigate("/");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
   return (
     <AppContext.Provider
       value={{
@@ -56,6 +91,7 @@ const AppMainContext = (props) => {
         addNewFaqDispatch,
         saveNewFaq,
         getFaqsList,
+        saveOrUpdateDailyList
       }}
     >
       {props.children}
