@@ -1,4 +1,3 @@
-import axios from "axios";
 import axiosInstance from "../../helpers/axiosInterceptor";
 
 export const register = (registData) => {
@@ -8,5 +7,3 @@ export const register = (registData) => {
 export const login = (loginData) => {
   return axiosInstance.post("auth/login", loginData);
 };
-
-

@@ -42,7 +42,6 @@ const AddNewFaq = () => {
       price: 0,
     };
     setDailyList([...dailyList, item]);
-    console.log(dailyList);
   };
 
   const handleChange = (e, indx) => {
@@ -50,16 +49,17 @@ const AddNewFaq = () => {
     dailyListCoppy[indx][e.target.name] = e.target.value;
     setDailyList(dailyListCoppy);
   };
+
   useEffect(() => {
     let newPrice = 0;
     let totalPrice = 0;
     dailyList.map((item) => {
       if (item.price) {
         newPrice = item.price;
-        totalPrice = parseInt(totalPrice) + parseInt(newPrice);
+        totalPrice = totalPrice + newPrice;
       }
     });
-    setTotal(totalPrice);
+    setTotal(Number(totalPrice));
   }, [dailyList]);
 
   const changeDeliverer = (e) => {
@@ -67,14 +67,12 @@ const AddNewFaq = () => {
     const data = places;
     data[name] = value;
     setPlace(data);
-    console.log(data);
   };
 
   const inputFaqs = (e) => {
     const { name, value } = e.target;
     const data = numberFaqs;
     data[name] = value;
-    console.log(data);
     setNumberFaqs(data);
   };
 
@@ -86,7 +84,6 @@ const AddNewFaq = () => {
       place: places.selectItems,
     };
 
-    console.log(data);
     saveNewFaq(data);
   };
 
