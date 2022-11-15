@@ -1,5 +1,5 @@
 import { Container } from "./AppStyle";
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./screens/Navigation/Navigation";
 
 function App() {
   return (
