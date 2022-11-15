@@ -1,58 +1,70 @@
 import styled from "styled-components";
 
-export const AddDailyReportsHolder = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-`;
-
 export const AddDailyReportsFrame = styled.div`
-    height: 100%;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    padding: 20px;
-    box-sizing: border-box;
+    align-items: flex-start;
+    background: #EFEFEF;
+
 
     table{
-        border: 1px solid black;
-        font-family: cursive;
-        height: 100vh;
-        max-width: 1200px;
+        width: 100%;
+        font-size: 14px;
+        border: 1px solid #999999;
+        border-bottom: none;
+        border-spacing: 0px;
 
         thead{
-            background-color: coral;
-            color: #fff;
-            font-size: 20px;
+            background-color: #fff;
+            color: #000;
+            text-align: right;
 
             th{
-                border: 1px solid black;
+                height: 32px;
+                border-bottom: 1px solid #999999;
+            }
+
+            th:first-child{
+                text-align: left;
+                padding-left: 35px;
+                display: flex;
+                align-items: center;
+            }
+            th:last-child{
+                padding-right: 35px;
             }
         }
 
         tbody{
-            background-color: antiquewhite;
-            color: #000;
+            background-color: #fff;
+            text-align: right;
+            padding-left: 35px;
 
             td{
-                text-align: center;
-                border: 1px solid black;
+                height: 32px;
+                border-bottom: 1px solid #999999;
+                width: 15%;
 
                 .potrosnjaInpt{
-                    text-align: center;
+                    text-align: right;
                     font-family: cursive;
                     outline: none;
-                    width: 130px;
                     height: 80%;
+                    border: none;
                 }
                 &.preneseno{
-                    background-color: silver;
-                    width: 130px;
                     font-family: cursive;
                     outline: none;
-                    text-align: center;
+                    text-align: right;
                 }
+            }
+
+            td:first-child{
+                text-align: left;
+                padding-left: 35px;
+                width: 25%;
+            }
+            td:last-child{
+                padding-right: 35px;
             }
             .rashodi{
                 font-size: 25px;
@@ -73,11 +85,4 @@ export const AddDailyReportsFrame = styled.div`
             }   
         }
     }
-`;
-
-export const FrameButton = styled.div`
-    width: 100%;
-    margin-top: 20px;
-    display: flex;
-    justify-content: flex-end;
 `;

@@ -1,11 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-image: linear-gradient(to bottom right, red, yellow);
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  tex-align: center;
+
 `;
 
 export const Input = styled.input`
