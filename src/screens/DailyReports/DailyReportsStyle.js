@@ -1,14 +1,13 @@
 import styled from "styled-components";
 
 export const DailyReportsFrame = styled.div`
-    height: 100vh;
+    height: 100%;
     display: flex;
     align-items: flex-start;
     background: #EFEFEF;
 `;
 
 export const TableFrame = styled.div`
-
     table{
         min-width: 780px;
         font-size: 14px;
@@ -93,10 +92,10 @@ export const TableFrame = styled.div`
 `;
 
 export const TableAndInputFrame = styled.div`
-    max-width: 1067px;
-    padding: 44px 0 32px 163px;
+    padding: 44px 0px 32px 163px;
     display: flex;
     flex-direction: column;
+    max-width: 780px;
 `;
 
 export const ShiftEntry = styled.div`
