@@ -15,6 +15,8 @@ const DailyReports = (props) => {
   let navigate = useNavigate();
   const {dailyReportsDispatch, dailyReportsState} = useContext(AppContext);
   const [dailyReports, setDailyReports] = useState([]);
+  const [hover, setHover] = useState(false);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   
   const DailyReports = () => {
     GetDailyReports().then((res) => {
@@ -49,6 +51,16 @@ const DailyReports = (props) => {
     
   }
 
+    const hovered = () => {
+      setHover(true);
+      setSelectedItemIndex(-1);
+  }
+
+  const notHovered = (indx) => {
+      setHover(false);
+      setSelectedItemIndex(indx);
+  }
+
   return (
       <DailyReportsFrame>
         <Menu></Menu>
@@ -64,7 +76,7 @@ const DailyReports = (props) => {
             </NavLink>
             <SearchInput />
           </ShiftAndInputFrame>
-        <TableFrame>
+        <TableFrame   hover={hover}>
             <table>
               <thead>
                 <tr>
@@ -86,20 +98,29 @@ const DailyReports = (props) => {
               <tbody>
                 {
                   dailyReports.map((item, indx) =>
-                  <tr key={indx}>
+                  <tr key={indx} onMouseEnter={() => hovered()} onMouseLeave={() => notHovered(indx)} hover={hover}>
                     <td>{moment(item.date).format("DD MMM YYYY")}</td>
                     <td>{item.shift}</td>
                     <td>{item.user.username}</td>
                     <td>{item.consumption}KM</td>
                     <td>{item.total}KM</td>
                     <td>
+                    {
+                      hover && 
                       <PreviewIcon onClick={() => OpenSpecificFaq(item)}/>
+                    }
                     </td>
                     <td>
+                    {
+                      hover &&
                       <UpdateIcon onClick={() => UpdateSpecificFaq(item, indx)}/>
+                    } 
                     </td>
                     <td>
-                      <DeleteIcon onClick={() => Delete(item.id, indx)}/>
+                    {
+                      hover && 
+                        <DeleteIcon onClick={() => Delete(item.id, indx)}/>
+                    }
                     </td>
                   </tr>
                 )

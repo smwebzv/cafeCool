@@ -10,15 +10,17 @@ export const DailyReportsFrame = styled.div`
 export const TableFrame = styled.div`
 
     table{
-        width: 100%;
+        min-width: 780px;
         font-size: 14px;
-        border: 1px solid #999999;
         border-bottom: none;
         border-spacing: 0px;
+        border-radius: 5px;
+        overflow: hidden;
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
         
         thead{
             background-color: #fff;
-            color: #000;
+            color: #4D4D4D;
             text-align: right;
             
             th{
@@ -44,10 +46,9 @@ export const TableFrame = styled.div`
             background-color: #fff;
             text-align: right;
 
-            tr:hover{
-                background: #EFEFEF;
+            tr{
+                background: ${props => props.hover ? "#EFEFEF" : "#fff"}
             }
-
             td{
                 height: 50px;
                 border-bottom: 1px solid #999999;
@@ -55,29 +56,45 @@ export const TableFrame = styled.div`
             td:first-child{
                 text-align: left;
                 padding-left: 26px;
+                color: #999999;
             }
-            td: nth-child(6){
+            td:nth-child(2){
+                color: #999999;
+            }
+            td:nth-child(3){
+                color: #999999;
+            }
+            td:nth-child(4){
+                color: #4D4D4D;
+            }
+            td:nth-child(6){
                 width: 30px;
                 padding-left: 74px;
                 cursor: pointer;
             }
-            td: nth-child(7){
+            td:nth-child(7){
                 width: 10px;
                 padding: 0 29px;
                 cursor: pointer
             }
-            td: nth-child(8){
+            td:nth-child(8){
                 width: 10px;
                 padding-right: 35px;
                 cursor: pointer;
             }
         }
     }
+
+    svg:hover{
+        path{
+            fill: DC4E4E;
+        }
+    }
 `;
 
 export const TableAndInputFrame = styled.div`
-    width: 100%;
-    padding: 44px 50px 32px 163px;
+    max-width: 1067px;
+    padding: 44px 0 32px 163px;
     display: flex;
     flex-direction: column;
 `;
