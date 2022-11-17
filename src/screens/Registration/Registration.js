@@ -2,12 +2,13 @@ import { register } from "../../context/actions/autentificationActions";
 import {
   RegistrationFrame,
   RegistrationBox,
-  RegistrationTitle,
-  RegistrationButton,
   CheckBoxAdmin,
+  Logo,
 } from "./RegistrationStyle";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 const Registration = () => {
   let navigate = useNavigate();
@@ -56,38 +57,39 @@ const Registration = () => {
   return (
     <RegistrationFrame>
       <RegistrationBox>
-        <RegistrationTitle>REGISTRATION</RegistrationTitle>
-        <input
+        <Logo />
+        <Input
           onChange={(name) => handleRegData(name)}
           name="username"
           type="text"
-          placeholder="Username"
+          placeHolder="Username"
         />
-        <div className="error">{handleErrors("username")}</div>
-        <input
+        <Input
           onChange={(name) => handleRegData(name)}
           name="password"
           type="password"
-          placeholder="Password"
+          placeHolder="Password"
         />
-        <div className="error">{handleErrors("password")}</div>
-
-        <input
+        <Input
           onChange={(name) => handleRegData(name)}
           name="email"
           type="email"
-          placeholder="Email"
+          placeHolder="Email"
         />
-        <div className="error">{handleErrors("email")}</div>
 
-        <CheckBoxAdmin checkedBox={registData.admin === 1}>
-          <div className="handleCheck" onClick={() => changeCheckBtn()}></div>
-          <p>Admin?</p>
+        <CheckBoxAdmin>
+          <input
+            onChange={() => changeCheckBtn()}
+            className="checkAdminInput"
+            type="checkbox"
+            id="scales"
+            name="admin"
+            value={checkedBox}
+          />
+          <div>Admin?</div>
         </CheckBoxAdmin>
 
-        <RegistrationButton onClick={() => handleRegister()}>
-          Registration
-        </RegistrationButton>
+        <Button name="Registration" onClick={() => handleRegister()} />
       </RegistrationBox>
     </RegistrationFrame>
   );

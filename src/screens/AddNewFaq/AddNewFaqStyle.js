@@ -1,147 +1,171 @@
 import styled from "styled-components";
-
+import searchIcon from "../../assets/icon/searchIcon.jpg";
+import dropDownIcon from "../../assets/icon/dropDownIcon.jpg";
 export const FakFrameFirst = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
+  background-color: #efefef;
+  padding: 0px 50px 0px 163px;
 `;
-
-export const FakFrame = styled.div`
-  height: 100%;
+export const Title = styled.div`
+  width: 90%;
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: 0 20px;
-  box-sizing: border-box;
-`;
 
-export const FakHeader = styled.div`
-  width: 100%;
-  height: 50px;
-  background-color: coral;
-  font-size: 25px;
-  font-family: cursive;
-  color: #fff;
-  border: 1px solid black;
-  border-radius: 7px 7px 0px 0px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 0 20px;
-  box-sizing: border-box;
+  justify-content: space-between;
+  p {
+    font-size: 36px;
+    font-weight: 600;
+    color: #999999;
+  }
+  input {
+    width: 70%;
+    background-image: url(${searchIcon});
+    background-repeat: no-repeat;
+    background-position: 10px;
+    height: 32px;
+    background-size: 11px;
+    border: 1px solid #999999;
+    outline: none;
+    border-radius: 5px;
+    padding-left: 30px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+  }
 `;
 
 export const FakBox = styled.div`
-  width: 100%;
-  border: 1px solid black;
-  border-radius: 0px 0px 7px 7px;
+  width: 780px;
   box-sizing: border-box;
-  border-top: none;
-  background-color: #fff;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
 
-  .inputAndSelect {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 15px;
-
-    .fakNumber {
-      width: 250px;
-      border: 1px solid black;
-      border-radius: 5px;
-      padding: 10px;
-      box-sizing: border-box;
-      display: flex;
-      font-family: cursive;
-      outline: none;
-    }
-    .selectItems {
-      width: 170px;
-      border: 1px solid black;
-      border-radius: 5px;
-      padding: 10px;
-      box-sizing: border-box;
-      display: flex;
-      outline: none;
-      cursor: pointer;
-      font-family: cursive;
-    }
-  }
   table {
-    font-family: cursive;
-    border: 1px solid black;
-    max-width: 1200px;
+    position: relative;
+    width: 780px;
+    border: 1px solid #999999;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 5px 5px 0px 0px;
+    background-color: #fff;
 
     thead {
-      background-color: coral;
+      width: 100%;
       color: #fff;
-    }
-    th {
-      font-size: 20px;
-      border: 1px solid black;
-    }
-    td {
-      border: 1px solid black;
-      height: 40px;
-      font-size: 15px;
-      text-align: center;
+      border-bottom: 1px solid #999999;
     }
 
-    .quantity {
-      width: 100%;
+    th {
+      width: 25%;
+      color: #000000;
+      text-align: left;
+      height: 32px;
+      padding-left: 1px;
+    }
+    th:nth-child(1) {
+      padding-left: 36px;
+    }
+
+    td {
+      font-size: 15px;
+      text-align: left;
+    }
+    td:nth-child(1) {
+      padding-left: 36px;
+    }
+
+    .quantity,
+    .price {
+      width: 90%;
       height: 100%;
       box-sizing: border-box;
       border: none;
-      text-align: center;
       outline: none;
-      font-family: cursive;
+      padding: 0;
     }
+
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-    .price {
-      width: 80%;
-      height: 100%;
-      box-sizing: border-box;
-      border: none;
-      text-align: center;
-      outline: none;
-      font-family: cursive;
-    }
-  }
-  .selectProd {
-    width: 100%;
-    height: 100%;
-    outline: none;
-    border: none;
-    font-family: cursive;
   }
 `;
-
-export const FakTitle = styled.div`
-  color: #000;
-  font-family: cursive;
-  font-size: 25px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
+export const SelectDiv = styled.div`
+  outline: none;
+  border: none;
+  color: #999999;
+  background-image: url(${dropDownIcon});
+  background-repeat: no-repeat;
+  background-position: right 8px;
+  font-size: 14px;
+  width: 140px;
+  cursor: pointer;
+`;
+export const DropDownContainer = styled.div`
+  position: relative;
+`;
+export const DropDownListContainer = styled.div`
+  position: absolute;
+  top: 20px;
+  border-radius: 10px;
+  background-color: red;
+  width: 200px;
+  max-height: 400px;
+  overflow: auto;
 `;
 
-export const ButtonsFrame = styled.div`
-  height: 100px;
+export const DropDownList = styled.div`
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #999999;
+  &:first-child {
+    padding-top: 7px;
+  }
+`;
+export const ListItem = styled.div`
+  cursor: pointer;
+  font-size: 14px;
+  border-top: 1px solid #fff;
+`;
+
+export const HolderinputAndSelect = styled.div`
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-top: 15px;
   flex-direction: column;
+  padding: 20px 0px;
 
-  .saveFak {
-    background-color: midnightblue;
+  .inputAndSelect {
+    width: 307px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    border: 1px solid #999999;
   }
+
+  .fakNumber {
+    width: 100%;
+    border: none;
+    padding: 8px 17px 8px 21px;
+
+    box-sizing: border-box;
+    outline: none;
+    border-bottom: 1px solid #999999;
+    border-radius: 5px 5px 0px 0px;
+  }
+  .selectItems {
+    width: 100%;
+    border: none;
+    box-sizing: border-box;
+    outline: none;
+    cursor: pointer;
+  }
+  .selectDiv {
+    padding: 5px 96px 5px 17px;
+    background-color: #fff;
+    border-radius: 0px 0px 5px 5px;
+  }
+`;
+export const ButtonsFrame = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 15px;
 `;
 
 export const AddProd = styled.div`

@@ -1,15 +1,9 @@
-import {
-  Error,
-  LoginBox,
-  LoginButton,
-  LoginFrame,
-  LoginTitle,
-  RegistrationBnt,
-} from "./LoginStyle";
+import { LoginBox, LoginFrame, Logo, Error } from "./LoginStyle";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../context/actions/autentificationActions";
-import { Input } from "../../AppStyle";
+import Input from "../../components/Input/Input";
+import Button from "../../components/Button/Button";
 
 const Login = () => {
   const [error, setError] = useState("");
@@ -39,31 +33,29 @@ const Login = () => {
   };
 
   return (
-    <LoginFrame style={{ height: "100vh" }}>
+    <LoginFrame>
       <LoginBox>
-        <LoginTitle>LOG IN</LoginTitle>
+        <Logo />
         <Input
-          type="text"
-          placeholder="Username"
-          name="username"
           onChange={(name) => loginDataa(name)}
+          type="text"
+          placeHolder="Username"
+          name="username"
         />
         <Input
-          type="password"
-          placeholder="Password"
-          name="password"
           onChange={(name) => loginDataa(name)}
+          type="password"
+          placeHolder="Password"
+          name="password"
         />
         <Error>{error}</Error>
-        <LoginButton onClick={() => handleLogin()}>Log in</LoginButton>
-        <RegistrationBnt>
+        <Button name="Log in" onClick={() => handleLogin()} />
+        <Button name="Registration">
           <NavLink
             style={{ color: "#000", textDecoration: "none" }}
             to="/registration"
-          >
-            Registration
-          </NavLink>
-        </RegistrationBnt>
+          ></NavLink>
+        </Button>
       </LoginBox>
     </LoginFrame>
   );
