@@ -4,14 +4,12 @@ import Menu from "../../components/Menu/Menu";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import GetDrinks from "../../context/actions/drinkActions";
 import { AppContext } from "../../context/application_context";
-import { AddProd } from "../AddNewFaq/AddNewFaqStyle";
 import { ShiftAndInputFrame, ShiftEntry, TableAndInputFrame } from "../DailyReports/DailyReportsStyle";
 import {
   AddDailyReportsFrame,
-  AddDailyReportsHolder,
-  FrameButton,
+  TableExpenses,
 } from "./AddDailyReportsStyle";
-
+import Button from "../../components/Button/Button";
 
 const AddDailyReports = (props) => {
   let navigate = useNavigate();
@@ -188,6 +186,46 @@ const AddDailyReports = (props) => {
             ))}
           </tbody>
         </table>
+            <TableExpenses>
+              <table className="rashodi">
+                <tbody>
+                  <tr>
+                    <th>
+                      <textarea
+                        className="rashodiOpis"
+                        placeholder="Navedite rashode..."
+                        value={consumptionDesc}
+                        disabled={disableInput}
+                        onChange={(e) => consuptionHandleDesc(e)}
+                      >
+                      </textarea>
+                      <div className="input">
+                        <input
+                          className="potrosnjaInpt"
+                          type="text"
+                          value={consumption}
+                          disabled={disableInput}
+                          onChange={(e) => consuptionHandleAmount(e)}
+                        />
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="summaryFrame">
+                      <div style={{display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", padding: "0 11px", boxSizing: "border-box", height: "100%"}}>
+                        <div className="sumamryText">Ukupno</div>
+                        <div className="summarytotal">{total}</div>
+                      </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <Button 
+                name={"Snimi smjenu"} 
+                onClick={Send}
+                >
+              </Button>
+            </TableExpenses>
           </TableAndInputFrame>
       </AddDailyReportsFrame>
   );

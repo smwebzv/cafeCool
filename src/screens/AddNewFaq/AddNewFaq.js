@@ -1,22 +1,27 @@
 import { useEffect, useState, useContext } from "react";
 import GetDrinks from "../../context/actions/drinkActions.js";
 import {
-  AddProd,
-  ButtonsFrame,
-  FakBox,
-  FakFrame,
   FakFrameFirst,
-  FakHeader,
-  FakTitle,
+  Title,
+  FakBox,
+  SelectDiv,
+  DropDownContainer,
+  DropDownListContainer,
+  DropDownList,
+  ListItem,
+  HolderinputAndSelect,
+  ButtonsFrame,
 } from "./AddNewFaqStyle";
 import { AppContext } from "../../context/application_context.js";
-
+import Button from "../../components/Button/Button";
 const AddNewFaq = () => {
   const { saveNewFaq } = useContext(AppContext);
+  const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [products, setProducts] = useState([]);
   const [numberFaqs, setNumberFaqs] = useState({});
   const [places, setPlace] = useState({});
   const [total, setTotal] = useState(0.0);
+
   const [dailyList, setDailyList] = useState([
     {
       drinkId: "",
@@ -24,6 +29,18 @@ const AddNewFaq = () => {
       price: 0,
     },
   ]);
+  const toggling = (index) => {
+    let i = dropDownIndex === index ? -1 : index;
+    setDropDownIndex(i);
+  };
+
+  const clickOption = (index, value) => {
+    let list = [...dailyList];
+    let optionName = value;
+    list[index].drinkId = optionName;
+    setDailyList(list);
+    setDropDownIndex(-1);
+  };
 
   useEffect(() => {
     GetDrinks()
@@ -88,10 +105,73 @@ const AddNewFaq = () => {
 
   return (
     <FakFrameFirst>
-      <FakFrame>
-        <FakHeader>Cool Caffe</FakHeader>
-        <FakBox>
-          <FakTitle>Unos Fakture</FakTitle>
+      <Title>
+        <p>Unos fakture</p>
+        <input type="search" />
+      </Title>
+      <FakBox>
+        <table>
+          <thead>
+            <tr>
+              <th>RB</th>
+              <th>Naziv</th>
+              <th>Kolicina</th>
+              <th>Cijena</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dailyList.map((item1, indx1) => (
+              <tr key={indx1}>
+                <td>{indx1 + 1}.</td>
+                <td>
+                  <DropDownContainer>
+                    <SelectDiv
+                      onClick={() => toggling(indx1)}
+                      onChange={(e) => handleChange(e, indx1)}
+                      className="selectProd"
+                      id="drinkId"
+                      name="drinkId"
+                    >
+                      {item1?.drinkId || "Izaberi proizvod..."}
+                    </SelectDiv>
+                    {dropDownIndex == indx1 && (
+                      <DropDownListContainer>
+                        {products.map((item, indx) => (
+                          <DropDownList value={item.name} key={item.id}>
+                            <ListItem
+                              onClick={() => clickOption(indx1, item.name)}
+                            >
+                              {item.name}
+                            </ListItem>
+                          </DropDownList>
+                        ))}
+                      </DropDownListContainer>
+                    )}
+                  </DropDownContainer>
+                </td>
+                <td>
+                  <input
+                    className="quantity"
+                    type="number"
+                    name="quantity"
+                    placeholder="Unesi kolicinu..."
+                    onChange={(e) => handleChange(e, indx1)}
+                  />
+                </td>
+                <td>
+                  <input
+                    className="price"
+                    type="number"
+                    name="price"
+                    placeholder="Unesi cijenu..."
+                    onChange={(e) => handleChange(e, indx1)}
+                  />{" "}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+        <HolderinputAndSelect>
           <div className="inputAndSelect">
             <input
               onChange={(e) => inputFaqs(e)}
@@ -100,89 +180,31 @@ const AddNewFaq = () => {
               placeholder="Unesi broj fakture"
               name="inputFaqs"
             ></input>
-            <select
-              className="selectItems"
-              onChange={(value) => changeDeliverer(value)}
-              name="selectItems"
-            >
-              <option value="default" hidden>
-                Odaberite dostavljaca
-              </option>
-              <option value="Beoprom">Beoprom</option>
-              <option value="Srbija">Srbija</option>
-              <option value="Market">Market</option>
-            </select>
+            <div className="selectDiv">
+              <select
+                className="selectItems"
+                onChange={(value) => changeDeliverer(value)}
+                name="selectItems"
+              >
+                <option value="default" hidden>
+                  Odaberite broj dostavljaca
+                </option>
+                <option value="Beoprom">Beoprom</option>
+                <option value="Srbija">Srbija</option>
+                <option value="Market">Market</option>
+              </select>
+            </div>
           </div>
-          <table>
-            <thead>
-              <tr>
-                <th>RB</th>
-                <th>Naziv</th>
-                <th>Kolicina</th>
-                <th>Cijena</th>
-              </tr>
-            </thead>
-            <tbody>
-              {dailyList.map((item1, indx1) => (
-                <tr key={indx1}>
-                  <td>{indx1 + 1}.</td>
-                  <td>
-                    <select
-                      onChange={(e) => handleChange(e, indx1)}
-                      className="selectProd"
-                      id="drinkId"
-                      name="drinkId"
-                    >
-                      <option value="default" hidden>
-                        Izaberi proizvod
-                      </option>
-                      {products.map((item) => (
-                        <option value={item.name} key={item.id}>
-                          {item.name}
-                        </option>
-                      ))}
-                    </select>
-                  </td>
-                  <td>
-                    <input
-                      className="quantity"
-                      type="number"
-                      name="quantity"
-                      placeholder="Unesi kolicinu"
-                      onChange={(e) => handleChange(e, indx1)}
-                    />
-                  </td>
-                  <td>
-                    <input
-                      className="price"
-                      type="number"
-                      name="price"
-                      placeholder="Unesi cijenu"
-                      onChange={(e) => handleChange(e, indx1)}
-                    />{" "}
-                    KM
-                  </td>
-                </tr>
-              ))}
-              <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td style={{ fontWeight: "bold", fontSize: "20px" }}>
-                  {total} KM
-                </td>
-              </tr>
-            </tbody>
-          </table>
-
-          <ButtonsFrame>
-            <AddProd onClick={() => handleAddRow()}>Novi Proizvod</AddProd>
-            <AddProd onClick={() => saveFaqss()} className="saveFak">
-              Sačuvaj Fakturu
-            </AddProd>
-          </ButtonsFrame>
-        </FakBox>
-      </FakFrame>
+        </HolderinputAndSelect>
+        <ButtonsFrame>
+          <Button name={"Novi Proizvod "} onClick={() => handleAddRow()} />
+          <Button
+            name={"Sačuvaj Fakturu"}
+            onClick={() => saveFaqss()}
+            style="saveFak"
+          />
+        </ButtonsFrame>
+      </FakBox>
     </FakFrameFirst>
   );
 };
