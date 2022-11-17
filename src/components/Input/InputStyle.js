@@ -10,5 +10,6 @@ export const Inputs = styled.div`
     padding: 0px 12px;
     font-size: 12px;
     margin-bottom: 11px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
   }
 `;
