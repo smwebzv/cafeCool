@@ -1,16 +1,22 @@
 import { useContext, useEffect, useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import { LoginButton, LoginFrame } from "../Login/LoginStyle";
-import { CaffeCoolTitle, DailyReportsFrame, InputHolder } from "./DailyReportsStyle";
+import { DailyReportsFrame, InputHolder, ShiftAndInputFrame, ShiftEntry, TableAndInputFrame, TableFrame } from "./DailyReportsStyle";
 import { DeleteDailyReports, GetDailyReports} from "../../context/actions/dailyReportsActions";
-import { Input } from "../../AppStyle";
 import moment from "moment";
 import { AppContext } from "../../context/application_context";
+import Menu from "../../components/Menu/Menu";
+import { ReactComponent as PreviewIcon } from "../../assets/icon/PreviewIcon.svg";
+import { ReactComponent as UpdateIcon } from "../../assets/icon/UpdateIcon.svg";
+import { ReactComponent as DeleteIcon } from "../../assets/icon/DeleteIcon.svg";
+import { ReactComponent as ArrowIcon } from "../../assets/icon/ArrowIcon.svg";
+import SearchInput from "../../components/SearchInput/SearchInput";
 
 const DailyReports = (props) => {
   let navigate = useNavigate();
   const {dailyReportsDispatch, dailyReportsState} = useContext(AppContext);
   const [dailyReports, setDailyReports] = useState([]);
+  const [hover, setHover] = useState(false);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
   
   const DailyReports = () => {
     GetDailyReports().then((res) => {
@@ -45,74 +51,85 @@ const DailyReports = (props) => {
     
   }
 
+    const hovered = () => {
+      setHover(true);
+      setSelectedItemIndex(-1);
+  }
+
+  const notHovered = (indx) => {
+      setHover(false);
+      setSelectedItemIndex(indx);
+  }
+
   return (
-    <LoginFrame>
       <DailyReportsFrame>
-        <CaffeCoolTitle>Cool Caffe</CaffeCoolTitle>
-        <div className="buttons">
-          <LoginButton className="button">
-            <NavLink
+        <Menu></Menu>
+        <TableAndInputFrame>
+          <ShiftAndInputFrame>
+            <NavLink 
               to="/addDailyReports"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              Unesi smjenu
+              style={{textDecoration: "none"}}
+            > 
+              <ShiftEntry>
+                Unos smjene
+              </ShiftEntry>
             </NavLink>
-          </LoginButton>
-          <LoginButton className="button">
-            <NavLink
-              to="/addNewFaq"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              Unesi fakturu
-            </NavLink>
-          </LoginButton>
-          <LoginButton className="button">
-            <NavLink
-              to="/faqs"
-              style={{ color: "#fff", textDecoration: "none" }}
-            >
-              Sve fakture
-            </NavLink>
-          </LoginButton>
-        </div>
-        <InputHolder>
-          <Input 
-            type="text"
-            placeholder="Pretrazi..."
-          />
-        </InputHolder>
-        <table>
-          <thead>
-            <tr>
-              <th>Datum</th>
-              <th>Smjena</th>
-              <th>Radnik</th>
-              <th>Troskovi</th>
-              <th>Pazar</th>
-              <th></th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              dailyReports.map((item, indx) =>
-              <tr key={indx}>
-                <td>{moment(item.date).format("DD MMM YYYY")}</td>
-                <td>{item.shift}</td>
-                <td>{item.user.username}</td>
-                <td>{item.consumption}KM</td>
-                <td>{item.total}KM</td>
-                <td className="doc" onClick={() => OpenSpecificFaq(item)}></td>
-                <td className="pen" onClick={() => UpdateSpecificFaq(item, indx)}></td>
-                <td className="delete" onClick={() => Delete(item.id, indx)}></td>
-              </tr>
-            )
-            }
-          </tbody>
-        </table>
+            <SearchInput />
+          </ShiftAndInputFrame>
+        <TableFrame   hover={hover}>
+            <table>
+              <thead>
+                <tr>
+                  <th>
+                    Datum
+                    <div className="arrow">
+                      <ArrowIcon />
+                    </div>
+                  </th>
+                  <th>Smjena</th>
+                  <th>Radnik</th>
+                  <th>Troskovi</th>
+                  <th>Pazar</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  dailyReports.map((item, indx) =>
+                  <tr key={indx} onMouseEnter={() => hovered()} onMouseLeave={() => notHovered(indx)} hover={hover}>
+                    <td>{moment(item.date).format("DD MMM YYYY")}</td>
+                    <td>{item.shift}</td>
+                    <td>{item.user.username}</td>
+                    <td>{item.consumption}KM</td>
+                    <td>{item.total}KM</td>
+                    <td>
+                    {
+                      hover && 
+                      <PreviewIcon onClick={() => OpenSpecificFaq(item)}/>
+                    }
+                    </td>
+                    <td>
+                    {
+                      hover &&
+                      <UpdateIcon onClick={() => UpdateSpecificFaq(item, indx)}/>
+                    } 
+                    </td>
+                    <td>
+                    {
+                      hover && 
+                        <DeleteIcon onClick={() => Delete(item.id, indx)}/>
+                    }
+                    </td>
+                  </tr>
+                )
+                }
+              </tbody>
+            </table>
+          </TableFrame>
+        </TableAndInputFrame>
       </DailyReportsFrame>
-    </LoginFrame>
   );
 };
 

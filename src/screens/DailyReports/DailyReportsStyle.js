@@ -1,186 +1,115 @@
 import styled from "styled-components";
-import document from "../../assets/icon/document.png";
-import edit from "../../assets/icon/edit.png";
-import del from "../../assets/icon/delete.png";
-
 
 export const DailyReportsFrame = styled.div`
-    padding: 0 20px 20px;
-    box-sizing: border-box;
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    background: #EFEFEF;
+`;
+
+export const TableFrame = styled.div`
+
+    table{
+        min-width: 780px;
+        font-size: 14px;
+        border-bottom: none;
+        border-spacing: 0px;
+        border-radius: 5px;
+        overflow: hidden;
+        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+        
+        thead{
+            background-color: #fff;
+            color: #4D4D4D;
+            text-align: right;
+            
+            th{
+                height: 50px;
+                border-bottom: 1px solid #999999;
+
+                .arrow{
+                    padding-left: 11px;
+                }
+            }
+            th:first-child{
+                text-align: left;
+                padding-left: 26px;
+                display: flex;
+                align-items: center;
+            }
+            th:last-child{
+                padding-right: 16px;
+            }
+        }
+
+        tbody{
+            background-color: #fff;
+            text-align: right;
+
+            tr{
+                background: ${props => props.hover ? "#EFEFEF" : "#fff"}
+            }
+            td{
+                height: 50px;
+                border-bottom: 1px solid #999999;
+            }
+            td:first-child{
+                text-align: left;
+                padding-left: 26px;
+                color: #999999;
+            }
+            td:nth-child(2){
+                color: #999999;
+            }
+            td:nth-child(3){
+                color: #999999;
+            }
+            td:nth-child(4){
+                color: #4D4D4D;
+            }
+            td:nth-child(6){
+                width: 30px;
+                padding-left: 74px;
+                cursor: pointer;
+            }
+            td:nth-child(7){
+                width: 10px;
+                padding: 0 29px;
+                cursor: pointer
+            }
+            td:nth-child(8){
+                width: 10px;
+                padding-right: 35px;
+                cursor: pointer;
+            }
+        }
+    }
+
+    svg:hover{
+        path{
+            fill: DC4E4E;
+        }
+    }
+`;
+
+export const TableAndInputFrame = styled.div`
+    max-width: 1067px;
+    padding: 44px 0 32px 163px;
     display: flex;
     flex-direction: column;
-
-    @media only screen and (max-width: 479px){
-        background: #d3d3d3;
-    }
-
-    .searchInput{
-        height: 40px;
-        background-color: #fff;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        font-family: cursive;
-        font-size: 15px;
-        padding: 0 20px;
-        box-sizing: border-box;
-
-        @media only screen and (max-width: 479px){
-            padding: 5px 20px;
-            font-size: 10px;
-        }
-    }
-    .buttons{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: flex-start;
-
-        .button{
-            margin: 0px;
-            display: flex;
-            align-items: center;
-
-            @media only screen and (max-width: 663px){
-                font-size: 15px;
-                padding: 15px 30px;
-            }
-            @media only screen and (max-width: 512px){
-                font-size: 10px;
-                padding: 15px 20px;
-            }
-            @media only screen and (max-width: 395px){
-                font-size: 10px;
-                padding: 10px 20px;
-            }
-        }
-        .button:nth-child(2){
-            margin: 0px 10px 0px 10px;
-
-            @media only screen and (max-width: 479px){
-                display: none;
-            }
-        }
-        
-        .button:nth-child(1){
-            @media only screen and (max-width: 479px){
-                display: none;
-            }
-        }
-    }
-    table{
-        border: 1px solid black;
-        max-width: 1200px;
-        margin-top: 15px;
-        font-family: cursive;
-
-        @media only screen and (max-width: 479px){
-            font-size: 15px;
-        }
-        @media only screen and (max-width: 360px){
-            font-size: 10px;
-        }
-
-        thead{
-            background-color: coral;
-            color: #fff;
-            font-size: 20px;
-
-            th{
-                border: 1px solid black;
-                height: 40px;
-            }
-
-            @media only screen and (max-width: 569px){
-                font-size: 16px;
-            }
-            
-            @media only screen and (max-width: 555px){
-                font-size: 14px;
-            }
-
-            @media only screen and (max-width: 510px){
-                font-size: 12px;
-            }
-            @media only screen and (max-width: 425px){
-                font-size: 10px;
-            }
-        }
-        tbody{
-            font-size: 18px;
-            background-color: #fff;
-            text-align: center;
-
-            td{
-                border: 1px solid black;
-                height: 40px;
-    
-                &.doc{
-                    background-color: #fff;
-                    background-image: url(${document});
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: 20px;
-                    width: 40px;
-                    cursor: pointer;
-                }
-                &.pen{
-                    background-color: #fff;
-                    background-image: url(${edit});
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: 20px;
-                    width: 40px;
-                    cursor: pointer;
-    
-                }
-                &.delete{
-                    background-color: #fff;
-                    background-image: url(${del});
-                    background-position: center;
-                    background-repeat: no-repeat;
-                    background-size: 20px;
-                    width: 40px;
-                    cursor: pointer;
-                }
-    
-    
-            }
-
-            @media only screen and (max-width: 569px){
-                font-size: 16px;
-            }
-            
-            @media only screen and (max-width: 555px){
-                font-size: 14px;
-            }
-
-            @media only screen and (max-width: 510px){
-                font-size: 12px;
-            }
-            @media only screen and (max-width: 425px){
-                font-size: 10px;
-            }
-        }
-    }
 `;
 
-export const CaffeCoolTitle = styled.div`
-    font-size: 60px;
-    font-weight: bold;
-    font-family: cursive;
-    color: #fff;
-    padding: 10px 0 30px;
+export const ShiftEntry = styled.div`
+    font-weight: 600;
+    font-size: 36px;
+    color: #999999;
+    height: 45px;
     display: flex;
-    justify-content: center;
-
-    @media only screen and (max-width: 479px){
-        font-size: 40px;
-    }
+    align-items: center;
 `;
 
-export const InputHolder = styled.div`
-    width: 100%;
-    text-align: right;
-    margin-top: 15px;
+export const ShiftAndInputFrame = styled.div`
+    display: flex;
+    align-items: end;
+    margin-bottom: 25px;
 `;

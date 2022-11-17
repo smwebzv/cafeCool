@@ -1,9 +1,6 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 `;
 
 export const Input = styled.input`

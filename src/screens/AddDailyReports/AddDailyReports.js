@@ -1,14 +1,15 @@
 import { useContext, useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import Menu from "../../components/Menu/Menu";
+import SearchInput from "../../components/SearchInput/SearchInput";
 import GetDrinks from "../../context/actions/drinkActions";
 import { AppContext } from "../../context/application_context";
-import { AddProd } from "../AddNewFaq/AddNewFaqStyle";
+import { ShiftAndInputFrame, ShiftEntry, TableAndInputFrame } from "../DailyReports/DailyReportsStyle";
 import {
   AddDailyReportsFrame,
-  AddDailyReportsHolder,
-  FrameButton,
+  TableExpenses,
 } from "./AddDailyReportsStyle";
-
+import Button from "../../components/Button/Button";
 
 const AddDailyReports = (props) => {
   let navigate = useNavigate();
@@ -138,8 +139,20 @@ const AddDailyReports = (props) => {
   }
 
   return (
-    <AddDailyReportsHolder>
       <AddDailyReportsFrame>
+        <Menu></Menu>
+        <TableAndInputFrame>
+          <ShiftAndInputFrame>
+            <NavLink 
+              to="/addDailyReports"
+              style={{textDecoration: "none"}}
+            > 
+              <ShiftEntry>
+                Unos smjene
+              </ShiftEntry>
+            </NavLink>
+            <SearchInput />
+          </ShiftAndInputFrame>
         <table>
           <thead>
             <tr>
@@ -154,10 +167,10 @@ const AddDailyReports = (props) => {
           <tbody>
             {products.map((item, indx) => (
               <tr key={indx}>
-                <td className="ime">{item.name}</td>
-                <td className="cijena">{item.price}</td>
-                <td className="preneseno">{item.carried}</td>
-                <td className="potrosnja">
+                <td>{item.name}</td>
+                <td>{item.price}</td>
+                <td>{item.carried}</td>
+                <td>
                   <input
                     className="potrosnjaInpt"
                     type="text"
@@ -168,41 +181,53 @@ const AddDailyReports = (props) => {
                   />
                 </td>
                 <td className="ostatak">{item.remaind}</td>
-                <td className="vrijednost">{item.totalPrice} KM</td>
+                <td className="vrijednost">{item.totalPrice}</td>
               </tr>
             ))}
-            <tr className="rashodi">
-              <td colSpan="1">Rashodi</td>
-              <td colSpan="4">
-                <textarea
-                  className="rashodiOpis"
-                  placeholder="Navedi rashode"
-                  value={consumptionDesc}
-                  disabled={disableInput}
-                  onChange={(e) => consuptionHandleDesc(e)}
-                ></textarea>
-              </td>
-              <td colSpan="1">
-                <input
-                  className="potrosnjaInpt"
-                  type="text"
-                  value={consumption}
-                  disabled={disableInput}
-                  onChange={(e) => consuptionHandleAmount(e)}
-                />
-              </td>
-            </tr>
-            <tr className="rashodi">
-              <td colSpan="5">Ukupno</td>
-              <td>{total}KM</td>
-            </tr>
           </tbody>
         </table>
-        <FrameButton>
-          <AddProd onClick={() => Send()}>Snimi Smjenu</AddProd>
-        </FrameButton>
+            <TableExpenses>
+              <table className="rashodi">
+                <tbody>
+                  <tr>
+                    <th>
+                      <textarea
+                        className="rashodiOpis"
+                        placeholder="Navedite rashode..."
+                        value={consumptionDesc}
+                        disabled={disableInput}
+                        onChange={(e) => consuptionHandleDesc(e)}
+                      >
+                      </textarea>
+                      <div className="input">
+                        <input
+                          className="potrosnjaInpt"
+                          type="text"
+                          value={consumption}
+                          disabled={disableInput}
+                          onChange={(e) => consuptionHandleAmount(e)}
+                        />
+                      </div>
+                    </th>
+                  </tr>
+                  <tr>
+                    <th className="summaryFrame">
+                      <div style={{display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", padding: "0 11px", boxSizing: "border-box", height: "100%"}}>
+                        <div className="sumamryText">Ukupno</div>
+                        <div className="summarytotal">{total}</div>
+                      </div>
+                    </th>
+                  </tr>
+                </tbody>
+              </table>
+              <Button 
+                name={"Snimi smjenu"} 
+                onClick={Send}
+                >
+              </Button>
+            </TableExpenses>
+          </TableAndInputFrame>
       </AddDailyReportsFrame>
-    </AddDailyReportsHolder>
   );
 };
 
