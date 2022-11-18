@@ -2,9 +2,7 @@ import styled from "styled-components";
 
 export const SecondTableHolder = styled.div`
   display: flex;
-  align-items: center;
   min-height: 100vh;
-  margin: 10px 0;
 `;
 
 export const SecondTableFrame = styled.div`
@@ -16,16 +14,32 @@ export const SecondTableFrame = styled.div`
   box-sizing: border-box;
 
   table {
-    border: 1px solid #999999;
     border-spacing: 0px;
     font-size: 0.9em;
     min-width: 780px;
     border-radius: 5px;
     overflow: hidden;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+    background-color: #fff;
+    position: relative;
+
+    .tableBody{
+      display: ${props => props.showFaqs ? "table-row-group" : "none"};
+    }
+
+    .dropdownHead{
+      background-color: #EFEFEF;
+
+    }
+
+    .dropdownHead th{
+      font-weight: 400 !important;
+      color: #4D4D4D;
+    }
 
     .iconDown{
-      padding-left: 10px;
+      padding-left: 8px;
+      cursor: pointer;
     }
 
     thead tr{
@@ -33,23 +47,48 @@ export const SecondTableFrame = styled.div`
       color: #4D4D4D;
       font-size: 14px;
       text-align: left;
+
+      svg{
+        transform: ${props => !props.showFaqs && "rotateX(180deg)"}
+      }
+  
+      svg:hover{
+        path{
+          fill: #2F4B9F;
+        }
+      }
+    }
+
+    .stallDropdown{
+      margin-right: 34px;
+      margin-left: 3px;
     }
 
     th {
-      padding: 6px 0;
       text-align: center;
+      font-weight: 600 !important;
 
       &:last-child:not(.alignLeft){
-        padding-right: 20px;
+        padding-right: 11px;
         text-align: right;
       } 
 
       &:first-child{
         padding-left: 13px;
+        text-align: left;
       } 
 
       &:nth-child(2){
+        width: 205px;
+      }
+
+      &:nth-child(3){
+        width: 135px;
         text-align: left;
+      }
+
+      &:nth-child(4){
+        width: 146px;
       }
 
       input{
@@ -66,23 +105,28 @@ export const SecondTableFrame = styled.div`
     }  
     
     td {
-      padding: 6px 0;
       cursor: pointer;
-      max-width: 80px;
-      border-top: 1px solid #999999;
+      border-top: 1px solid #00000040;
       text-align: center;
+
+      .checkmark{
+        margin-right: 32px !important;
+      }
 
       &:first-child{
         padding-left: 13px;
-        width: 47px;
       } 
 
-      &:nth-child(2){
+      &:nth-child(3){
         text-align: left;
       } 
 
+      &:nth-child(4){
+        color: #4D4D4D;
+      }
+
       &:last-child:not(.alignLeft){
-        padding-right: 20px;
+        padding-right: 26px;
         text-align: right;
         color: #4D4D4D !important;
       } 
@@ -104,13 +148,27 @@ export const SecondTableFrame = styled.div`
 
     .withoutBorder{
       border-top: 1px solid transparent !important;
+      background-color: #EFEFEF;
+
+      th{
+        color: #4D4D4D !important;
+        font-weight: 400 !important;
+        background-color: #EFEFEF;
+      }
+
+      &:first-child{
+        text-align: left;
+      }
     }
 
     tr{
-      max-width: 32px;
+      height: 32px;
 
       .container {
         position: relative;
+        display: flex;
+        align-items: center;
+        height: 29px;
 
         input {
           position: absolute;
@@ -121,23 +179,21 @@ export const SecondTableFrame = styled.div`
         }
 
         .checkmark {
-          position: absolute;
-          top: 9px;
-          left: 13px;
+          position: relative;
           height: 14px;
           width: 14px;
           background-color: #D9D9D9;
           cursor: pointer;
+          border-radius: 1px;
+          margin-right: 12px;
         }
 
         .stall{
-          position: absolute;
-          right: 11px;
-          top: 7px;
+          margin-right: 11px;
         }
       }
 
-      .container:hover input ~ .checkmark {
+      .checkmark {
         background-color: #ccc;
       }
 
@@ -164,10 +220,6 @@ export const SecondTableFrame = styled.div`
         border-width: 0 2px 2px 0;
         transform: rotate(37deg);
       }
-    }
-
-    .dropDown{
-      background-color: transparent;
     }
   }
 `;
