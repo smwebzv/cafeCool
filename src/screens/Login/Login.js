@@ -1,11 +1,12 @@
 import { LoginBox, LoginFrame, Logo, Error } from "./LoginStyle";
-import { NavLink } from "react-router-dom";
 import { useState } from "react";
 import { login } from "../../context/actions/autentificationActions";
 import Input from "../../components/Input/Input";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+  let navigate = useNavigate();
   const [error, setError] = useState("");
   const [loginData, setLoginData] = useState({
     username: "",
@@ -32,6 +33,10 @@ const Login = () => {
       });
   };
 
+  const chanhgeScreen = () => {
+    navigate("/registration")
+  }
+
   return (
     <LoginFrame>
       <LoginBox>
@@ -50,11 +55,7 @@ const Login = () => {
         />
         <Error>{error}</Error>
         <Button name="Log in" onClick={() => handleLogin()} />
-        <Button name="Registration">
-          <NavLink
-            style={{ color: "#000", textDecoration: "none" }}
-            to="/registration"
-          ></NavLink>
+        <Button name="Registration" onClick={() => chanhgeScreen()}>
         </Button>
       </LoginBox>
     </LoginFrame>

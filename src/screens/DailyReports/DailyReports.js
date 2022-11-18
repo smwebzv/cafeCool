@@ -63,10 +63,11 @@ const DailyReports = (props) => {
 
   return (
     <DailyReportsFrame>
-      <Menu></Menu>
+      <Menu/>
       <TableAndInputFrame>
         <SearchInput
           name={"Dnevni izvjestaji"}
+          route={"/addDailyReports"}
         />
           <table>
             <thead>

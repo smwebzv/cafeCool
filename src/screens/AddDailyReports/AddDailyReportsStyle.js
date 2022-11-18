@@ -37,7 +37,7 @@ export const TableAndInputFrame = styled.div`
                 padding-left: 12px;
                 display: flex;
                 align-items: center;
-                width: 100px;
+                width: 135px;
             }
             th:last-child{
                 width: 89px;

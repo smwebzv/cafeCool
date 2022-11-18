@@ -15,6 +15,7 @@ export const MenuFrame = styled.div`
     -o-transition: width 0.4s ease-in-out;
     transition: width 0.4s ease-in-out;
     width: ${props => props.hover ? "150px" : "50px"};
+    z-index: 9999999999999999;
 `;
 
 export const MenuFrame1 = styled.div`

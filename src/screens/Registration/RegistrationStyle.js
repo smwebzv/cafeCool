@@ -39,4 +39,5 @@ export const CheckBoxAdmin = styled.div`
   align-items: center;
   width: 50%;
   margin-bottom: 18px;
+
 `;

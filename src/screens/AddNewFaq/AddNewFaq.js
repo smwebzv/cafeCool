@@ -19,10 +19,6 @@ import { AppContext } from "../../context/application_context.js";
 import Button from "../../components/Button/Button";
 import SearchInput from "../../components/SearchInput/SearchInput.js";
 import Menu from "../../components/Menu/Menu.js";
-import {
-  ShiftAndInputFrame,
-  ShiftEntry,
-} from "../DailyReports/DailyReportsStyle.js";
 
 const AddNewFaq = () => {
   const { saveNewFaq } = useContext(AppContext);
@@ -135,13 +131,8 @@ const AddNewFaq = () => {
       <Menu />
       <FakFrameFirst>
         <FakBox>
-          <ShiftAndInputFrame>
-            <NavLink to="/addDailyReports" style={{ textDecoration: "none" }}>
-              <ShiftEntry>Unos fakture</ShiftEntry>
-            </NavLink>
-            <SearchInput />
-          </ShiftAndInputFrame>
-
+            <SearchInput 
+            name={"Unos fakture"}/>
           <table>
             <thead>
               <tr>

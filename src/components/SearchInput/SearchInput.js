@@ -5,7 +5,7 @@ import { ReactComponent as PlusIcon } from "../../assets/icon/PlusIcon.svg";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const SearchInput = ({name}) => {
+const SearchInput = ({name, route}) => {
 
     let navigate = useNavigate();
     const [hover, setHover] = useState(false);
@@ -37,7 +37,7 @@ const SearchInput = ({name}) => {
                 </form>
                 <DeleteIcon className="deleteIcon"/>
             </SearchInputFrame>
-            <PlusFrame onClick={() => changeScreen("/addDailyReports")}>
+            <PlusFrame onClick={() => changeScreen(route)}>
                 <PlusIcon />
             </PlusFrame>
         </ShiftAndInputFrame>

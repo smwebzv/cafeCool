@@ -6,7 +6,7 @@ export const FakFrameFirst = styled.div`
   min-height: 100vh;
   min-width: 100vh;
   background-color: #efefef;
-  padding: 0px 50px 0px 101px;
+  padding: 30px 50px 0px 101px;
 `;
 
 export const FakBox = styled.div`
@@ -111,7 +111,7 @@ export const SelectDiv = styled.div`
   background-image: url(${(props) =>
     props.dropDownIndex ? dropDown : dropUp});
   background-repeat: no-repeat;
-  background-position: right 10px;
+  background-position: right 8px;
   font-size: 14px;
   width: 130px;
   cursor: pointer;
@@ -163,7 +163,7 @@ export const HolderinputAndSelect = styled.div`
   border-radius: 5px;
 
   .inputAndSelect {
-    width: 222px;
+    width: 228px;
   }
 
   .fakNumber {

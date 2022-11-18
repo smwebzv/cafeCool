@@ -86,7 +86,7 @@ const Registration = () => {
             name="admin"
             value={checkedBox}
           />
-          <div>Admin?</div>
+          <div style={{color:"#999999", fontSize:"12px"}}>Admin?</div>
         </CheckBoxAdmin>
 
         <Button name="Registration" onClick={() => handleRegister()} />

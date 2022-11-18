@@ -14,6 +14,7 @@ const Faqs = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [selectedItem, setSelectedItem] = useState([]);
   const [showFaqs, setShowFaqs] = useState(false);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
 
   useEffect(() => {
     if (addNewFaqsState?.faqsList?.length > 1) {
@@ -51,11 +52,21 @@ const Faqs = () => {
     }
   }
 
+  const hovered = (indx) => {
+    setSelectedItemIndex(indx);
+  }
+
+  const notHovered = () => {
+    setSelectedItemIndex(-1);
+  }
+
   return (
     <DailyReportsFrame>
       <Menu></Menu>
       <TableAndInputFrame>
-          <SearchInput />
+          <SearchInput 
+          name={"Fakture"}
+          route={"/addNewFaq"}/>
         <SecondTableHolder>
           <SecondTableFrame showFaqs={showFaqs}>
             <table>
@@ -78,7 +89,7 @@ const Faqs = () => {
               <tbody className="tableBody">
                 {getFaqs?.map((item, index) => (
                   <>
-                    <tr className={dropDownIndex == index ? "withoutBorder" : ""}>
+                    <tr onMouseEnter={() => hovered(index)} onMouseLeave={() => notHovered()} className={selectedItemIndex === index ? "hovered" : dropDownIndex === index ? ("withoutBorder" + "hovered") : ""}>
                       <td className="container">
                         <input type="checkbox" checked={item?.selected === true || selectedItem.includes(item) ? "checked" : ""} readOnly={true} />
                         <span className="checkmark" onClick={() => selectItems(item, index)}></span>

@@ -101,12 +101,30 @@ export const SecondTableFrame = styled.div`
     tbody {
       background-color: #fff;
       color: #999999;
-      width:100%:      
+      width:100%:   
+      
+      .hovered{
+        background: #EFEFEF;
+        cursor: pointer; 
+    }
+    .withoutBorder{
+      border-top: 1px solid transparent !important;
+      background-color: #EFEFEF;
+
+      th{
+        color: #4D4D4D !important;
+        font-weight: 400 !important;
+        background-color: #EFEFEF;
+      }
+
+      &:first-child{
+        text-align: left;
+      }
+    }
     }  
     
     td {
       cursor: pointer;
-      border-top: 1px solid #00000040;
       text-align: center;
 
       .checkmark{
@@ -118,7 +136,7 @@ export const SecondTableFrame = styled.div`
       } 
 
       &:nth-child(3){
-        text-align: left;
+        text-align: left !important;
       } 
 
       &:nth-child(4){
@@ -146,20 +164,7 @@ export const SecondTableFrame = styled.div`
       }
     }
 
-    .withoutBorder{
-      border-top: 1px solid transparent !important;
-      background-color: #EFEFEF;
-
-      th{
-        color: #4D4D4D !important;
-        font-weight: 400 !important;
-        background-color: #EFEFEF;
-      }
-
-      &:first-child{
-        text-align: left;
-      }
-    }
+    
 
     tr{
       height: 32px;
@@ -168,7 +173,6 @@ export const SecondTableFrame = styled.div`
         position: relative;
         display: flex;
         align-items: center;
-        height: 29px;
 
         input {
           position: absolute;
