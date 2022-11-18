@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const MenuFrame = styled.div`
-    width: ${props => props.hover ? "150px" : "50px"};  
+export const MenuFrame = styled.div`  
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -11,6 +10,11 @@ export const MenuFrame = styled.div`
     box-sizing: border-box;
     position: fixed;
     top: 0;
+    -webkit-transition: width 0.4s ease-in-out;
+    -moz-transition: width 0.4s ease-in-out;
+    -o-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+    width: ${props => props.hover ? "150px" : "50px"};
 `;
 
 export const MenuFrame1 = styled.div`
@@ -45,9 +49,13 @@ export const IconFrame = styled.div`
     .text{
         padding-left: ${props => props.hover ? "8px" : "0px"};
         text-align: left;
-        font-size: 12px;
         font-weight: 400;
         color: #787878;
+        -webkit-transition: font-size 0.4s ease-in-out;
+        -moz-transition: font-size 0.4s ease-in-out;
+        -o-transition: font-size 0.4s ease-in-out;
+        transition: font-size 0.4s ease-in-out;
+        font-size: ${props => props.hover ? "12px" : "0px"};
     }
     
     &:hover{
