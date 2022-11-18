@@ -1,6 +1,13 @@
 import styled from "styled-components";
 
 export const DailyReportsFrame = styled.div`
+    height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    background: #EFEFEF;
+`;
+
+export const AddDailyReportsFrame = styled.div`
     height: 100%;
     display: flex;
     align-items: flex-start;

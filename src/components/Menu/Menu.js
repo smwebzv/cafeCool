@@ -7,9 +7,15 @@ import { ReactComponent as SettingsIcon } from "../../assets/icon/Icon7.svg";
 import { ReactComponent as UserIcon } from "../../assets/icon/Icon8.svg";
 import { ReactComponent as LogoIcon } from "../../assets/icon/LogoIcon.svg";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Menu = (props) => {
+    let navigate = useNavigate();
     const [hover, setHover] = useState(false);
+
+    const changeScreen = (screen) => {
+        navigate(screen)
+    }
 
     const hovered = () => {
         setHover(true);
@@ -26,21 +32,21 @@ const Menu = (props) => {
                     <LogoFrame hover={hover}>
                         <LogoIcon />
                     </LogoFrame>
-                    <IconFrame hover={hover}>          
+                    <IconFrame hover={hover} onClick={() => changeScreen("/")}>          
                         <DailyReportsIcon />
                         {
                             hover && 
                             <div className="text">Dnevni izvjestaji</div>
                         }     
                     </IconFrame >
-                    <IconFrame hover={hover}>
+                    <IconFrame hover={hover} onClick={() => changeScreen("/faqs")}>
                         <Faqs />
                         {
                             hover &&
                             <div className="text">Fakture</div>
                         }     
                     </IconFrame>
-                    <IconFrame hover={hover}>
+                    <IconFrame hover={hover} onClick={() => changeScreen()}>
                         <Graficons />
                         {
                             hover &&
