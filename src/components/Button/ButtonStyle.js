@@ -25,4 +25,7 @@ export const HolderButton = styled.div`
   &.saveFak {
     margin-left: 16px;
   }
+  &.saveFaqs{
+    margin-bottom: 0px;
+  }
 `;
