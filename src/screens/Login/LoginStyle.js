@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import loginLogo from "../../assets/icon/loginLogo.jpg";
+import LogoIcon from "../../assets/icon/LogoIcon.svg";
 
 export const LoginFrame = styled.div`
   height: 100vh;
@@ -26,8 +26,10 @@ export const Logo = styled.div`
   height: 75px;
   margin-bottom: 10px;
 
-  background-image: url(${loginLogo});
+  background-image: url(${LogoIcon});
   background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
 `;
 
 export const LoginButton = styled.div`
