@@ -1,15 +1,13 @@
 import { useContext, useEffect, useState } from "react";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Menu from "../../components/Menu/Menu";
 import SearchInput from "../../components/SearchInput/SearchInput";
+import TableExpenses from "../../components/TableExpenses/TableExpenses";
 import GetDrinks from "../../context/actions/drinkActions";
 import { AppContext } from "../../context/application_context";
-import { ShiftAndInputFrame, ShiftEntry, TableAndInputFrame } from "../DailyReports/DailyReportsStyle";
 import {
-  AddDailyReportsFrame,
-  TableExpenses,
+  AddDailyReportsFrame, TableAndInputFrame
 } from "./AddDailyReportsStyle";
-import Button from "../../components/Button/Button";
 
 const AddDailyReports = (props) => {
   let navigate = useNavigate();
@@ -142,23 +140,16 @@ const AddDailyReports = (props) => {
       <AddDailyReportsFrame>
         <Menu></Menu>
         <TableAndInputFrame>
-          <ShiftAndInputFrame>
-            <NavLink 
-              to="/addDailyReports"
-              style={{textDecoration: "none"}}
-            > 
-              <ShiftEntry>
-                Unos smjene
-              </ShiftEntry>
-            </NavLink>
-            <SearchInput />
-          </ShiftAndInputFrame>
+            <SearchInput 
+            name={"Unos smjene"}
+            />
         <table>
           <thead>
             <tr>
               <th>Naziv Artikla</th>
               <th>Cijena</th>
               <th>Preneseno</th>
+              <th style={{width: "35px"}}></th>
               <th>Potrošnja</th>
               <th>Ostatak</th>
               <th>Vrijednost</th>
@@ -170,6 +161,7 @@ const AddDailyReports = (props) => {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.carried}</td>
+                <td style={{width: "35px"}}></td>
                 <td>
                   <input
                     className="potrosnjaInpt"
@@ -181,51 +173,20 @@ const AddDailyReports = (props) => {
                   />
                 </td>
                 <td className="ostatak">{item.remaind}</td>
-                <td className="vrijednost">{item.totalPrice}</td>
+                <td className="vrijednost">{item.totalPrice.toFixed(2)}</td>
               </tr>
             ))}
           </tbody>
         </table>
-            <TableExpenses>
-              <table className="rashodi">
-                <tbody>
-                  <tr>
-                    <th>
-                      <textarea
-                        className="rashodiOpis"
-                        placeholder="Navedite rashode..."
-                        value={consumptionDesc}
-                        disabled={disableInput}
-                        onChange={(e) => consuptionHandleDesc(e)}
-                      >
-                      </textarea>
-                      <div className="input">
-                        <input
-                          className="potrosnjaInpt"
-                          type="text"
-                          value={consumption}
-                          disabled={disableInput}
-                          onChange={(e) => consuptionHandleAmount(e)}
-                        />
-                      </div>
-                    </th>
-                  </tr>
-                  <tr>
-                    <th className="summaryFrame">
-                      <div style={{display: "flex", width: "100%", justifyContent: "space-between", alignItems: "center", padding: "0 11px", boxSizing: "border-box", height: "100%"}}>
-                        <div className="sumamryText">Ukupno</div>
-                        <div className="summarytotal">{total}</div>
-                      </div>
-                    </th>
-                  </tr>
-                </tbody>
-              </table>
-              <Button 
-                name={"Snimi smjenu"} 
-                onClick={Send}
-                >
-              </Button>
-            </TableExpenses>
+        <TableExpenses 
+          consuptionHandleDesc={consuptionHandleDesc}
+          consuptionHandleAmount={consuptionHandleAmount}
+          total={total}
+          send={Send}
+          disableInput={disableInput}
+          consumptionDesc={consumptionDesc}
+          consumption={consumption}
+        />
           </TableAndInputFrame>
       </AddDailyReportsFrame>
   );

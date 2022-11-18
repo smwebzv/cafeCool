@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { SecondTableFrame, SecondTableHolder } from "./FaqsStyle";
 import Moment from "moment";
 import { AppContext } from "../../context/application_context";
-import { AddDailyReportsFrame, ShiftAndInputFrame, ShiftEntry, TableAndInputFrame } from "../DailyReports/DailyReportsStyle";
+import { DailyReportsFrame, TableAndInputFrame } from "../DailyReports/DailyReportsStyle";
 import Menu from "../../components/Menu/Menu";
 import { NavLink } from "react-router-dom";
 import SearchInput from "../../components/SearchInput/SearchInput";
@@ -52,20 +52,10 @@ const Faqs = () => {
   }
 
   return (
-    <AddDailyReportsFrame>
+    <DailyReportsFrame>
       <Menu></Menu>
       <TableAndInputFrame>
-        <ShiftAndInputFrame>
-          <NavLink
-            to="//faqs"
-            style={{ textDecoration: "none" }}
-          >
-            <ShiftEntry>
-              Fakture
-            </ShiftEntry>
-          </NavLink>
           <SearchInput />
-        </ShiftAndInputFrame>
         <SecondTableHolder>
           <SecondTableFrame showFaqs={showFaqs}>
             <table>
@@ -134,7 +124,7 @@ const Faqs = () => {
           </SecondTableFrame>
         </SecondTableHolder>
       </TableAndInputFrame>
-    </AddDailyReportsFrame>
+    </DailyReportsFrame>
   );
 };
 

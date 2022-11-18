@@ -1,102 +1,119 @@
 import styled from "styled-components";
-import searchIcon from "../../assets/icon/searchIcon.jpg";
-import dropDownIcon from "../../assets/icon/dropDownIcon.jpg";
+import dropDown from "../../assets/icon/dropDown.svg";
+import dropUp from "../../assets/icon/dropUp.svg";
+
 export const FakFrameFirst = styled.div`
   min-height: 100vh;
+  min-width: 100vh;
   background-color: #efefef;
-  padding: 0px 50px 0px 163px;
-`;
-export const Title = styled.div`
-  width: 90%;
-  display: flex;
-  align-items: center;
-
-  justify-content: space-between;
-  p {
-    font-size: 36px;
-    font-weight: 600;
-    color: #999999;
-  }
-  input {
-    width: 70%;
-    background-image: url(${searchIcon});
-    background-repeat: no-repeat;
-    background-position: 10px;
-    height: 32px;
-    background-size: 11px;
-    border: 1px solid #999999;
-    outline: none;
-    border-radius: 5px;
-    padding-left: 30px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-  }
+  padding: 0px 50px 0px 101px;
 `;
 
 export const FakBox = styled.div`
-  width: 780px;
+  width: 704px;
   box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
 
   table {
     position: relative;
-    width: 780px;
-    border: 1px solid #999999;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 5px 5px 0px 0px;
+    z-index: 9999;
+    width: 704px;
+    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+    border-radius: 5px;
     background-color: #fff;
+    border-spacing: 0 !important;
+
+    tr {
+      height: 32px;
+    }
 
     thead {
       width: 100%;
       color: #fff;
-      border-bottom: 1px solid #999999;
     }
 
     th {
       width: 25%;
-      color: #000000;
+      color: #4d4e50;
       text-align: left;
       height: 32px;
-      padding-left: 1px;
+      font-size: 14px;
+      font-weight: 600;
     }
     th:nth-child(1) {
-      padding-left: 36px;
+      padding-left: 12px;
+    }
+
+    th:nth-child(3) {
+      text-align: center;
+    }
+
+    th:nth-child(4) {
+      text-align: right;
+      padding-right: 12px;
     }
 
     td {
-      font-size: 15px;
+      font-size: 14px !important;
       text-align: left;
+      font-weight: 400;
+      color: #999999;
+      border-top: 1px solid #00000040 !important;
     }
+
     td:nth-child(1) {
-      padding-left: 36px;
+      padding-left: 12px;
+    }
+    td:nth-child(3) {
+      text-align: center;
+    }
+    td:nth-child(4) {
+      text-align: right;
+      padding-right: 12px;
     }
 
     .quantity,
     .price {
-      width: 90%;
-      height: 100%;
+      width: 53px;
+
+      height: 22px;
       box-sizing: border-box;
       border: none;
       outline: none;
-      padding: 0;
+      background-color: #bfbfbf;
+      color: #ffffff;
+      border-radius: 3px;
+      text-align: center;
+      cursor: pointer;
+    }
+
+    input:hover {
+      background-color: #999999;
     }
 
     input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
+    input::placeholder {
+      color: #fff;
+    }
+    input:focus {
+      background-color: #474747;
+    }
   }
 `;
+
 export const SelectDiv = styled.div`
+  position: relative;
   outline: none;
   border: none;
   color: #999999;
-  background-image: url(${dropDownIcon});
+  background-image: url(${(props) =>
+    props.dropDownIndex ? dropDown : dropUp});
   background-repeat: no-repeat;
-  background-position: right 8px;
+  background-position: right 10px;
   font-size: 14px;
-  width: 140px;
+  width: 130px;
   cursor: pointer;
 `;
 export const DropDownContainer = styled.div`
@@ -104,49 +121,67 @@ export const DropDownContainer = styled.div`
 `;
 export const DropDownListContainer = styled.div`
   position: absolute;
-  top: 20px;
-  border-radius: 10px;
-  background-color: red;
-  width: 200px;
-  max-height: 400px;
-  overflow: auto;
+  right: 23px;
+  top: 28px;
+  border-radius: 5px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+  max-height: 189px;
+  overflow-y: scroll;
+  scrollbar-color: rebeccapurple green;
+  scrollbar-width: thin;
+  padding: 4px;
+  background-color: #fff;
 `;
 
 export const DropDownList = styled.div`
   margin: 0;
   box-sizing: border-box;
-  background-color: #999999;
-  &:first-child {
-    padding-top: 7px;
-  }
+  background-color: #fff;
 `;
 export const ListItem = styled.div`
+  min-width: 136px;
+  max-width: 136px;
   cursor: pointer;
   font-size: 14px;
+  padding: 3px 6px;
   border-top: 1px solid #fff;
+  color: #4d4d4d;
+  box-sizing: border-box;
+
+  :hover {
+    background-color: #d9d9d9;
+    border-radius: 2px;
+  }
 `;
 
 export const HolderinputAndSelect = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 20px 0px;
+  align-items: flex-end;
+  padding-top: 20px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+  border-radius: 5px;
 
   .inputAndSelect {
-    width: 307px;
-    border-radius: 5px;
-    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25);
-    border: 1px solid #999999;
+    width: 222px;
   }
 
   .fakNumber {
     width: 100%;
+    height: 34px;
+
     border: none;
-    padding: 8px 17px 8px 21px;
+    padding: 10px 0px 7px 9px;
 
     box-sizing: border-box;
     outline: none;
-    border-bottom: 1px solid #999999;
+    border-bottom: 1px solid #00000040;
     border-radius: 5px 5px 0px 0px;
+  }
+  .selectDiv {
+    background-color: #fff;
+    padding: 8px 8px 8px 9px;
+    border-radius: 0px 0px 5px 5px;
   }
   .selectItems {
     width: 100%;
@@ -154,11 +189,13 @@ export const HolderinputAndSelect = styled.div`
     box-sizing: border-box;
     outline: none;
     cursor: pointer;
-  }
-  .selectDiv {
-    padding: 5px 96px 5px 17px;
-    background-color: #fff;
+    background-image: url(${(props) =>
+      props.dropDownDostavljaca ? dropUp : dropDown});
+    background-repeat: no-repeat;
+    background-position: right 8px;
+
     border-radius: 0px 0px 5px 5px;
+    color: #4d4d4d;
   }
 `;
 export const ButtonsFrame = styled.div`
@@ -179,4 +216,33 @@ export const AddProd = styled.div`
   cursor: pointer;
   font-family: cursive;
   padding: 10px 15px;
+`;
+export const SelectDivDostavljac = styled.div`
+  position: relative;
+  outline: none;
+  border: none;
+  color: #999999;
+
+  font-size: 14px;
+  width: 196px;
+  cursor: pointer;
+
+  .selectItems {
+  }
+`;
+export const DropDownListContainerDostavljaca = styled.div`
+  position: absolute;
+  right: -7px;
+  top: 33px;
+  border-radius: 2px;
+  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+  max-height: 189px;
+  padding: 5px;
+  background-color: #fff;
+`;
+
+export const DropDownListDostavljaca = styled.div`
+  margin: 0;
+  box-sizing: border-box;
+  background-color: #fff;
 `;

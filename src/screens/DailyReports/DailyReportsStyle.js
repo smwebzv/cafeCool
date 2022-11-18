@@ -1,20 +1,17 @@
 import styled from "styled-components";
 
 export const DailyReportsFrame = styled.div`
-    height: 100vh;
     display: flex;
     align-items: flex-start;
     background: #EFEFEF;
 `;
 
-export const AddDailyReportsFrame = styled.div`
-    height: 100%;
+export const TableAndInputFrame = styled.div`
+    padding: 30px 0px 32px 101px;
     display: flex;
-    align-items: flex-start;
-    background: #EFEFEF;
-`;
+    flex-direction: column;
+    max-width: 780px;
 
-export const TableFrame = styled.div`
     table{
         min-width: 780px;
         font-size: 14px;
@@ -30,8 +27,9 @@ export const TableFrame = styled.div`
             text-align: right;
             
             th{
-                height: 50px;
-                border-bottom: 1px solid #999999;
+                height: 32px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+                text-align: center;
 
                 .arrow{
                     padding-left: 11px;
@@ -39,12 +37,12 @@ export const TableFrame = styled.div`
             }
             th:first-child{
                 text-align: left;
-                padding-left: 26px;
+                padding-left: 12px;
                 display: flex;
                 align-items: center;
             }
             th:last-child{
-                padding-right: 16px;
+                width: 122.5px;
             }
         }
 
@@ -52,70 +50,75 @@ export const TableFrame = styled.div`
             background-color: #fff;
             text-align: right;
 
+            .hovered{
+                background: #EFEFEF;
+                cursor: pointer; 
+            }
             tr{
-                background: ${props => props.hover ? "#EFEFEF" : "#fff"}
+                background: #fff;   
             }
             td{
-                height: 50px;
-                border-bottom: 1px solid #999999;
+                height: 32px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.25);
             }
             td:first-child{
                 text-align: left;
-                padding-left: 26px;
+                padding-left: 12px;
                 color: #999999;
             }
             td:nth-child(2){
                 color: #999999;
+                text-align: center;
             }
             td:nth-child(3){
                 color: #999999;
+                text-align: center;
             }
             td:nth-child(4){
                 color: #4D4D4D;
+                text-align: center;
+            }
+            td:nth-child(5){
+                color: #4D4D4D;
+                text-align: center;
             }
             td:nth-child(6){
-                width: 30px;
-                padding-left: 74px;
+                display: flex;
+                align-items: center;
+                flex-direction: row;
                 cursor: pointer;
+                justify-content: flex-end;
+                padding-right: 12px;
+
+                span:nth-child(2){
+                    padding: 0 20px;
+                }
             }
-            td:nth-child(7){
-                width: 10px;
-                padding: 0 29px;
-                cursor: pointer
-            }
-            td:nth-child(8){
-                width: 10px;
-                padding-right: 35px;
-                cursor: pointer;
+        }
+        tr:last-child{
+            td{
+                border-bottom: 0;
             }
         }
     }
-
-    svg:hover{
+    .prewIcon:hover{
         path{
-            fill: DC4E4E;
+            fill: #2F4B9F;
+            fill-opacity: 100%;
+        }
+    }
+    .updateIcon:hover{
+        path{
+            fill: #2F4B9F;
+            fill-opacity: 100%;
+        }
+    }
+    .deleteIcon:hover{
+        path{
+            fill: #FB0D0D;
+            fill-opacity: 100%;
         }
     }
 `;
 
-export const TableAndInputFrame = styled.div`
-    padding: 44px 0px 32px 163px;
-    display: flex;
-    flex-direction: column;
-    max-width: 780px;
-`;
 
-export const ShiftEntry = styled.div`
-    font-weight: 600;
-    font-size: 36px;
-    color: #999999;
-    height: 45px;
-    display: flex;
-    align-items: center;
-`;
-
-export const ShiftAndInputFrame = styled.div`
-    display: flex;
-    align-items: end;
-    margin-bottom: 25px;
-`;
