@@ -7,7 +7,6 @@ import {
   TableAndInputFrame,
 } from "../DailyReports/DailyReportsStyle";
 import Menu from "../../components/Menu/Menu";
-import { NavLink } from "react-router-dom";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import { ReactComponent as ArrowDown } from "../.../../../assets/icon/ArrowDown.svg";
 
