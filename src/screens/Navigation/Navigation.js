@@ -14,9 +14,9 @@ const Navigation = () => {
         {token ? (
           <>
             <Route path="/" element={<DailyReports />} />
-            <Route path="/addDailyReports" element={<AddDailyReports />} />
-            <Route path="/addNewFaq" element={<AddNewFaq />} />
-            <Route path="/faqs" element={<Faqs />} />
+            <Route path="/unos-smene" element={<AddDailyReports />} />
+            <Route path="/unos-fakture" element={<AddNewFaq />} />
+            <Route path="/fakture" element={<Faqs />} />
           </>
         ) : (
           <>

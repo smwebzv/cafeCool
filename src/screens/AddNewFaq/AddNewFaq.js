@@ -131,8 +131,7 @@ const AddNewFaq = () => {
       <Menu />
       <FakFrameFirst>
         <FakBox>
-            <SearchInput 
-            name={"Unos fakture"}/>
+          <SearchInput name={"Unos fakture"} hiddeAddButton="true" />
           <table>
             <thead>
               <tr>

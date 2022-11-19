@@ -23,10 +23,6 @@ export const SecondTableFrame = styled.div`
     background-color: #fff;
     position: relative;
 
-    .tableBody{
-      display: ${props => props.showFaqs ? "table-row-group" : "none"};
-    }
-
     .dropdownHead{
       background-color: #EFEFEF;
 

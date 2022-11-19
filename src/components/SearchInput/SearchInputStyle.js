@@ -1,4 +1,5 @@
 import styled, { keyframes } from "styled-components";
+import { appMainStyle } from "../../AppStyle";
 
 export const inputAnim = keyframes`
   0% {
@@ -35,7 +36,7 @@ export const SearchInputFrame = styled.div`
     margin-left: 13px;
     border-radius: 5px;
     background: #fff;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: ${appMainStyle.appShadow};
     cursor: pointer;
     position: relative;
 
@@ -87,7 +88,7 @@ export const PlusFrame = styled.div`
     align-items: center;
     justify-content: center;
     background: #FFFFFF;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: ${appMainStyle.appShadow};
     border-radius: 3px;
     margin-left: 6px;
     cursor: pointer;

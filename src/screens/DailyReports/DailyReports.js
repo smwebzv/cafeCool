@@ -35,10 +35,10 @@ const DailyReports = (props) => {
   }, [dailyReportsState?.dailyList]);
 
   const UpdateSpecificFaq = (item, indx) => {
-    navigate("/addDailyReports", { state: { list: item, indx } });
+    navigate("/unos-smene", { state: { list: item, indx } });
   }
   const OpenSpecificFaq = (item) => {
-    navigate("/addDailyReports", { state: { list: item, disableInput: true } });
+    navigate("/unos-smene", { state: { list: item, disableInput: true } });
   }
 
   const Delete = (id, indx) => {
@@ -67,7 +67,7 @@ const DailyReports = (props) => {
       <TableAndInputFrame>
         <SearchInput
           name={"Dnevni izvjestaji"}
-          route={"/addDailyReports"}
+          route={"/unos-smene"}
         />
           <table>
             <thead>

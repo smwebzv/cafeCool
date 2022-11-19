@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const appMainStyle = {
+  appShadow: "0px 0px 2px rgba(0, 0, 0, 0.25)"
+};
+
 export const Container = styled.div`
 `;
 

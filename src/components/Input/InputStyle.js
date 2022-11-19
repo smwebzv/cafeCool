@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { appMainStyle } from "../../AppStyle";
 
 export const Inputs = styled.div`
   input {
@@ -10,7 +11,7 @@ export const Inputs = styled.div`
     padding: 0px 12px;
     font-size: 12px;
     margin-bottom: 11px;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: ${appMainStyle.appShadow};
     background-color: #ffffff;
   }
 `;

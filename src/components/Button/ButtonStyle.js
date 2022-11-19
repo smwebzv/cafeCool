@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { appMainStyle } from "../../AppStyle";
 
 export const HolderButton = styled.div`
   display: flex;
@@ -8,7 +9,7 @@ export const HolderButton = styled.div`
   box-sizing: border-box;
   margin-bottom: 11px;
   padding: 7px 10px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
+  box-shadow: ${appMainStyle.appShadow};
   border-radius: 8px;
   outline: none;
   border: 1px solid #ffffff;

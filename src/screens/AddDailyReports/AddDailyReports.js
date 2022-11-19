@@ -6,7 +6,8 @@ import TableExpenses from "../../components/TableExpenses/TableExpenses";
 import GetDrinks from "../../context/actions/drinkActions";
 import { AppContext } from "../../context/application_context";
 import {
-  AddDailyReportsFrame, TableAndInputFrame
+  AddDailyReportsFrame,
+  TableAndInputFrame,
 } from "./AddDailyReportsStyle";
 
 const AddDailyReports = (props) => {
@@ -78,7 +79,12 @@ const AddDailyReports = (props) => {
     item.totalPrice = Number(item.consumption) * Number(item.price);
     item.remaind = Number(item.carried) - Number(item.consumption);
     const newTotal = total - oldPrice + item.totalPrice;
-    saveDataForSessionStorage(newTotal.toFixed(2), productsCoppy, consumption, consumptionDesc);
+    saveDataForSessionStorage(
+      newTotal.toFixed(2),
+      productsCoppy,
+      consumption,
+      consumptionDesc
+    );
     setProducts(productsCoppy);
     setTotal(newTotal.toFixed(2));
   };
@@ -90,7 +96,12 @@ const AddDailyReports = (props) => {
     let data = consumption;
     data = value;
     const newTotal = Number(total) + Number(oldPrice) - data;
-    saveDataForSessionStorage(newTotal.toFixed(2), products, data, consumptionDesc);
+    saveDataForSessionStorage(
+      newTotal.toFixed(2),
+      products,
+      data,
+      consumptionDesc
+    );
     setTotal(newTotal.toFixed(2));
     setConsumption(data);
   };
@@ -124,8 +135,13 @@ const AddDailyReports = (props) => {
     saveOrUpdateDailyList(propsData, data, updatedItemIndex);
   };
 
-  const saveDataForSessionStorage = (total, products, consumption, consumptionDesc) => {
-    if(propsData) return;
+  const saveDataForSessionStorage = (
+    total,
+    products,
+    consumption,
+    consumptionDesc
+  ) => {
+    if (propsData) return;
     const dailyReportsData = {
       total: total,
       dailyList: products,
@@ -134,22 +150,20 @@ const AddDailyReports = (props) => {
     };
     sessionStorage.setItem("dailyReport", JSON.stringify(dailyReportsData));
     dailyReportsDispatch({ type: "setDailyReport", payload: dailyReportsData });
-  }
+  };
 
   return (
-      <AddDailyReportsFrame>
-        <Menu></Menu>
-        <TableAndInputFrame>
-            <SearchInput 
-            name={"Unos smjene"}
-            />
+    <AddDailyReportsFrame>
+      <Menu />
+      <TableAndInputFrame>
+        <SearchInput name={"Unos smjene"} hiddeAddButton="true" />
         <table>
           <thead>
             <tr>
               <th>Naziv Artikla</th>
               <th>Cijena</th>
               <th>Preneseno</th>
-              <th style={{width: "35px"}}></th>
+              <th style={{ width: "35px" }}></th>
               <th>Potrošnja</th>
               <th>Ostatak</th>
               <th>Vrijednost</th>
@@ -161,7 +175,7 @@ const AddDailyReports = (props) => {
                 <td>{item.name}</td>
                 <td>{item.price}</td>
                 <td>{item.carried}</td>
-                <td style={{width: "35px"}}></td>
+                <td style={{ width: "35px" }}></td>
                 <td>
                   <input
                     className="potrosnjaInpt"
@@ -178,7 +192,7 @@ const AddDailyReports = (props) => {
             ))}
           </tbody>
         </table>
-        <TableExpenses 
+        <TableExpenses
           consuptionHandleDesc={consuptionHandleDesc}
           consuptionHandleAmount={consuptionHandleAmount}
           total={total}
@@ -187,8 +201,8 @@ const AddDailyReports = (props) => {
           consumptionDesc={consumptionDesc}
           consumption={consumption}
         />
-          </TableAndInputFrame>
-      </AddDailyReportsFrame>
+      </TableAndInputFrame>
+    </AddDailyReportsFrame>
   );
 };
 
