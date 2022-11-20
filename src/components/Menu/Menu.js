@@ -13,14 +13,17 @@ import { ReactComponent as SettingsIcon } from "../../assets/icon/Icon7.svg";
 import { ReactComponent as UserIcon } from "../../assets/icon/Icon8.svg";
 import { ReactComponent as LogoIcon } from "../../assets/icon/LogoIcon.svg";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AppContext } from "../../context/application_context";
 
 const Menu = (props) => {
   let navigate = useNavigate();
+  const { userState } = useContext(AppContext);
 
   const changeScreen = (screen) => {
     navigate(screen);
   };
-
+  
   return (
     <MenuFrame>
       <MenuFrame1>
@@ -58,7 +61,7 @@ const Menu = (props) => {
           <IconFrame>
             <UserIcon />
 
-            <div className="text">Vladan Djokic</div>
+            <div className="text">{userState?.userInfo?.username}</div>
           </IconFrame>
         </MenuFrame2>
       </MenuFrame1>

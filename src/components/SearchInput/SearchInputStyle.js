@@ -33,7 +33,7 @@ export const SearchInputFrame = styled.div`
     justify-content: space-between;
     flex: 1;
     padding: 0 10px 0 3px;
-    margin-left: 13px;
+    margin-left: ${props => props.screenWidth > 420 ?  "13px" : "0"};
     border-radius: 5px;
     background: #fff;
     box-shadow: ${appMainStyle.appShadow};

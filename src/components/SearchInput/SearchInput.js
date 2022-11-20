@@ -25,7 +25,7 @@ const SearchInput = ({ name, route, hiddeAddButton }) => {
   return (
     <ShiftAndInputFrame name={name}>
       <ShiftEntry>{name}</ShiftEntry>
-      <SearchInputFrame hover={hover}>
+      <SearchInputFrame hover={hover} screenWidth={window.outerWidth}>
         <form>
           <SearchIcon
             className="searchIcon"
@@ -36,10 +36,11 @@ const SearchInput = ({ name, route, hiddeAddButton }) => {
         </form>
         {/* <DeleteIcon className="deleteIcon" /> */}
       </SearchInputFrame>
-      {!hiddeAddButton && (
-        <PlusFrame onClick={() => changeScreen(route)}>
-          <PlusIcon />
-        </PlusFrame>
+      { window.outerWidth > 420 &&
+        !hiddeAddButton && (
+          <PlusFrame onClick={() => changeScreen(route)}>
+            <PlusIcon />
+          </PlusFrame>
       )}
     </ShiftAndInputFrame>
   );

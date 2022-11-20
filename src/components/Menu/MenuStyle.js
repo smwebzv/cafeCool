@@ -18,6 +18,7 @@ export const MenuFrame = styled.div`
   box-shadow: ${appMainStyle.appShadow};
   width: 50px;
   z-index: 100;
+  left:0;
 
   &:hover {
     width: 180px;
