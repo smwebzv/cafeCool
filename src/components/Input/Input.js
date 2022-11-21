@@ -1,9 +1,9 @@
 import { Inputs } from "./InputStyle";
-const Input = ({ placeHolder, type, name, onChange }) => {
+const Input = ({ placeholder, type, name, onChange }) => {
   return (
     <Inputs>
       <input
-        placeHolder={placeHolder}
+        placeholder={placeholder}
         type={type}
         name={name}
         onChange={onChange}

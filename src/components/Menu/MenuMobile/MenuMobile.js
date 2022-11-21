@@ -7,7 +7,7 @@ import { ReactComponent as LogoutIcon } from "../../../assets/icon/logoutMobileI
 import { ReactComponent as LogoIcon } from "../../../assets/icon/LogoIcon.svg";
 import { useNavigate } from "react-router-dom";
   
-  const MenuMobile = (props) => {
+  const MenuMobile = ({changeCurrentTab}) => {
     let navigate = useNavigate();
     const [openMenu, setOpenMenu] = useState(false);
 
@@ -38,10 +38,10 @@ import { useNavigate } from "react-router-dom";
                         <LogoFrame>
                             <LogoIcon/>
                         </LogoFrame>
-                        <IconFrame onClick={() => changeScreen("/")}>
+                        <IconFrame onClick={() => changeCurrentTab(1)}>
                             <DailyReportsIcon />
                         </IconFrame>
-                        <IconFrame onClick={() => changeScreen("/fakture")}>
+                        <IconFrame onClick={() => changeCurrentTab(2)}>
                             <Faqs />
                         </IconFrame>
                     </div>

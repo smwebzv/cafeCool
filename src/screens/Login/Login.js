@@ -44,13 +44,13 @@ const Login = () => {
         <Input
           onChange={(name) => loginDataa(name)}
           type="text"
-          placeHolder="Username"
+          placeholder="Username"
           name="username"
         />
         <Input
           onChange={(name) => loginDataa(name)}
           type="password"
-          placeHolder="Password"
+          placeholder="Password"
           name="password"
         />
         <Error>{error}</Error>

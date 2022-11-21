@@ -30,7 +30,6 @@ const SearchInput = ({ name, route, hiddeAddButton }) => {
           <SearchIcon
             className="searchIcon"
             onClick={() => hovered()}
-            hover={hover}
           />
           {hover && <input placeholder="Search" />}
         </form>

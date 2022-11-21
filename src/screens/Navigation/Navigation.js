@@ -5,9 +5,7 @@ import AddDailyReports from "../AddDailyReports/AddDailyReports";
 import Faqs from "../Faqs/Faqs";
 import Registration from "../Registration/Registration";
 import DailyReports from "../DailyReports/DailyReports";
-import DailyReportsMobile from "../DailyReports/DailyReportsMobile/DailyReportsMobile";
-import AddDailyReportsMobile from "../AddDailyReports/AddDailyReportsMobile/AddDailyReportsMobile";
-import FaqsMobile from "../Faqs/FaqsMobile/FaqsMobile";
+import MobileVersion from "../MobileVersion/DailyReportsMobile/MobileVersion";
 
 const Navigation = () => {
   const token = localStorage.getItem("userToken");
@@ -17,10 +15,10 @@ const Navigation = () => {
       <Routes>
         {token ? (
           <>
-            <Route path="/" element={window.outerWidth > 420 ? <DailyReports /> :  <DailyReportsMobile/>}/>
-            <Route path="/unos-smene" element={window.outerWidth > 420 ? <AddDailyReports /> : <AddDailyReportsMobile/>} />
+            <Route path="/" element={window.outerWidth > 420 ? <DailyReports /> :  <MobileVersion/>}/>
+            <Route path="/unos-smene" element={<AddDailyReports />} />
             <Route path="/unos-fakture" element={<AddNewFaq />} />
-            <Route path="/fakture" element={window.outerWidth > 420 ? <Faqs /> : <FaqsMobile/>} />
+            <Route path="/fakture" element={<Faqs />} />
           </>
         ) : (
           <>

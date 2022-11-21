@@ -37,5 +37,10 @@ export const Cart = styled.div`
     .borderBottom{
         border-bottom: 1px solid #00000040;
     }
+
+    .dropdownMenu{
+        background-color:#EFEFEF;
+        padding: 3px 3px 0px 3px;
+    }
     
 `;
