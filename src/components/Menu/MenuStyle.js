@@ -31,7 +31,7 @@ export const MenuFrame = styled.div`
 
 export const MenuFrame1 = styled.div`
   position: absolute;
-  width: 180px;
+  width: 165px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;

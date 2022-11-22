@@ -9,6 +9,7 @@ import {
 import Menu from "../../components/Menu/Menu";
 import SearchInput from "../../components/SearchInput/SearchInput";
 import { ReactComponent as ArrowDown } from "../.../../../assets/icon/ArrowDown.svg";
+import { ReactComponent as ArrowUp } from "../.../../../assets/icon/ArrowUp.svg";
 
 const Faqs = () => {
   const { addNewFaqsState, getFaqsList } = useContext(AppContext);
@@ -16,6 +17,7 @@ const Faqs = () => {
   const [dropDownIndex, setDropDownIndex] = useState(-1);
   const [selectedItem, setSelectedItem] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
+  const [sortDate, setSortDate] = useState("asc");
 
   useEffect(() => {
     if (addNewFaqsState?.faqsList?.length > 1) {
@@ -61,13 +63,33 @@ const Faqs = () => {
     setSelectedItemIndex(-1);
   };
 
+  const sortByDate = () => {
+    if (sortDate === "asc") {
+      setGetFaqs(
+        getFaqs.slice().sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        })
+      );
+      setSortDate("desc");
+    }
+
+    if (sortDate === "desc") {
+      setGetFaqs(
+        getFaqs.slice().sort((a, b) => {
+          return new Date(a.date) - new Date(b.date);
+        })
+      );
+      setSortDate("asc");
+    }
+  };
+
   return (
     <DailyReportsFrame>
       <Menu />
       <TableAndInputFrame>
         <SearchInput name={"Fakture"} route={"/unos-fakture"} />
         <SecondTableHolder>
-          <SecondTableFrame>
+          <SecondTableFrame sortDate={sortDate}>
             <table>
               <thead>
                 <tr>
@@ -87,9 +109,12 @@ const Faqs = () => {
                   <th>Broj fakture</th>
                   <th>Nabavljeno</th>
                   <th>Ukupno</th>
-                  <th>
+                  <th onClick={() => sortByDate()}>
                     Datum nabavke
-                    <ArrowDown className="iconDown" />
+                    { 
+                    sortDate === "asc" ?  <ArrowDown className="iconDown" /> :
+                    sortDate === "desc" ?  <ArrowUp className="iconDown" /> : <ArrowDown className="iconDown" />
+                    }
                   </th>
                 </tr>
               </thead>
@@ -97,6 +122,7 @@ const Faqs = () => {
                 {getFaqs?.map((item, index) => (
                   <>
                     <tr
+                      key={index}
                       onMouseEnter={() => hovered(index)}
                       onMouseLeave={() => notHovered()}
                       className={
