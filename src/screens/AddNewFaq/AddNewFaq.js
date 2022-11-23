@@ -1,24 +1,17 @@
+import { AppContext } from "../../context/application_context.js";
 import { useEffect, useState, useContext } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
 import GetDrinks from "../../context/actions/drinkActions.js";
 import {
   FakFrameFirst,
   FakBox,
-  SelectDiv,
-  DropDownContainer,
-  DropDownListContainer,
-  DropDownList,
-  ListItem,
   HolderinputAndSelect,
   ButtonsFrame,
-  SelectDivDostavljac,
-  DropDownListContainerDostavljaca,
-  DropDownListDostavljaca,
 } from "./AddNewFaqStyle";
-import { AppContext } from "../../context/application_context.js";
 import Button from "../../components/Button/Button";
 import SearchInput from "../../components/SearchInput/SearchInput.js";
 import Menu from "../../components/Menu/Menu.js";
+import SelectDrinks from "../../components/Select/SelectDrinks.js";
+import SelectDeliverer from "../../components/Select/SelectDeliverer.js";
 
 const AddNewFaq = () => {
   const { saveNewFaq } = useContext(AppContext);
@@ -27,23 +20,24 @@ const AddNewFaq = () => {
   const [numberFaqs, setNumberFaqs] = useState({});
   const [places, setPlace] = useState({});
   const [total, setTotal] = useState(0.0);
-
   const [dropDownDostavljaca, setDropDownDostavljaca] = useState(false);
 
-  const [dostavljaci, setDostavljaci] = useState([
+  const [deliverers, setDeliverers] = useState([
     {
+      id: 1,
       name: "Beoprom",
     },
-    { name: "Srbija" },
+    { id: 2, name: "Srbija" },
     {
+      id: 3,
       name: "Bosna",
     },
   ]);
-  console.log(dostavljaci);
-  console.log(products);
+
   const dropDownDostavljac = () => {
     setDropDownDostavljaca(!dropDownDostavljaca);
   };
+
   const [dailyList, setDailyList] = useState([
     {
       drinkId: "",
@@ -88,25 +82,24 @@ const AddNewFaq = () => {
     dailyListCoppy[indx][e.target.name] = e.target.value;
     setDailyList(dailyListCoppy);
   };
-  useEffect(() => {
-    let newPrice = 0;
-    let totalPrice = 0;
-    dailyList.map((item) => {
-      if (item.price) {
-        newPrice = item.price;
-        totalPrice = Number(totalPrice) + Number(newPrice);
-      }
-    });
-    setTotal(totalPrice);
-  }, [dailyList]);
+
+  // useEffect(() => {
+  //   let newPrice = 0;
+  //   let totalPrice = 0;
+  //   dailyList.map((item) => {
+  //     if (item.price) {
+  //       newPrice = item.price;
+  //       totalPrice = Number(totalPrice) + Number(newPrice);
+  //     }
+  //   });
+  //   setTotal(totalPrice);
+  // }, [dailyList]);
 
   const changeDeliverer = (name, value) => {
-    setDropDownDostavljaca(!dropDownDostavljaca);
-
     const data = places;
-
     data[name] = value;
     setPlace(data);
+    setDropDownDostavljaca(!dropDownDostavljaca);
   };
 
   const inputFaqs = (e) => {
@@ -143,33 +136,18 @@ const AddNewFaq = () => {
             </thead>
             <tbody>
               {dailyList.map((item1, indx1) => (
-                <tr className="borderTop" key={indx1}>
+                <tr key={indx1}>
                   <td>{indx1 + 1}.</td>
                   <td>
-                    <DropDownContainer>
-                      <SelectDiv
-                        dropDownIndex={dropDownIndex}
-                        onClick={() => toggling(indx1)}
-                        onChange={(e) => handleChange(e, indx1)}
-                        id="drinkId"
-                        name="drinkId"
-                      >
-                        {item1?.drinkId || "Izaberi proizvod"}
-                      </SelectDiv>
-                      {dropDownIndex == indx1 && (
-                        <DropDownListContainer>
-                          {products.map((item, indx) => (
-                            <DropDownList value={item.name} key={item.id}>
-                              <ListItem
-                                onClick={() => clickOption(indx1, item.name)}
-                              >
-                                {item.name}
-                              </ListItem>
-                            </DropDownList>
-                          ))}
-                        </DropDownListContainer>
-                      )}
-                    </DropDownContainer>
+                    <SelectDrinks
+                      products={products}
+                      dailyList={dailyList}
+                      toggling={toggling}
+                      clickOption={clickOption}
+                      dropDownIndex={dropDownIndex}
+                      item1={item1}
+                      indx1={indx1}
+                    />
                   </td>
                   <td>
                     <input
@@ -203,27 +181,13 @@ const AddNewFaq = () => {
                 name="inputFaqs"
               ></input>
               <div className="selectDiv">
-                <SelectDivDostavljac
-                  onClick={() => dropDownDostavljac()}
-                  className="selectItems"
-                  name="selectItems"
-                >
-                  {places?.place ? places.place : "Izaberi proizvod..."}
-                  {dropDownDostavljaca && (
-                    <DropDownListContainerDostavljaca>
-                      {dostavljaci.map((item) => (
-                        <DropDownListDostavljaca key={item.id}>
-                          <ListItem
-                            onClick={() => changeDeliverer("place", item.name)}
-                          >
-                            {item.name}
-                          </ListItem>
-                        </DropDownListDostavljaca>
-                      ))}
-                      <DropDownListDostavljaca></DropDownListDostavljaca>
-                    </DropDownListContainerDostavljaca>
-                  )}
-                </SelectDivDostavljac>
+                <SelectDeliverer
+                  deliverers={deliverers}
+                  dropDownDostavljac={dropDownDostavljac}
+                  places={places}
+                  dropDownDostavljaca={dropDownDostavljaca}
+                  changeDeliverer={changeDeliverer}
+                />
               </div>
             </div>
           </HolderinputAndSelect>
