@@ -55,7 +55,7 @@ export const SearchInputFrame = styled.div`
       padding-left: 26px;
       box-sizing: border-box;
       color: ${appMainStyle.white};
-      animation: ${inputAnim} 0.3s linear;
+      animation: ${inputAnimOpen} 0.3s linear;
     }
 
 
