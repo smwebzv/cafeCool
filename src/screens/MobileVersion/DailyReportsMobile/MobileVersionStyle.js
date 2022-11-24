@@ -16,21 +16,34 @@ export const ListHolder = styled.div`
 `;
 
 export const Cart = styled.div`
-    padding: 10px 20px 30px 20px;
+    padding: 10px 0 30px 0;
     
 
     .row{
         display: flex;
         justify-content: space-between;
-        padding-bottom: 8px;
+        padding: 0 20px 8px 20px;
         margin-bottom: 7px;
 
         .leftText{
             color:#4D4D4D;
             font-weight: 600;
         }
+        .userArrowFrame{
+            display: flex;
+            align-items: center;
+        }
         .rightText{
             color:#4D4D4D;
+        }
+        .rightText:first-child{
+            padding-right: 13px;
+        }
+        svg:hover{
+            transform: ${props => props.dropDownIndex ? `rotate(-0deg)` : `rotate(-180deg)`};
+            path{
+                fill: #2F4B9F;
+            }
         }
     }
 
@@ -40,7 +53,10 @@ export const Cart = styled.div`
 
     .dropdownMenu{
         background-color:#EFEFEF;
-        padding: 3px 3px 0px 3px;
+        padding: 7px 0;
+    }
+    .dropdownMenu:last-child{
+        padding-bottom: 0;
     }
     
 `;
