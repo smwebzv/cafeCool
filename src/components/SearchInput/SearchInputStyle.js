@@ -1,7 +1,7 @@
-import styled, { keyframes } from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import { appMainStyle } from "../../AppStyle";
 
-export const inputAnim = keyframes`
+export const inputAnimOpen = keyframes`
   0% {
     width: 0px;
   }
@@ -44,6 +44,7 @@ export const SearchInputFrame = styled.div`
     display: flex;
     align-items: center;
 
+
     input {
       width: 150px;
       height: 26px;
@@ -56,6 +57,8 @@ export const SearchInputFrame = styled.div`
       color: ${appMainStyle.white};
       animation: ${inputAnim} 0.3s linear;
     }
+
+
 
     input::placeholder {
       color: ${appMainStyle.white};

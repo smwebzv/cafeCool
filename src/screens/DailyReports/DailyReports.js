@@ -2,14 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { DailyReportsFrame, TableAndInputFrame} from "./DailyReportsStyle";
 import { DeleteDailyReports, GetDailyReports } from "../../context/actions/dailyReportsActions";
-import moment from "moment";
 import { AppContext } from "../../context/application_context";
 import Menu from "../../components/Menu/Menu";
-import { ReactComponent as PreviewIcon } from "../../assets/icon/PreviewIcon.svg";
-import { ReactComponent as UpdateIcon } from "../../assets/icon/UpdateIcon.svg";
-import { ReactComponent as DeleteIcon } from "../../assets/icon/DeleteIcon.svg";
-import { ReactComponent as ArrowIcon } from "../../assets/icon/ArrowIcon.svg";
 import SearchInput from "../../components/SearchInput/SearchInput";
+import DailyReportsTable from "../../components/DailyReportsTable/DailyReportsTable";
 
 const DailyReports = (props) => {
   let navigate = useNavigate();
@@ -17,6 +13,7 @@ const DailyReports = (props) => {
   const [dailyReports, setDailyReports] = useState([]);
   const [hover, setHover] = useState(false);
   const [selectedItemIndex, setSelectedItemIndex] = useState(-1);
+  const [sortDate, setSortDate] = useState("asc");
 
   const DailyReports = () => {
     GetDailyReports().then((res) => {
@@ -61,6 +58,26 @@ const DailyReports = (props) => {
     setSelectedItemIndex(-1);
   }
 
+  const sortByDate = () => {
+    if (sortDate === "asc") {
+      setDailyReports(
+        dailyReports.slice().sort((a, b) => {
+          return new Date(b.date) - new Date(a.date);
+        })
+      );
+      setSortDate("desc");
+    }
+
+    if (sortDate === "desc") {
+      setDailyReports(
+        dailyReports.slice().sort((a, b) => {
+          return new Date(a.date) - new Date(b.date);
+        })
+      );
+      setSortDate("asc");
+    }
+  };
+
   return (
     <DailyReportsFrame>
       <Menu/>
@@ -69,52 +86,17 @@ const DailyReports = (props) => {
           name={"Dnevni izvjestaji"}
           route={"/unos-smene"}
         />
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  Datum
-                  <div className="arrow">
-                    <ArrowIcon />
-                  </div>
-                </th>
-                <th>Smjena</th>
-                <th>Radnik</th>
-                <th>Troskovi</th>
-                <th>Pazar</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {
-                dailyReports.map((item, indx) =>
-                  <tr key={indx} onMouseEnter={() => hovered(indx)} onMouseLeave={() => notHovered()} className={selectedItemIndex === indx && "hovered"}>
-                    <td>{moment(item.date).format("DD MMM YYYY")}</td>
-                    <td>{item.shift}</td>
-                    <td>{item.user.username}</td>
-                    <td>{item.consumption}KM</td>
-                    <td>{item.total}KM</td>
-                    <td>
-                      {
-                        selectedItemIndex === indx &&
-                        <>
-                          <span>
-                            <PreviewIcon className="prewIcon" onClick={() => OpenSpecificFaq(item)} />
-                          </span>
-                          <span>
-                            <UpdateIcon className="updateIcon" onClick={() => UpdateSpecificFaq(item, indx)} />
-                          </span>
-                          <span>
-                            <DeleteIcon className="deleteIcon" onClick={() => Delete(item.id, indx)} />
-                          </span>
-                        </>
-                      }
-                    </td>
-                  </tr>
-                )
-              }
-            </tbody>
-          </table>
+        <DailyReportsTable 
+          sortByDate={sortByDate}
+          sortDate={sortDate}
+          dailyReports={dailyReports}
+          hovered={hovered}
+          notHovered={notHovered}
+          selectedItemIndex={selectedItemIndex}
+          OpenSpecificFaq={OpenSpecificFaq}
+          UpdateSpecificFaq={UpdateSpecificFaq}
+          Delete={Delete}
+        />
       </TableAndInputFrame>
     </DailyReportsFrame>
   );

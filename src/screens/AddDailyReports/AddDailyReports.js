@@ -9,7 +9,7 @@ import {
   AddDailyReportsFrame,
   TableAndInputFrame,
 } from "./AddDailyReportsStyle";
-
+import AddDailyReportsTable from "../../components/AddDailyReportsTable/AddDailyReportsTable";
 const AddDailyReports = (props) => {
   let navigate = useNavigate();
   let location = useLocation();
@@ -157,41 +157,12 @@ const AddDailyReports = (props) => {
       <Menu />
       <TableAndInputFrame>
         <SearchInput name={"Unos smjene"} hiddeAddButton="true" />
-        <table>
-          <thead>
-            <tr>
-              <th>Naziv Artikla</th>
-              <th>Cijena</th>
-              <th>Preneseno</th>
-              <th style={{ width: "35px" }}></th>
-              <th>Potrošnja</th>
-              <th>Ostatak</th>
-              <th>Vrijednost</th>
-            </tr>
-          </thead>
-          <tbody>
-            {products.map((item, indx) => (
-              <tr key={indx}>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
-                <td>{item.carried}</td>
-                <td style={{ width: "35px" }}></td>
-                <td>
-                  <input
-                    className="potrosnjaInpt"
-                    type="text"
-                    name="consumption"
-                    value={item.consumption}
-                    disabled={disableInput}
-                    onChange={(e) => potrosnja(indx, e.target.value)}
-                  />
-                </td>
-                <td className="ostatak">{item.remaind}</td>
-                <td className="vrijednost">{item.totalPrice.toFixed(2)}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <AddDailyReportsTable 
+          consumption={consumption}
+          products={products}
+          disableInput={disableInput}
+          potrosnja={potrosnja}
+        />
         <TableExpenses
           consuptionHandleDesc={consuptionHandleDesc}
           consuptionHandleAmount={consuptionHandleAmount}

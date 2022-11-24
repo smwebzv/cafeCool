@@ -6,6 +6,7 @@ export const AddDailyReportsFrame = styled.div`
   align-items: flex-start;
 `;
 export const TableAndInputFrame = styled.div`
+
   padding: 30px 0px 32px 101px;
   display: flex;
   flex-direction: column;

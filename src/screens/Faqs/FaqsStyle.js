@@ -1,5 +1,18 @@
-import styled from "styled-components";
+
+
 import { appMainStyle } from "../../AppStyle";
+import styled, { keyframes } from "styled-components";
+
+export const OpenAnimation = keyframes`
+  0%{
+    height: 20px;
+  }
+  50% {
+    height: 32px;
+  }
+`;
+
+
 export const SecondTableHolder = styled.div`
   display: flex;
   min-height: 100vh;
@@ -25,7 +38,6 @@ export const SecondTableFrame = styled.div`
 
     .dropdownHead{
       background-color: ${appMainStyle.hoverTable};
-
     }
 
     .dropdownHead th{
@@ -47,7 +59,6 @@ export const SecondTableFrame = styled.div`
       svg{
         transform: ${(props) => !props.showFaqs && "rotateX(180deg)"}
       }
-  
       svg:hover{
         path{
           fill: ${appMainStyle.blueColor};
@@ -164,6 +175,7 @@ export const SecondTableFrame = styled.div`
 
     tr{
       height: 32px;
+      animation: ${OpenAnimation} 0.8s linear;
 
       .container {
         position: relative;

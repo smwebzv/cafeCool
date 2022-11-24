@@ -29,9 +29,9 @@ export const MenuFrame = styled.div`
   }
 `;
 
-export const MenuFrame1 = styled.div`
+export const MenuFrameAbsolutePosition = styled.div`
   position: absolute;
-  width: 180px;
+  width: 165px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -41,7 +41,7 @@ export const MenuFrame1 = styled.div`
   box-sizing: border-box;
 `;
 
-export const MenuFrame2 = styled.div`
+export const MenuFrameForIcons = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;

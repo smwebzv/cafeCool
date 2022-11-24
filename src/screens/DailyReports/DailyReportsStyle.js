@@ -6,6 +6,7 @@ export const DailyReportsFrame = styled.div`
 `;
 
 export const TableAndInputFrame = styled.div`
+
   padding: 30px 0px 32px 101px;
   display: flex;
   flex-direction: column;
@@ -117,4 +118,5 @@ export const TableAndInputFrame = styled.div`
       fill-opacity: 100%;
     }
   }
+
 `;

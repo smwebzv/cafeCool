@@ -2,8 +2,8 @@ import {
   IconFrame,
   LogoFrame,
   MenuFrame,
-  MenuFrame1,
-  MenuFrame2,
+  MenuFrameAbsolutePosition,
+  MenuFrameForIcons,
 } from "./MenuStyle";
 import { ReactComponent as Graficons } from "../../assets/icon/Icon2.svg";
 import { ReactComponent as DailyReportsIcon } from "../../assets/icon/DailyReportsIcon.svg";
@@ -26,8 +26,8 @@ const Menu = (props) => {
   
   return (
     <MenuFrame>
-      <MenuFrame1>
-        <MenuFrame2>
+      <MenuFrameAbsolutePosition>
+        <MenuFrameForIcons>
           <LogoFrame>
             <LogoIcon />
           </LogoFrame>
@@ -46,8 +46,8 @@ const Menu = (props) => {
 
             <div className="text">Grafikoni</div>
           </IconFrame> */}
-        </MenuFrame2>
-        <MenuFrame2>
+        </MenuFrameForIcons>
+        <MenuFrameForIcons>
           {/* <IconFrame>
             <InformationIcon />
 
@@ -63,8 +63,8 @@ const Menu = (props) => {
 
             <div className="text">{userState?.userInfo?.username}</div>
           </IconFrame>
-        </MenuFrame2>
-      </MenuFrame1>
+        </MenuFrameForIcons>
+      </MenuFrameAbsolutePosition>
     </MenuFrame>
   );
 };
