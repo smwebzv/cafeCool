@@ -12,6 +12,6 @@ export const Inputs = styled.div`
     font-size: 12px;
     margin-bottom: 11px;
     box-shadow: ${appMainStyle.appShadow};
-    background-color: #ffffff;
+    background-color: ${appMainStyle.white};
   }
 `;

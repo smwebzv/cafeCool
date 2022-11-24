@@ -1,18 +1,18 @@
 import styled from "styled-components";
-
+import { appMainStyle } from "../../../AppStyle";
 export const MainHolder = styled.div`
-    height:100%;
-    width:100%;
-    .holder{
-        width: calc(100% - 40px);
-        padding:0 20px;
-    }
+  height: 100%;
+  width: 100%;
+  .holder {
+    width: calc(100% - 40px);
+    padding: 0 20px;
+  }
 `;
 
 export const ListHolder = styled.div`
-    background-color: #fff;
-    box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.25);
-    border-radius: 5px;
+  background-color: ${appMainStyle.white};
+  box-shadow: ${appMainStyle.appShadow};
+  border-radius: 5px;
 `;
 
 export const Cart = styled.div`
@@ -26,7 +26,7 @@ export const Cart = styled.div`
         margin-bottom: 7px;
 
         .leftText{
-            color:#4D4D4D;
+            color: ${appMainStyle.darkSilver};
             font-weight: 600;
         }
         .userArrowFrame{
@@ -46,13 +46,17 @@ export const Cart = styled.div`
             }
         }
     }
-
-    .borderBottom{
-        border-bottom: 1px solid #00000040;
+    .rightText {
+      color: ${appMainStyle.darkSilver};
     }
+  }
 
+
+  .borderBottom {
+    border-bottom: 1px solid ${appMainStyle.borderLine};
+  }
     .dropdownMenu{
-        background-color:#EFEFEF;
+        background-color: ${appMainStyle.hoverTable};
         padding: 7px 0;
     }
     .dropdownMenu:last-child{
@@ -60,3 +64,4 @@ export const Cart = styled.div`
     }
     
 `;
+

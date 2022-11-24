@@ -62,19 +62,19 @@ const Registration = () => {
           onChange={(name) => handleRegData(name)}
           name="username"
           type="text"
-          placeHolder="Username"
+          placeholder="Username"
         />
         <Input
           onChange={(name) => handleRegData(name)}
           name="password"
           type="password"
-          placeHolder="Password"
+          placeholder="Password"
         />
         <Input
           onChange={(name) => handleRegData(name)}
           name="email"
           type="email"
-          placeHolder="Email"
+          placeholder="Email"
         />
 
         <CheckBoxAdmin>
@@ -86,7 +86,7 @@ const Registration = () => {
             name="admin"
             value={checkedBox}
           />
-          <div style={{color:"#999999", fontSize:"12px"}}>Admin?</div>
+          <div style={{ color: "#999999", fontSize: "12px" }}>Admin?</div>
         </CheckBoxAdmin>
 
         <Button name="Registration" onClick={() => handleRegister()} />

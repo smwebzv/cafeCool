@@ -1,3 +1,6 @@
+
+
+import { appMainStyle } from "../../AppStyle";
 import styled, { keyframes } from "styled-components";
 
 export const OpenAnimation = keyframes`
@@ -8,6 +11,7 @@ export const OpenAnimation = keyframes`
     height: 32px;
   }
 `;
+
 
 export const SecondTableHolder = styled.div`
   display: flex;
@@ -28,17 +32,17 @@ export const SecondTableFrame = styled.div`
     min-width: 780px;
     border-radius: 5px;
     overflow: hidden;
-    filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
-    background-color: #fff;
+    box-shadow:${appMainStyle.appShadow};
+    background-color: ${appMainStyle.white};
     position: relative;
 
     .dropdownHead{
-      background-color: #EFEFEF;
+      background-color: ${appMainStyle.hoverTable};
     }
 
     .dropdownHead th{
       font-weight: 400 !important;
-      color: #4D4D4D;
+      color: ${appMainStyle.darkSilver};
     }
 
     .iconDown{
@@ -47,14 +51,17 @@ export const SecondTableFrame = styled.div`
     }
 
     thead tr{
-      background-color: #fff;
-      color: #4D4D4D;
+      background-color:${appMainStyle.white};
+      color:${appMainStyle.darkSilver}
       font-size: 14px;
       text-align: left;
 
+      svg{
+        transform: ${(props) => !props.showFaqs && "rotateX(180deg)"}
+      }
       svg:hover{
         path{
-          fill: #2F4B9F;
+          fill: ${appMainStyle.blueColor};
         }
       }
     }
@@ -99,22 +106,22 @@ export const SecondTableFrame = styled.div`
     }
 
     tbody {
-      background-color: #fff;
-      color: #999999;
+      background-color: ${appMainStyle.white};
+      color: ${appMainStyle.silverColor};
       width:100%:   
       
       .hovered{
-        background: #EFEFEF;
+        background: ${appMainStyle.hoverTable};
         cursor: pointer; 
     }
     .withoutBorder{
       border-top: 1px solid transparent !important;
-      background-color: #EFEFEF;
+      background-color: ${appMainStyle.hoverTable};
 
       th{
-        color: #4D4D4D !important;
+        color: ${appMainStyle.darkSilver} !important;
         font-weight: 400 !important;
-        background-color: #EFEFEF;
+        background-color: ${appMainStyle.hoverTable};
       }
 
       &:first-child{
@@ -140,17 +147,17 @@ export const SecondTableFrame = styled.div`
       } 
 
       &:nth-child(4){
-        color: #4D4D4D;
+        color: ${appMainStyle.darkSilver};
       }
 
       &:last-child:not(.alignLeft){
         padding-right: 26px;
         text-align: right;
-        color: #4D4D4D !important;
+        color: ${appMainStyle.darkSilver} !important;
       } 
 
       &:nth-child(5):not(.alignLeft){
-        color: #4D4D4D !important;
+        color: ${appMainStyle.darkSilver} !important;
       } 
 
       &.rightAlign{
@@ -187,7 +194,7 @@ export const SecondTableFrame = styled.div`
           position: relative;
           height: 14px;
           width: 14px;
-          background-color: #D9D9D9;
+          background-color:${appMainStyle.optionHover};
           cursor: pointer;
           border-radius: 1px;
           margin-right: 12px;
@@ -199,11 +206,11 @@ export const SecondTableFrame = styled.div`
       }
 
       .checkmark {
-        background-color: #ccc;
+        background-color: ${appMainStyle.lightSilverColor};
       }
 
       .container input:checked ~ .checkmark {
-        background-color: #0A3CBB;
+        background-color: ${appMainStyle.white};
       }
 
       .checkmark:after {
@@ -221,7 +228,7 @@ export const SecondTableFrame = styled.div`
         top: 0px;
         width: 3px;
         height: 9px;
-        border: solid white;
+        border: solid ${appMainStyle.white};
         border-width: 0 2px 2px 0;
         transform: rotate(37deg);
       }

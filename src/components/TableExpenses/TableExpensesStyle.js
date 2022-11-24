@@ -1,5 +1,5 @@
 import styled from "styled-components";
-
+import { appMainStyle } from "../../AppStyle";
 export const TableExpensesFrame = styled.div`
     display: flex;
     align-items: flex-end;
@@ -8,9 +8,9 @@ export const TableExpensesFrame = styled.div`
 
     table{
         min-width: 307px !important;
-        background: #fff;
+        background: ${appMainStyle.white};
         margin-right: 21px;
-        filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
+        box-shadow:${appMainStyle.appShadow}
         border-radius: 5px;
         overflow: hidden;
         font-size: 13px;
@@ -26,7 +26,7 @@ export const TableExpensesFrame = styled.div`
 
             .rashodiOpis{
                 width: 100%;
-                color: #999999;
+                color: ${appMainStyle.silverColor};
                 font-size: 13px;
                 font-weight: 400;
                 overflow: auto;
@@ -51,9 +51,9 @@ export const TableExpensesFrame = styled.div`
                     outline: none;
                     border: none;
                     text-align: right;
-                    background: #BFBFBF;
+                    background: ${appMainStyle.inputBg};
                     border-radius: 3px;
-                    color: #fff;
+                    color: ${appMainStyle.white};
                     cursor: pointer;
                     padding-right: 11px;
                     box-sizing: border-box;
@@ -61,10 +61,10 @@ export const TableExpensesFrame = styled.div`
                 }
 
                 .potrosnjaInpt:hover{
-                    background: #999999;
+                    background: ${appMainStyle.silverColor};
                 }
                 .potrosnjaInpt:focus{
-                    background: #474747;
+                    background: ${appMainStyle.inputFocus};
                 }
             }
         }

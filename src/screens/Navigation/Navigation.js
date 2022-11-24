@@ -15,7 +15,12 @@ const Navigation = () => {
       <Routes>
         {token ? (
           <>
-            <Route path="/" element={window.outerWidth > 420 ? <DailyReports /> :  <MobileVersion/>}/>
+            <Route
+              path="/"
+              element={
+                window.outerWidth > 420 ? <DailyReports /> : <MobileVersion />
+              }
+            />
             <Route path="/unos-smene" element={<AddDailyReports />} />
             <Route path="/unos-fakture" element={<AddNewFaq />} />
             <Route path="/fakture" element={<Faqs />} />

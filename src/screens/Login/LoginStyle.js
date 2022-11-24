@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import LogoIcon from "../../assets/icon/LogoIcon.svg";
-
+import { appMainStyle } from "../../AppStyle";
 export const LoginFrame = styled.div`
   height: 100vh;
   display: flex;
@@ -38,7 +38,7 @@ export const LoginButton = styled.div`
   padding: 10px 40px;
   border: none;
   border-radius: 10px;
-  color: #fff;
+  color: ${appMainStyle.white};
   font-family: cursive;
   font-size: 20px;
   margin: 20px 0 40px;
