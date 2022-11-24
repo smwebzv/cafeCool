@@ -5,28 +5,28 @@ export const HolderButton = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width:95px;
+  min-width: 95px;
   box-sizing: border-box;
   margin-bottom: 11px;
   padding: 7px 10px;
   box-shadow: ${appMainStyle.appShadow};
   border-radius: 8px;
   outline: none;
-  border: 1px solid #ffffff;
+  border: 1px solid ${appMainStyle.white};
   font-size: 12px;
-  color: #999999;
+  color: ${appMainStyle.silverColor};
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: ${appMainStyle.white};
 
   &:hover {
-    background-color: #2f4b9f;
-    color: white;
-    border: 1px solid #2f4b9f;
+    background-color: ${appMainStyle.blueColor};
+    color: ${appMainStyle.white};
+    border: 1px solid ${appMainStyle.blueColor};
   }
   &.saveFak {
     margin-left: 16px;
   }
-  &.saveFaqs{
+  &.saveFaqs {
     margin-bottom: 0px;
   }
 `;

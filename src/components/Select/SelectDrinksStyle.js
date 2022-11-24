@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { appMainStyle } from "../../AppStyle";
+
 import dropDown from "../../assets/icon/dropDown.svg";
 import dropUp from "../../assets/icon/dropUp.svg";
 
@@ -10,7 +12,8 @@ export const SelectDiv = styled.div`
   position: relative;
   outline: none;
   border: none;
-  color: #999999;
+  color: ${appMainStyle.silverColor};
+
   background-image: url(${(props) =>
     props.dropDownIndex === props.index ? dropUp : dropDown});
   background-repeat: no-repeat;
@@ -26,20 +29,19 @@ export const DropDownListContainer = styled.div`
   right: 23px;
   top: 28px;
   border-radius: 5px;
-  filter: drop-shadow(0px 0px 2px rgba(0, 0, 0, 0.25));
-  max-height: 189px;
+  box-shadow: ${appMainStyle.appShadow};
+  max-height: 153px;
   overflow-y: scroll;
-  scrollbar-color: rebeccapurple green;
-  scrollbar-width: thin;
   padding: 4px;
-  background-color: #fff;
+  background-color: ${appMainStyle.white};
+
   z-index: 10;
 `;
 
 export const DropDownList = styled.div`
   margin: 0;
   box-sizing: border-box;
-  background-color: #fff;
+  background-color: ${appMainStyle.white};
 `;
 export const ListItem = styled.div`
   min-width: 136px;
@@ -47,12 +49,12 @@ export const ListItem = styled.div`
   cursor: pointer;
   font-size: 14px;
   padding: 3px 6px;
-  border-top: 1px solid #fff;
-  color: #4d4d4d;
+  border-top: 1px solid ${appMainStyle.white};
+  color: ${appMainStyle.darkSilver};
   box-sizing: border-box;
 
   :hover {
-    background-color: #d9d9d9;
+    background-color: ${appMainStyle.optionHover};
     border-radius: 2px;
   }
 `;

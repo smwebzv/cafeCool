@@ -7,7 +7,7 @@ export const MenuFrame = styled.div`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  background-color: #fff;
+  background-color: ${appMainStyle.white};
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -18,7 +18,7 @@ export const MenuFrame = styled.div`
   box-shadow: ${appMainStyle.appShadow};
   width: 50px;
   z-index: 100;
-  left:0;
+  left: 0;
 
   &:hover {
     width: 180px;
@@ -67,11 +67,11 @@ export const IconFrame = styled.div`
 
         text-align: left;
         font-weight: 400;
-        color: #787878;
+        color: ${appMainStyle.menuColorFont};
     }
     
     &:hover{
-        background: #BFBFBF;
+        background-color: ${appMainStyle.hoverMenuBgColor};
 
         .text{
             color: #fff !important;
@@ -79,10 +79,10 @@ export const IconFrame = styled.div`
 
         svg{
             path{
-                fill: #fff;
+                fill: ${appMainStyle.white};
             }
             .info{
-                fill: #999999;
+                fill: ${appMainStyle.silverColor};
             }
     }
 `;
