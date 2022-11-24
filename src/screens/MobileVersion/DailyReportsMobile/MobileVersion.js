@@ -5,6 +5,7 @@ import { AppContext } from "../../../context/application_context";
 import SearchInput from "../../../components/SearchInput/SearchInput";
 import moment from "moment";
 import MenuMobile from "../../../components/Menu/MenuMobile/MenuMobile";
+import { ReactComponent as TwoArrows } from "../../../assets/icon/TwoArrows.svg";
 
 const MobileVersion = (props) => {
   const { dailyReportsDispatch, dailyReportsState, addNewFaqsState, getFaqsList } = useContext(AppContext);
@@ -91,10 +92,13 @@ const MobileVersion = (props) => {
                 }
                 { tab === 2 &&
                     getFaqs?.map((item, indx) => 
-                        <Cart key={indx} onClick={() => showDailyLists(indx)}>
+                        <Cart key={indx} onClick={() => showDailyLists(indx)} dropDownIndex={dropDownIndex}>
                             <div className={"row + borderBottom"}>
                                 <div className="leftText">Robu primio</div>
-                                <div className="rightText">{item.user.username}</div>
+                                <div className="userArrowFrame">
+                                  <div className="rightText">{item.user.username}</div>
+                                  <TwoArrows />
+                                </div>
                             </div>
                             <div className="row">
                                 <div className="leftText">Broj fakture</div>
