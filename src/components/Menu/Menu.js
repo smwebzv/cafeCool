@@ -23,7 +23,7 @@ const Menu = (props) => {
   const changeScreen = (screen) => {
     navigate(screen);
   };
-  
+
   return (
     <MenuFrame>
       <MenuFrameAbsolutePosition>
@@ -41,7 +41,7 @@ const Menu = (props) => {
 
             <div className="text">Fakture</div>
           </IconFrame>
-          {/* <IconFrame onClick={() => changeScreen()}>
+          {/* <IconFrame onClick={() => changeScreen("/grafikoni")}>
             <Graficons />
 
             <div className="text">Grafikoni</div>

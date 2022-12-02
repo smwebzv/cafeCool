@@ -74,7 +74,7 @@ export const IconFrame = styled.div`
         background-color: ${appMainStyle.hoverMenuBgColor};
 
         .text{
-            color: #fff !important;
+            color: ${appMainStyle.white} !important;
         }
 
         svg{

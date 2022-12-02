@@ -6,6 +6,7 @@ import Faqs from "../Faqs/Faqs";
 import Registration from "../Registration/Registration";
 import DailyReports from "../DailyReports/DailyReports";
 import MobileVersion from "../MobileVersion/DailyReportsMobile/MobileVersion";
+import Charts from "../Charts/Charts";
 
 const Navigation = () => {
   const token = localStorage.getItem("userToken");
@@ -24,6 +25,7 @@ const Navigation = () => {
             <Route path="/unos-smene" element={<AddDailyReports />} />
             <Route path="/unos-fakture" element={<AddNewFaq />} />
             <Route path="/fakture" element={<Faqs />} />
+            {/* <Route path="/grafikoni" element={<Charts />} /> */}
           </>
         ) : (
           <>
