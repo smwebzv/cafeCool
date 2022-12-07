@@ -41,11 +41,11 @@ const Menu = (props) => {
 
             <div className="text">Fakture</div>
           </IconFrame>
-          {/* <IconFrame onClick={() => changeScreen("/grafikoni")}>
+          <IconFrame onClick={() => changeScreen("/grafikoni")}>
             <Graficons />
 
             <div className="text">Grafikoni</div>
-          </IconFrame> */}
+          </IconFrame>
         </MenuFrameForIcons>
         <MenuFrameForIcons>
           {/* <IconFrame>

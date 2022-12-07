@@ -25,7 +25,7 @@ const Navigation = () => {
             <Route path="/unos-smene" element={<AddDailyReports />} />
             <Route path="/unos-fakture" element={<AddNewFaq />} />
             <Route path="/fakture" element={<Faqs />} />
-            {/* <Route path="/grafikoni" element={<Charts />} /> */}
+            <Route path="/grafikoni" element={<Charts />} />
           </>
         ) : (
           <>
