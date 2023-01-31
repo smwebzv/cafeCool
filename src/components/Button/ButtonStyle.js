@@ -14,12 +14,12 @@ export const HolderButton = styled.div`
   outline: none;
   border: 1px solid ${appMainStyle.white};
   font-size: 12px;
-  color: ${appMainStyle.silverColor};
+  color: ${appMainStyle.white};
   cursor: pointer;
-  background-color: ${appMainStyle.white};
+  background-color: ${appMainStyle.blueColor};
 
   &:hover {
-    background-color: ${appMainStyle.blueColor};
+    background-color: ${appMainStyle.blueColorHover};
     color: ${appMainStyle.white};
     border: 1px solid ${appMainStyle.blueColor};
   }

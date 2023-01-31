@@ -76,8 +76,15 @@ const AddDailyReports = (props) => {
     const oldPrice = productsCoppy[indx].totalPrice;
 
     item.consumption = number;
-    item.totalPrice = Number(item.consumption) * Number(item.price);
-    item.remaind = Number(item.carried) - Number(item.consumption);
+
+    if(item.id == 1 ){
+      item.totalPrice = ( Number(item.consumption) - Number(item.carried)) * Number(item.price);
+      item.remaind = Number(item.consumption);
+    }else{
+      item.totalPrice = Number(item.consumption) * Number(item.price);
+      item.remaind = Number(item.carried) - Number(item.consumption);
+    }
+
     const newTotal = total - oldPrice + item.totalPrice;
     saveDataForSessionStorage(
       newTotal.toFixed(2),

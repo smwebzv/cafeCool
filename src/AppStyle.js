@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const appMainStyle = {
   white: "#ffffff",
   blueColor: "#2f4b9f",
+  blueColorHover: "#4765be",
   silverColor: "#999999",
   lightSilverColor: "#00000026",
   menuColorFont: "#787878",

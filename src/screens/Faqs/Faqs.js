@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { SecondTableFrame, SecondTableHolder } from "./FaqsStyle";
 import Moment from "moment";
 import { AppContext } from "../../context/application_context";
@@ -20,12 +20,8 @@ const Faqs = () => {
   const [sortDate, setSortDate] = useState("asc");
 
   useEffect(() => {
-    if (addNewFaqsState?.faqsList?.length > 1) {
-      setGetFaqs(addNewFaqsState.faqsList);
-    } else {
-      getFaqsList();
-    }
-  }, [addNewFaqsState.faqsList]);
+    getFaqsList();
+  }, []);
 
   const showDailyLists = (indx) => {
     let i = dropDownIndex === indx ? -1 : indx;
@@ -119,8 +115,8 @@ const Faqs = () => {
                 </tr>
               </thead>
               <tbody className="tableBody">
-                {getFaqs?.map((item, index) => (
-                  <>
+                {addNewFaqsState.faqsList?.map((item, index) => (
+                  <React.Fragment key={index}>
                     <tr
                       key={index}
                       onMouseEnter={() => hovered(index)}
@@ -202,7 +198,7 @@ const Faqs = () => {
                         ))}
                       </>
                     )}
-                  </>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>

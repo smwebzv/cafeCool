@@ -19,7 +19,7 @@ const AddNewFaq = () => {
   const [products, setProducts] = useState([]);
   const [numberFaqs, setNumberFaqs] = useState({});
   const [places, setPlace] = useState({});
-  const [total, setTotal] = useState(0.0);
+  const [total, setTotal] = useState(0);
   const [dropDownDostavljaca, setDropDownDostavljaca] = useState(false);
 
   const [deliverers, setDeliverers] = useState([
@@ -79,21 +79,18 @@ const AddNewFaq = () => {
 
   const handleChange = (e, indx) => {
     const dailyListCoppy = dailyList.slice();
+    const valueBefore = dailyListCoppy[indx][e.target.name];
     dailyListCoppy[indx][e.target.name] = e.target.value;
+
+    const prevtotal = total - valueBefore;
+    const newTotal = prevtotal < 0 ? 0 : prevtotal;
+    const newValue = e.target.value ? e.target.value : 0;
+
+    if (e.target.name == "price") {
+      setTotal(newTotal + parseInt(newValue));
+    }
     setDailyList(dailyListCoppy);
   };
-
-  // useEffect(() => {
-  //   let newPrice = 0;
-  //   let totalPrice = 0;
-  //   dailyList.map((item) => {
-  //     if (item.price) {
-  //       newPrice = item.price;
-  //       totalPrice = Number(totalPrice) + Number(newPrice);
-  //     }
-  //   });
-  //   setTotal(totalPrice);
-  // }, [dailyList]);
 
   const changeDeliverer = (name, value) => {
     const data = places;
@@ -171,6 +168,14 @@ const AddNewFaq = () => {
               ))}
             </tbody>
           </table>
+          <div className="new-product-holder">
+            <Button
+              name={"Novi Proizvod "}
+              style="new-product-button"
+              onClick={() => handleAddRow()}
+            />
+          </div>
+
           <HolderinputAndSelect dropDownDostavljaca={dropDownDostavljaca}>
             <div className="inputAndSelect">
               <input
@@ -189,10 +194,13 @@ const AddNewFaq = () => {
                   changeDeliverer={changeDeliverer}
                 />
               </div>
+              <div className="total-value-div">
+                <span>Ukupno</span>
+                <span>{total}KM</span>
+              </div>
             </div>
           </HolderinputAndSelect>
           <ButtonsFrame>
-            <Button name={"Novi Proizvod "} onClick={() => handleAddRow()} />
             <Button
               name={"Sačuvaj Fakturu"}
               onClick={() => saveFaqss()}

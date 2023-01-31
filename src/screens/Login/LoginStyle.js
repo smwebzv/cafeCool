@@ -17,8 +17,10 @@ export const LoginBox = styled.div`
 `;
 
 export const Error = styled.div`
-  background-color: red;
-  // margin: ${(error) => (error ? "10px" : "none")};
+  color: #ff0000;
+  font-size: 12px;
+  font-weight: 600;
+  margin-bottom: 10px;
 `;
 
 export const Logo = styled.div`

@@ -1,7 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { DailyReportsFrame, TableAndInputFrame} from "./DailyReportsStyle";
-import { DeleteDailyReports, GetDailyReports } from "../../context/actions/dailyReportsActions";
+import { DailyReportsFrame, TableAndInputFrame } from "./DailyReportsStyle";
+import {
+  DeleteDailyReports,
+  GetDailyReports,
+} from "../../context/actions/dailyReportsActions";
 import { AppContext } from "../../context/application_context";
 import Menu from "../../components/Menu/Menu";
 import SearchInput from "../../components/SearchInput/SearchInput";
@@ -16,47 +19,49 @@ const DailyReports = (props) => {
   const [sortDate, setSortDate] = useState("asc");
 
   const DailyReports = () => {
-    GetDailyReports().then((res) => {
-      dailyReportsDispatch({ type: "setDailyList", payload: res.data });
-    }).catch((err) => {
-      console.log(err);
-    })
-  }
+    GetDailyReports()
+      .then((res) => {
+        console.log("WHAT IS DATA");
+        console.log(res);
+        dailyReportsDispatch({ type: "setDailyList", payload: res.data });
+        setDailyReports(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   useEffect(() => {
-    if (dailyReportsState?.dailyList?.length) {
-      setDailyReports(dailyReportsState?.dailyList);
-    } else {
-      DailyReports();
-    }
-  }, [dailyReportsState?.dailyList]);
+    DailyReports();
+  }, []);
 
   const UpdateSpecificFaq = (item, indx) => {
     navigate("/unos-smene", { state: { list: item, indx } });
-  }
+  };
   const OpenSpecificFaq = (item) => {
     navigate("/unos-smene", { state: { list: item, disableInput: true } });
-  }
+  };
 
   const Delete = (id, indx) => {
-    DeleteDailyReports(id).then((res) => {
-      dailyReportsDispatch({ type: "removeDailyItem", payload: indx });
-      console.log(res.data);
-    }).catch((err) => {
-      console.log(err);
-    });
-
-  }
+    DeleteDailyReports(id)
+      .then((res) => {
+        dailyReportsDispatch({ type: "removeDailyItem", payload: indx });
+        console.log(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const hovered = (indx) => {
     setHover(true);
     setSelectedItemIndex(indx);
-  }
+  };
 
   const notHovered = () => {
     setHover(false);
     setSelectedItemIndex(-1);
-  }
+  };
 
   const sortByDate = () => {
     if (sortDate === "asc") {
@@ -80,13 +85,10 @@ const DailyReports = (props) => {
 
   return (
     <DailyReportsFrame>
-      <Menu/>
+      <Menu />
       <TableAndInputFrame>
-        <SearchInput
-          name={"Dnevni izvjestaji"}
-          route={"/unos-smene"}
-        />
-        <DailyReportsTable 
+        <SearchInput name={"Dnevni izvjestaji"} route={"/unos-smene"} />
+        <DailyReportsTable
           sortByDate={sortByDate}
           sortDate={sortDate}
           dailyReports={dailyReports}

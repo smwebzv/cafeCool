@@ -30,7 +30,7 @@ export const DropDownListContainer = styled.div`
   top: 28px;
   border-radius: 5px;
   box-shadow: ${appMainStyle.appShadow};
-  max-height: 153px;
+  max-height: 500px;
   overflow-y: scroll;
   padding: 4px;
   background-color: ${appMainStyle.white};

@@ -26,12 +26,11 @@ const AppMainContext = (props) => {
   const saveNewFaq = (data) => {
     saveFAQS(data)
       .then((res) => {
-        console.log(res.data);
         data.user = userState.userInfo;
         data.date = new Date();
         data.id = res.data.generatedMaps[0].id;
         addNewFaqDispatch({ type: "addNewItemFaqs", payload: data });
-        navigate("/faqs");
+        navigate("/fakture");
       })
       .catch((err) => {
         console.log(err);
@@ -53,11 +52,6 @@ const AppMainContext = (props) => {
       propsData.total = data.total;
       propsData.consumption = data.consumption;
       propsData.consumptionDesc = data.consumptionDesc;
-      console.log(propsData);
-      /*UpdateDailyReports(propsData.user.id, dataForUpdate).then((res)=>{
-    }).catch((err)=>{
-      console.log(err);
-    })*/
       dailyReportsDispatch({
         type: "updateDailyItem",
         payload: { data: propsData, indx: updatedItemIndex },
@@ -79,7 +73,7 @@ const AppMainContext = (props) => {
           console.log(err);
         });
     }
-  }
+  };
   return (
     <AppContext.Provider
       value={{
@@ -91,7 +85,7 @@ const AppMainContext = (props) => {
         addNewFaqDispatch,
         saveNewFaq,
         getFaqsList,
-        saveOrUpdateDailyList
+        saveOrUpdateDailyList,
       }}
     >
       {props.children}

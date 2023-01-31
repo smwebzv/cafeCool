@@ -98,6 +98,14 @@ export const FakBox = styled.div`
       background-color: ${appMainStyle.inputFocus};
     }
   }
+
+  .new-product-holder{
+    text-align: right;
+    .new-product-button{
+      margin-top: 20px;
+      display: inline-block;
+    }
+  }
 `;
 
 export const HolderinputAndSelect = styled.div`
@@ -110,6 +118,17 @@ export const HolderinputAndSelect = styled.div`
 
   .inputAndSelect {
     width: 228px;
+  }
+
+  .total-value-div{
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    background-color: #ffffff;
+    padding: 8px 8px 8px 9px;
+    border-radius: 5px;
+    margin-top: 5px;
+    color: #4D4D4D;
   }
 
   .fakNumber {
